@@ -11,7 +11,7 @@ const Input = ({
   return (
     <div className='w-full'>
         {lable && (
-          <label className="inline-block mb-1 pl-1" htmlFor={Id}>
+          <label className="inline-block mb-1 pl-1" htmlFor={id}>
             {lable}
           </label>
         )}
