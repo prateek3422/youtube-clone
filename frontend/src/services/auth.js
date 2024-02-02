@@ -1,15 +1,22 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export class AuthService {
   async createAccount({ name, email, password }) {
     try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+        },
+        withCredentials: true
+      }
         const userAccount = await axios.post("http://localhost:8080/api/v1/users/register", {
             username: name,
             email: email,
             password: password,
-          })
+          },config)
           if(userAccount){
-          return  this.Login(email ,password)
+          return  this.Login({email ,password})
           }else{
             return userAccount
           }
@@ -20,12 +27,21 @@ export class AuthService {
   }
 
 
-  async Login (email, password){
+  async Login ({email, password}){
   try {
+    const config = {
+      headers: {
+        "content-type": "application/json"
+      },
+      withCredentials: true
+    }
   const res = await axios.post('http://localhost:8080/api/v1/users/login',{
-      email,password
-    })
-    // console.log(res)
+      email:email,
+      password:password,
+    }, config)
+
+    console.log(res)
+
     return res
   } catch (error) {
     console.log('login', error)
@@ -35,10 +51,20 @@ export class AuthService {
 
   async getCurrentUser(){
    try {
-    return await axios.get('http://localhost:8080/api/v1/users/current-user')
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
+      withCredentials: true
+    }
+  const res = await axios.get('http://localhost:8080/api/v1/users/current-user',config)
+  return res
+
    } catch (error) {
     console.log('getCurrentUsser', error)
    }
+
+  //  return null
 
   }
 

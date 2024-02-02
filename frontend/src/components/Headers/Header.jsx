@@ -32,7 +32,6 @@ const Header = () => {
               <li key={item.name}>
               <button className='px-4 py-2 rounded-lg bg-red-500 text-white' onClick={() => navigate(item.slug)}  >{item.name}</button>
               </li>
-
             ))
           }
         </ul>

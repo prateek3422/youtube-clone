@@ -13,12 +13,12 @@ const Signup = () => {
 
 
   const signup = async(data) => {
-    console.log(data)
+    // console.log(data)
     try {
       const createSession = await authService.createAccount(data);
       if(createSession){
         const userData  = await authService.getCurrentUser()
-        if(userData)dispatch(authLogin(userData))
+        if(userData)dispatch(authLogin(userData.data))
         navigate('/')
       }
 

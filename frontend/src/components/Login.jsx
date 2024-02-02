@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import Input from "./Input";
 import Button from "./Button";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import authService from "../services/auth";
 import { useDispatch } from "react-redux";
 import { login as authLogin } from "../store/authSlice";
+import axios from "axios";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -13,13 +15,13 @@ const Login = () => {
   const navigate = useNavigate()
   const login = async (data) => {
     try {
-      const LoginSession = authService.Login(data) 
+      const LoginSession = await authService.Login(data)
       if(LoginSession){
-        const userData  = authService.getCurrentUser(LoginSession)
-        if(userData)
-        dispatch(authLogin(userData))
+        const userData  = await authService.getCurrentUser()
+        // console.log(userData.data)
+        if(userData)dispatch(authLogin(userData.data))
       }
-      navigate('/')
+      // navigate('/')
     } catch (error) {
       console.log(error)
     }
