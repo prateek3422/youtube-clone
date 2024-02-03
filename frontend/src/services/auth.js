@@ -7,6 +7,7 @@ export class AuthService {
       const config = {
         headers: {
           "content-type": "application/json",
+        
         },
         withCredentials: true
       }
@@ -31,7 +32,8 @@ export class AuthService {
   try {
     const config = {
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+
       },
       withCredentials: true
     }
@@ -54,6 +56,7 @@ export class AuthService {
     const config = {
       headers: {
         "content-type": "application/json",
+        'accept': 'application/json'
       },
       withCredentials: true
     }
@@ -64,13 +67,19 @@ export class AuthService {
     console.log('getCurrentUsser', error)
    }
 
-  //  return null
+   return null
 
   }
 
   async logout (){
     try {
-      return await axios.post('http://localhost:8080/api/v1/users/logout')
+      const config = {
+        withCredentials: true
+      }
+    const res =  await axios.post('http://localhost:8080/api/v1/users/logout',{},config)
+      console.log(res)
+      return res
+    
     } catch (error) {
       console.log('logout', error)
     }

@@ -8,11 +8,8 @@ const LogOut = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogout = async () => {
-    authService
-      .logout()
-      .then(() => dispatch(logout("/")))
-      .catch((error) => console.log("logout", error));
+  const handleLogout =() => {
+    authService.logout().then(()=>dispatch(logout()))
   };
   return <div  onClick={handleLogout}>Logout</div>;
 };

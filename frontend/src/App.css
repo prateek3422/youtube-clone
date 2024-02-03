@@ -17,6 +17,13 @@ box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
     height: 92vh;
 }
 
-/* .auth-title{
+.grid-two-col{
+    display: grid;
+    grid-template-columns:16rem 1fr;
+    height: 100vh;
+}
 
-} */
+.video-card{
+    border: 1px solid rgb(187, 149, 149);
+    height:19rem;
+}
