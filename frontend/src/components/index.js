@@ -6,6 +6,9 @@ import Button from "./Button"
 import Container from "./containers/container"
 import logOut  from './Headers/LogOut'
 import SideBar from './sideBar.jsx'
+import VideoCard from "./videoCard.jsx"
+
+
 export{
     Header,
     Signup,
@@ -14,5 +17,6 @@ export{
     Button,
     Container,
     logOut,
-    SideBar
+    SideBar, 
+    VideoCard
 }

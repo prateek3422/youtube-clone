@@ -24,6 +24,6 @@ box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
 }
 
 .video-card{
-    border: 1px solid rgb(187, 149, 149);
-    height:19rem;
+    /* border: 1px solid rgb(187, 149, 149); */
+    height:21rem;
 }
