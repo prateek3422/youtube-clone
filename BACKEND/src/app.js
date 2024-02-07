@@ -16,7 +16,7 @@ import userRouter from "./routes/user.routes.js";
 
 // router decleartion
 
-app.use('api/v1/users', userRouter)
+app.use("/api/v1/users", userRouter)
 
 
 app.use(express.json({ limit: "16kb" }));
