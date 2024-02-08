@@ -17,7 +17,7 @@ cloudinary.config({
             resource_type:'auto'
         })
         // console.log(' file is  uploaded on cloudinary', response.url)
-        fs.unlink(localFilPath)
+        fs.unlinkSync(localFilPath)
         return response
     } catch (error) {
 
