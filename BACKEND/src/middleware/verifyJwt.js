@@ -3,22 +3,23 @@ import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
 
-const veryfyJwt = asyncHandler(async (req, res, next) => {
+export const veryfyJwt = asyncHandler(async (req, _, next) => {
   try {
     const token =
-      req.cookie?.accessToken ||
+      req.cookies?.accessToken ||
       req.header("Authorization"?.replace("Bearer", ""));
+
+      // console.log(token)
 
     if (!token) {
       throw new ApiError(401, "unauthorized request");
     }
-
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN);
 
-    const user = await User.findById(decodedToken?._d).select(
+
+    const user = await User.findById(decodedToken?._id).select(
       "-password -refreshtoken"
     );
-
     if (!user) {
       throw new ApiError(401, "Invalid Access Token");
     }
@@ -31,4 +32,4 @@ const veryfyJwt = asyncHandler(async (req, res, next) => {
   }
 });
 
-export default veryfyJwt;
+
