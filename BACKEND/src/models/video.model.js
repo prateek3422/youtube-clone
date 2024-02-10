@@ -8,7 +8,7 @@ const videoSchema = new Schema({
         required:true
 
     },
-    thumnail:{
+    thumbnail:{
         type:String, //cloudnary upload
         required:true
 
