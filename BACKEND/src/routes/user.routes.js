@@ -3,6 +3,7 @@ import {
   changeCurrentPassword,
   getChannelProfile,
   getCurrentUser,
+  getWatchHistory,
   loginUser,
   logoutUser,
   refreshAccessToken,
@@ -42,5 +43,6 @@ router
   .route("/coverImage")
   .patch(veryfyJwt, upload.single("coverImage"), updateCoverImage);
 router.route("/c/:userName").get(veryfyJwt, getChannelProfile);
+router.route("/history").get(veryfyJwt, getWatchHistory)
 
 export default router;

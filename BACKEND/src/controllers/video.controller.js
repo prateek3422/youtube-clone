@@ -4,7 +4,7 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { cloudinaryUpload, clouldinaryDelete } from "../utils/fileUpload.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 const getAllVideos = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
@@ -27,7 +27,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
   if (userId) {
     pipeline.push({
       $match: {
-        owner: new mongoose.Types.ObjectId({ userId }),
+        owner:req.user._id
       },
     });
   }
