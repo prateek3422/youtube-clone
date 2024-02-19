@@ -11,7 +11,7 @@ export class AuthService {
         },
         withCredentials: true
       }
-        const userAccount = await axios.post("http://localhost:8080/api/v1/users/register", {
+        const userAccount = await axios.post("http://localhost:3000/api/v1/users/register", {
             username: name,
             email: email,
             password: password,
@@ -27,21 +27,23 @@ export class AuthService {
 
   }
 
-
   async Login ({email, password}){
   try {
     const config = {
       headers: {
         "content-type": "application/json",
-
       },
       withCredentials: true
     }
-  const res = await axios.post('http://localhost:8080/api/v1/users/login',{
-      email:email,
-      password:password,
-    }, config)
-
+    const res = await axios.post('http://localhost:3000/api/v1/users/login',{
+        email:email,
+        password:password,
+      }, config)
+    // const res = await axios.post('http://localhost:8080/api/v1/users/login',{
+    //     email:email,
+    //     password:password,
+    //   }, config)
+    
     console.log(res)
 
     return res
@@ -56,11 +58,13 @@ export class AuthService {
     const config = {
       headers: {
         "content-type": "application/json",
-        'accept': 'application/json'
+        'accept': 'application/json',
+      
       },
       withCredentials: true
     }
-  const res = await axios.get('http://localhost:8080/api/v1/users/current-user',config)
+  const res = await axios.get(' http://localhost:3000/api/v1/users/current-user',config)
+  // const res = await axios.get(' http://localhost:8080/api/v1/users/current-user',config)
   return res
 
    } catch (error) {
@@ -76,7 +80,7 @@ export class AuthService {
       const config = {
         withCredentials: true
       }
-    const res =  await axios.post('http://localhost:8080/api/v1/users/logout',{},config)
+    const res =  await axios.post('http://localhost:3000/api/v1/users/logout',{},config)
       console.log(res)
       return res
     

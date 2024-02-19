@@ -9,7 +9,7 @@ const SideBar = () => {
   const sideList = [
     {
       name:'Home',
-      slug:'/home',
+      slug:'/',
     },
 
     {

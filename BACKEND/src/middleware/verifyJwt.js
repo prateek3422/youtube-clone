@@ -7,15 +7,15 @@ export const veryfyJwt = asyncHandler(async (req, _, next) => {
   try {
     const token =
       req.cookies?.accessToken ||
-      req.header("Authorization"?.replace("Bearer", ""));
+      req.header("Authorization")?.replace("Bearer ", "");
 
-      // console.log(token)
+    // console.log(req.header)
+    // console.log(token)
 
     if (!token) {
       throw new ApiError(401, "unauthorized request");
     }
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN);
-
 
     const user = await User.findById(decodedToken?._id).select(
       "-password -refreshtoken"
@@ -25,11 +25,8 @@ export const veryfyJwt = asyncHandler(async (req, _, next) => {
     }
 
     req.user = user;
-
     next();
   } catch (error) {
     throw new ApiError(401, error.message || "Invalid Access Token");
   }
 });
-
-

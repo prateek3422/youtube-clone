@@ -1,37 +1,42 @@
-import { Router } from "express";
-import { upload } from "../middleware/multer.middleware.js";
+import { Router } from 'express';
 import {
-  deleteVideo,
-  getAllVideos,
-  getVideoById,
-  publishAVideo,
-  updateVideo,
-} from "../controllers/video.controller.js";
+    deleteVideo,
+    getAllVideos,
+    getVideoById,
+    publishAVideo,
+    togglePublishStatus,
+    updateVideo,
+} from "../controllers/video.controller.js"
+import { upload } from "../middleware/multer.middleware.js";
 import { veryfyJwt } from "../middleware/verifyJwt.js";
 
 const router = Router();
-
 router.use(veryfyJwt); // Apply verifyJWT middleware to all routes in this file
 
-router.route("/publish-video").post(
-  upload.fields([
-    {
-      name: "videoFile",
-      maxCount: 1,
-    },
-    {
-      name: "thumbnail",
-      maxCount: 1,
-    },
-  ]),
-  publishAVideo
-);
+router
+    .route("/")
+    .get(getAllVideos)
+    .post(
+        upload.fields([
+            {
+                name: "videoFile",
+                maxCount: 1,
+            },
+            {
+                name: "thumbnail",
+                maxCount: 1,
+            },
+            
+        ]),
+        publishAVideo
+    );
 
 router
-.route("/:videoId")
-.get(getAllVideos)
-  .get(getVideoById)
-  .delete(deleteVideo)
-  .patch(upload.single("thumbnail"), updateVideo);
+    .route("/:videoId")
+    .get(getVideoById)
+    .delete(deleteVideo)
+    .patch(upload.single("thumbnail"), updateVideo);
 
-export default router;
+router.route("/toggle/publish/:videoId").patch(togglePublishStatus);
+
+export default router

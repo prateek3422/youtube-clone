@@ -36,7 +36,7 @@ router.route("/login").post(loginUser);
 router.route("/logout").post(veryfyJwt, logoutUser);
 router.route("/refresh-token").post(refreshAccessToken);
 router.route("/change-password").post(veryfyJwt, changeCurrentPassword);
-router.route("/current-password").get(veryfyJwt, getCurrentUser);
+router.route("/current-user").get(veryfyJwt, getCurrentUser);
 router.route("/update-account").patch(veryfyJwt, updateAccountDetails);
 router.route("/avatar").patch(veryfyJwt, upload.single("avatar"), updateAvatar);
 router

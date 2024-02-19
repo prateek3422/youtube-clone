@@ -48,7 +48,7 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
   });
 
   if (iscommentLike) {
-    const commentUnlike = await Comment.findByIdAndDelete(commentLike?._id);
+    const commentUnlike = await Comment.findByIdAndDelete(commentUnlike?._id);
 
     return res
       .status(200)

@@ -22,7 +22,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
       },
     });
   }
-  console.log(userId);
+  // console.log(userId);
 
   if (userId) {
     pipeline.push({
@@ -133,6 +133,8 @@ const getVideoById = asyncHandler(async (req, res) => {
   if (!view) {
     throw new ApiError(400, "somethin went wrong while updating views");
   }
+
+  // console.log(video)
 
   return res
     .status(200)

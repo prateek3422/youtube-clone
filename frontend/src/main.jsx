@@ -6,8 +6,11 @@ import { BrowserRouter, RouterProvider, createBrowserRouter } from 'react-router
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
+
 import { Provider } from 'react-redux'
+
 import { store } from './store/store.js'
+import Videos from './pages/videos.jsx'
 
 
 const router = createBrowserRouter([
@@ -27,6 +30,10 @@ const router = createBrowserRouter([
         path:'/signup',
         element:<Signup/>
       },
+      {
+        path:"/video/:slug",
+        element:<Videos/>
+      }
     ]
   }
 ])
