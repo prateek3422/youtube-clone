@@ -62,15 +62,18 @@ const publishAVideo = asyncHandler(async (req, res) => {
 
   const { title, description } = req.body;
 
+
+
   // TODO: get video, upload to cloudinary, create video
   if ([title, description].some((field) => field?.trim() == "")) {
     throw new ApiError(401, "All filds are required");
   }
 
-  //   console.log(req.files)
+    // console.log(req.files)
 
   const videoLocalFilePath = req.files?.videoFile[0]?.path;
   const thumbnailFilePath = req.files?.thumbnail[0]?.path;
+  console.log(thumbnailFilePath)
 
   //   console.log(videoLocalFilePath)
 

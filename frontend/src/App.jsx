@@ -8,6 +8,8 @@ import { login as authLogin, logout } from "./store/authSlice";
 
 function App() {
   const [loaing, setLoading] = useState(true);
+
+  
   const dispatch = useDispatch();
 
   useEffect(() => {

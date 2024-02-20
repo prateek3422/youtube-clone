@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import videoService from "../services/VideoService";
+import ReactPlayer from "react-player"
 
 const Videos = () => {
   const {slug} = useParams();
@@ -30,6 +31,15 @@ const Videos = () => {
   return (
     <>
     <div className="video">
+    <ReactPlayer
+      url={"https://youtu.be/rq5mUupP-Tg?si=0YoDo01lb6VwStfM"}
+      config={{
+        youtube: {
+          playerVars: { showinfo: 1,}
+        },
+        
+      }}
+    />
       <h1>{video.title}</h1>
     </div>
     </>
