@@ -15,23 +15,28 @@ const toggleSubscription = asyncHandler(async (req, res) => {
 
     }
 
-    const  subscriberExist = await Subscription.find({
+    const subscriberExist = await Subscription.findOne({
         channel:channelId,
-        subscriber:new mongoose.Types.ObjectId(req.user?._id)
+        subscriber: new mongoose.Types.ObjectId(req.user?._id)
     })
 
-    if(subscriberExist){
-        const unsubscriber = await Subscription.findByIdAndDelete(subscriberExist?._id)
+    // console.log(subscriberExist)
 
-        return res.status(200).json(new ApiResponse(200, unsubscriber, " unsubscribe successully"))
-    }
+    
+    if(!subscriberExist ){
 
-   const subscribed =  await Subscription.create({
-        channel:channelId,
-        subscriber:req.user?._id
-    })
+        const subscribed =  await Subscription.create({
+            channel:channelId,
+            subscriber:req.user?._id
+        })
+        
+        return res.status(200).json(new ApiResponse(200, subscribed, " subscribe successully"))
+        
+    }else{
 
-    return res.status(200).json(new ApiResponse(200, subscribed, " subscribe successully"))
+        const unsubscribe = await Subscription.findByIdAndDelete(subscriberExist)
+        return res.status(200).json(new ApiResponse(200, unsubscribe, " unsubscribe successully"))
+    }   
 })
 
 // controller to return subscriber list of a channel
