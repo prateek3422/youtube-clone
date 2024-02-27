@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Header } from "./components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import authService from "./services/auth";
 import { login as authLogin, logout } from "./store/authSlice";
@@ -11,6 +11,7 @@ function App() {
 
   
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   useEffect(() => {
     authService
@@ -20,6 +21,7 @@ function App() {
           dispatch(authLogin(userData.data))
         }else{
           dispatch(logout())
+          navigate('/login')
         }
       })
       .catch((error) => error)

@@ -15,8 +15,8 @@ const Home = () => {
     (async() =>{
      try {
       const videoData =  await videoService.getAllVideos()
-      // console.log(videoData.data.docs)
-      setVideo(videoData.data.docs)
+      // console.log(videoData.data.data)
+      setVideo(videoData.data.data.docs)
      } catch (error) {
       console.log(error)
      }

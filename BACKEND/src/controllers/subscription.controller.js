@@ -35,7 +35,7 @@ const toggleSubscription = asyncHandler(async (req, res) => {
     }else{
 
         const unsubscribe = await Subscription.findByIdAndDelete(subscriberExist)
-        return res.status(200).json(new ApiResponse(200, unsubscribe, " unsubscribe successully"))
+        return res.status(200).json(new ApiResponse(200,  "unsubscribe successully"))
     }   
 })
 

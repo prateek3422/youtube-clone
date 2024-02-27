@@ -8,9 +8,9 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 
 import { Provider } from 'react-redux'
-
-import { store } from './store/store.js'
-import Videos from './pages/videos.jsx'
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './store/store.js'
+import Videos from './pages/Videos.jsx'
 
 
 const router = createBrowserRouter([
@@ -41,8 +41,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
 
     <RouterProvider router={router}/>
+      </PersistGate>
     </Provider> 
   </React.StrictMode>,
 )

@@ -32,3 +32,31 @@ box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
     height: 15rem;
     object-fit: cover;
 }
+
+/* -----------video details-------- */
+
+.brown{
+    border: 1px solid brown;
+
+}
+
+.yellow{
+    border: 1px solid yellow ;
+    height: 5rem;
+}
+
+.related-videos{
+    border: 1px solid orange;
+}
+
+.grid-two-col-video{
+    display: grid;
+    grid-template-columns: 1fr 30rem;
+    height: 100vh;
+}
+
+.subs-btn{
+    border: 1px solid white;
+    
+     
+}
