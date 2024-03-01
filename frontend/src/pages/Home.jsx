@@ -29,14 +29,10 @@ const Home = () => {
   return (
     <>
       <div className="container">
-        <div className="grid-two-col gap-1">
-          <div className="sidebar  w-full">
-            <SideBar />
-          </div>
+    
           <div className="main  w-full">
             <div className="grid grid-cols-3 gap-4">
               {video.map((vid) => (
-              // console.log(vid._id)
                 <li key={vid._id} className="list-none">
                   <VideoCard {...vid}/>
                 </li>
@@ -44,7 +40,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

@@ -12,6 +12,8 @@ const Signup = () => {
   const navigate = useNavigate()
 
 
+  // todo: create avatar
+
   const signup = async(data) => {
     // console.log(data)
     try {

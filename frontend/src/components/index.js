@@ -7,6 +7,7 @@ import Container from "./containers/container"
 import logOut  from './Headers/LogOut'
 import SideBar from './sideBar.jsx'
 import VideoCard from "./videoCard.jsx"
+import CommentSection from "./commentSection.jsx"
 
 
 export{
@@ -18,5 +19,6 @@ export{
     Container,
     logOut,
     SideBar, 
-    VideoCard
+    VideoCard,
+    CommentSection
 }

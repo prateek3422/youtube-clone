@@ -6,6 +6,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 const getVideoComments = asyncHandler(async (req, res) => {
   //TODO: get all comments for a video
+
   const { videoId } = req.params;
   const { page = 1, limit = 10 } = req.query;
 
@@ -15,7 +16,34 @@ const getVideoComments = asyncHandler(async (req, res) => {
 
   const aggregate = Comment.aggregate([
     {
-      $match: { video: videoId },
+      $match: {
+        video: new mongoose.Types.ObjectId(videoId),
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "owner",
+        pipeline: [
+          {
+            $project: {
+              userName: 1,
+              fullname: 1,
+              avatar: 1,
+            },
+          },
+        ],
+      },
+    },
+
+    {
+      $addFields: {
+        owner: {
+          $first: "$owner",
+        },
+      },
     },
   ]);
 
@@ -24,7 +52,7 @@ const getVideoComments = asyncHandler(async (req, res) => {
     limit,
   });
 
-  // console.log(comment)
+  // console.log(comment);
 
   return res
     .status(200)
@@ -71,11 +99,9 @@ const updateComment = asyncHandler(async (req, res) => {
     throw new ApiError(404, "comment id missing");
   }
 
-  
   if (!content) {
     throw new ApiError(404, "content is missing");
   }
-  
 
   const commentUpdate = await Comment.findByIdAndUpdate(
     commentId,
@@ -91,7 +117,9 @@ const updateComment = asyncHandler(async (req, res) => {
 
   // console.log(commentUpdate)
 
-  return res.status(200).json(new ApiResponse(200, commentUpdate, "comment updated"))
+  return res
+    .status(200)
+    .json(new ApiResponse(200, commentUpdate, "comment updated"));
 });
 
 const deleteComment = asyncHandler(async (req, res) => {
@@ -102,10 +130,11 @@ const deleteComment = asyncHandler(async (req, res) => {
     throw new ApiError(404, "comment id missing");
   }
 
+  const deleteComment = await Comment.findByIdAndDelete(commentId);
 
-  const deleteComment = await Comment.findByIdAndDelete(commentId)
-
-  return res.status(200).json(new ApiResponse(200, deleteComment, "comment delete successfully"))
+  return res
+    .status(200)
+    .json(new ApiResponse(200, deleteComment, "comment delete successfully"));
 });
 
 export { getVideoComments, addComment, updateComment, deleteComment };
