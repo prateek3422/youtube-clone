@@ -11,64 +11,65 @@ import { FaUserCheck } from "react-icons/fa";
 
 const SideBar = () => {
   const navigate = useNavigate();
-  const authStatus = useSelector(state => state.auth.status)
+  const authStatus = useSelector((state) => state.auth.status);
   const sideList = [
     {
       name: "Home",
-      icon:<IoMdHome/>,
+      icon: <IoMdHome />,
       slug: "/",
-      active:authStatus
+      active: authStatus,
     },
 
     {
-      name: "Liked-videos",
-      icon:<AiFillLike/>,
+      name: "Liked videos",
+      icon: <AiFillLike />,
       slug: "/liked-videos",
-      active:authStatus
+      active: authStatus,
     },
     {
       name: "History",
-      icon:<FaHistory/>,
+      icon: <FaHistory />,
       slug: "/history",
-      active:authStatus
+      active: authStatus,
     },
 
     {
       name: "Collection",
-      icon:<BsCollectionPlay/>,
+      icon: <BsCollectionPlay />,
       slug: "/collection",
-      active:authStatus
+      active: authStatus,
     },
 
     {
-      name: "My-Content",
-      icon:<FaVideo/>,
+      name: "MyContent",
+      icon: <FaVideo />,
       slug: "/content",
-      active:authStatus
+      active: authStatus,
     },
     {
       name: "Subscribers",
-      icon:<FaUserCheck/>,
+      icon: <FaUserCheck />,
       slug: "/subscribers",
-      active:authStatus
+      active: authStatus,
     },
   ];
 
   return (
     <>
       <ul className="flex flex-col gap-y-2 items-center justify-center">
-        {sideList.map((item) =>  
-        item.active ?(
+        {sideList.map((item) =>
+          item.active ? (
             <li className="list-none w-full" key={item.name}>
-              
-                  <button className="flex  items-center justify-start border-2 w-full h-10 " onClick={() => navigate(item.slug)}>
-                    <span className="inline-block w-5 ">{item.icon}</span>
-                    <span className="block ">{item.name}</span>          
-                  </button>
+              <button
+                className="flex  items-center justify-start border-2 w-full h-10 "
+                onClick={() => navigate(item.slug)}
+              >
+                <span className="inline-block w-5 ">{item.icon}</span>
+                <span className="block ">{item.name}</span>
+              </button>
             </li>
-          ):
-          null
-          )}
+          ) : null
+        )}
       </ul>
     </>
   );

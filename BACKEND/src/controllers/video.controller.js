@@ -11,7 +11,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
   //TODO: get all videos based on query, sort, pagination
 
   const pipeline = [];
-
   if (query) {
     pipeline.push({
       $match: {
@@ -22,12 +21,11 @@ const getAllVideos = asyncHandler(async (req, res) => {
       },
     });
   }
-  // console.log(userId);
 
   if (userId) {
     pipeline.push({
       $match: {
-        owner: req.user._id,
+        _id: new mongoose.Types.ObjectId(req.user._id),
       },
     });
   }
@@ -48,7 +46,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
     page,
     limit,
   });
-
   res
     .status(200)
     .json(new ApiResponse(200, video, "video feached successfully"));
@@ -67,13 +64,8 @@ const publishAVideo = asyncHandler(async (req, res) => {
     throw new ApiError(401, "All filds are required");
   }
 
-  // console.log(req.files)
-
   const videoLocalFilePath = req.files?.videoFile[0]?.path;
   const thumbnailFilePath = req.files?.thumbnail[0]?.path;
-  // console.log(thumbnailFilePath);
-
-  //   console.log(videoLocalFilePath)
 
   const thumbnail = await cloudinaryUpload(thumbnailFilePath);
   const videoFile = await cloudinaryUpload(videoLocalFilePath);
@@ -84,13 +76,15 @@ const publishAVideo = asyncHandler(async (req, res) => {
 
   const duration = Math.floor(videoFile.duration);
 
+  const user = await User.findById(req.user._id);
+
   const videos = await Video.create({
     videoFile: videoFile.url,
     thumbnail: thumbnail.url,
     title,
     description,
     duration,
-    owner: req.user,
+    owner: user,
   });
 
   if (!videos) {
@@ -105,75 +99,63 @@ const publishAVideo = asyncHandler(async (req, res) => {
 const getVideoById = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
   //TODO: get video by id
-  // console.log(videoId)
 
   if (!videoId?.trim()) {
     throw new ApiError(400, "video id is missing");
   }
 
- // console.log(video)
-
- const videoById = await Video.findById(videoId)
-//  console.log(videoById)
+  const videoById = await Video.findById(videoId);
 
   const video = await Video.aggregate([
     {
       $match: { _id: new mongoose.Types.ObjectId(videoId) },
     },
     {
-      $lookup:{
-        from:"users",
-        localField:"owner",
-        foreignField:"_id",
-        as:"owner",
-      
-        pipeline:[
+      $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "owner",
+
+        pipeline: [
           {
-            $lookup:{
-              from:"subscriptions",
-              localField:"_id",
-              foreignField:"channel",
-              as:"subscribers",
-            }
+            $lookup: {
+              from: "subscriptions",
+              localField: "_id",
+              foreignField: "channel",
+              as: "subscribers",
+            },
           },
           {
-            $addFields:{
-              subscriberCount:{$size:"$subscribers"}
-            }
+            $addFields: {
+              subscriberCount: { $size: "$subscribers" },
+            },
           },
           {
-            $project:{
-              userName:1,
-              fullname:1,
-              avatar:1,
-              subscriberCount:1
-            }
-          }
+            $project: {
+              userName: 1,
+              fullname: 1,
+              avatar: 1,
+              subscriberCount: 1,
+            },
+          },
         ],
-        
       },
-     
     },
     {
-      $addFields:{
-        owner:{
-          $first:"$owner"
-        }
-      }
+      $addFields: {
+        owner: {
+          $first: "$owner",
+        },
+      },
     },
-
-
   ]);
-
-
 
   const user = await User.findById(req.user?._id);
 
   if (!user) {
     throw new ApiError(400, "please login ");
   }
-  // console.log(user)
-
   user.watchhistory.push(videoId);
   await user.save({ validateBeforeSave: false });
 
@@ -183,10 +165,6 @@ const getVideoById = asyncHandler(async (req, res) => {
   if (!view) {
     throw new ApiError(400, "somethin went wrong while updating views");
   }
-
-
-
-  // console.log(video)
 
   return res
     .status(200)
@@ -205,8 +183,6 @@ const updateVideo = asyncHandler(async (req, res) => {
 
   const thumbnailFilePath = req.file?.path;
 
-  console.log(thumbnailFilePath);
-
   if (!thumbnailFilePath) {
     throw new ApiError(400, "thumbnail file is missig");
   }
@@ -216,7 +192,6 @@ const updateVideo = asyncHandler(async (req, res) => {
   if (!thumbnail) {
     throw new ApiError(400, "somethin went worng while uploading thumbnail");
   }
-  console.log(thumbnail);
 
   const video = await Video.findByIdAndUpdate(
     videoId,
@@ -229,7 +204,6 @@ const updateVideo = asyncHandler(async (req, res) => {
     },
     { new: true }
   );
-  console.log(video.thumbnail);
 
   if (!video) {
     throw new ApiError(404, "video is not find");

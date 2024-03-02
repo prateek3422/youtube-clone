@@ -15,16 +15,16 @@ export class VideoService {
         `http://localhost:3000/api/v1/videos/getAllVideo/?page=1&limit=10`,
         config
       );
-      toast.success(response?.data?.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      // toast.success(response?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
       // console.log(response.data);
       return response;
     } catch (error) {
@@ -131,9 +131,9 @@ export class VideoService {
     }
   }
 
-  async createComment(videoId, comment){
-    console.log(comment)
-    console.log(videoId)
+  async createComment(videoId, comment) {
+    // console.log(comment);
+    // console.log(videoId);
     try {
       const config = {
         headers: {
@@ -142,7 +142,11 @@ export class VideoService {
         },
         withCredentials: true,
       };
-      const commentres = await axios.post(`http://localhost:3000/api/v1/comments/${videoId}`, {content:comment}, config)
+      const commentres = await axios.post(
+        `http://localhost:3000/api/v1/comments/${videoId}`,
+        { content: comment },
+        config
+      );
 
       toast.success(commentres?.data?.message, {
         position: "top-right",
@@ -154,10 +158,10 @@ export class VideoService {
         progress: undefined,
         theme: "colored",
       });
-      console.log(commentres)
-      return commentres
+      // console.log(commentres);
+      return commentres;
     } catch (error) {
-      
+      console.log("create comment",error)
     }
   }
 }
