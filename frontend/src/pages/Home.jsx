@@ -1,45 +1,41 @@
 import React, { Children, useEffect, useState } from "react";
-import { SideBar } from "../components";
 import { VideoCard } from "../components";
-import axios from "axios";
 import videoService from "../services/VideoService";
-
-
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const [video, setVideo] = useState([]);
   const [query, setQuery] = useState("jjk");
-// console.log(video)
+  // console.log(video);
+
 
   useEffect(() => {
-    (async() =>{
-     try {
-      const videoData =  await videoService.getAllVideos()
-      // console.log(videoData.data.data)
-      setVideo(videoData.data.data.docs)
-     } catch (error) {
-      console.log(error)
-     }
-    }
-    )()
+    (async () => {
+      try {
+        
+
+        const videoData = await videoService.getAllVideos();
+        // console.log(videoData.data.data)
+        setVideo(videoData.data.data.docs);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
-
-
 
   return (
     <>
       <div className="container">
-    
-          <div className="main  w-full">
-            <div className="grid grid-cols-3 gap-4">
-              {video.map((vid) => (
-                <li key={vid._id} className="list-none">
-                  <VideoCard {...vid}/>
-                </li>
-              ))}
-            </div>
+        <div className="main  w-full">
+          <div className="grid grid-cols-3 gap-4">
+            {video.map((vid) => (
+              <li key={vid._id} className="list-none">
+                <VideoCard {...vid} />
+              </li>
+            ))}
           </div>
         </div>
+      </div>
     </>
   );
 };

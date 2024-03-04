@@ -10,6 +10,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
   //TODO: get all videos based on query, sort, pagination
 
+  // console.log(userId)
   const pipeline = [];
   if (query) {
     pipeline.push({
@@ -22,12 +23,41 @@ const getAllVideos = asyncHandler(async (req, res) => {
     });
   }
 
+  // console.log(req.user?._id)
   if (userId) {
-    pipeline.push({
-      $match: {
-        _id: new mongoose.Types.ObjectId(req.user._id),
+    pipeline.push(
+      {
+        $match: {
+          owner: new mongoose.Types.ObjectId(req.user._id),
+        },
       },
-    });
+      // {
+      //   $lookup: {
+      //     from: "users",
+      //     localField: "owner",
+      //     foreignField: "_id",
+      //     as: "owner",
+      //     pipeline:[
+      //       {
+      //         $project:{
+      //           userName: 1,
+      //           fullname: 1,
+      //           avatar:1
+      //         }
+      //       }
+      //     ]
+      //   },
+      // },
+ 
+      // {
+      //   $addFields: {
+      //     owner: {
+      //       $first: "$owner",
+      //     },
+      //   },
+      // },
+
+    );
   }
 
   pipeline.push({
@@ -60,7 +90,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
   const { title, description } = req.body;
 
   // TODO: get video, upload to cloudinary, create video
-  if ([title, description].some((field) => field?.trim() == "")) {
+  if (!title && !description) {
     throw new ApiError(401, "All filds are required");
   }
 
@@ -77,14 +107,14 @@ const publishAVideo = asyncHandler(async (req, res) => {
   const duration = Math.floor(videoFile.duration);
 
   const user = await User.findById(req.user._id);
-
+  // console.log(user)
   const videos = await Video.create({
     videoFile: videoFile.url,
     thumbnail: thumbnail.url,
     title,
     description,
     duration,
-    owner: user,
+    owner: req.user._id,
   });
 
   if (!videos) {

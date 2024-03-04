@@ -1,9 +1,9 @@
 import React from 'react'
 
-const likedVideos = () => {
+const LikedVideos = () => {
   return (
     <div>likedVideos</div>
   )
 }
 
-export default likedVideos
+export default LikedVideos

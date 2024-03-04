@@ -109,6 +109,37 @@ export class VideoService {
     }
   }
 
+  async getMyVideos(userId) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const ourVideo = axios.get(
+        `http://localhost:3000/api/v1/videos/getAllVideo/?page=1&limit=10&userId=${userId}`,
+        config
+      );
+      // console.log(ourVideo)
+
+      toast.success(ourVideo?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return ourVideo;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // comment
 
   async getVideoComments(videoId) {
@@ -161,7 +192,7 @@ export class VideoService {
       // console.log(commentres);
       return commentres;
     } catch (error) {
-      console.log("create comment",error)
+      console.log("create comment", error);
     }
   }
 }

@@ -13,6 +13,11 @@ import { persistor, store } from './store/store.js'
 import Videos from './pages/Videos.jsx'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'
+import LikedVideos from './pages/likedVideos.jsx'
+import History from './pages/history.jsx'
+import Collection from './pages/Collection.jsx'
+import Subscribers from './pages/Subscribers.jsx'
+import MyContent from './pages/MyContent.jsx'
 
 
 const router = createBrowserRouter([
@@ -35,7 +40,27 @@ const router = createBrowserRouter([
       {
         path:"/video/:slug",
         element:<Videos/>
-      }
+      },
+      {
+        path:"/liked-videos",
+        element:<LikedVideos/>
+      },
+      {
+        path:"/history",
+        element:<History/>
+      },
+      {
+        path:"/collection",
+        element:<Collection/>
+      },
+      {
+        path:"/subscribers",
+        element:<Subscribers/>
+      },
+      {
+        path:"/content",
+        element:<MyContent/>
+      },
     ]
   }
 ])

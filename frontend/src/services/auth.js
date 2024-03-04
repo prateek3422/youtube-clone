@@ -92,8 +92,27 @@ export class AuthService {
       // const res = await axios.get(' http://localhost:8080/api/v1/users/current-user',config)
       return res;
     } catch (error) {
-
       console.log("getCurrentUsser", error);
+    }
+
+    return null;
+  }
+  async getWatchHistory() {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const history = await axios.get(
+        "http://localhost:3000/api/v1/users/history",
+        config
+      );
+      return history.data;
+    } catch (error) {
+      console.log("getWatchHistory", error);
     }
 
     return null;
@@ -136,6 +155,23 @@ export class AuthService {
         // transition: Bounce,
       });
     }
+  }
+
+  async getChannelDetails(userName) {
+try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const chdetail = axios.get(` http://localhost:3000/api/v1/users/c/${userName}`, config);
+
+      return chdetail
+} catch (error) {
+  console.log(error)
+}
   }
 }
 

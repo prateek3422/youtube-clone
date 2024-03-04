@@ -4,6 +4,7 @@ import { User } from "../models/user.model.js";
 import { cloudinaryUpload } from "../utils/fileUpload.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 const genrateAccessAndRefreshToken = async (userId) => {
   try {
@@ -402,9 +403,9 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     {
       $lookup: {
         from: "videos",
-        localField: "watchHistory",
+        localField: "watchhistory",
         foreignField: "_id",
-        as: "watchHistory",
+        as: "watchhistory",
         pipeline: [
           {
             $lookup: {
@@ -415,8 +416,8 @@ const getWatchHistory = asyncHandler(async (req, res) => {
               pipeline: [
                 {
                   $project: {
-                    fullName: 1,
-                    username: 1,
+                    fullname: 1,
+                    userName: 1,
                     avatar: 1,
                   },
                 },
@@ -428,6 +429,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
               owner: {
                 $first: "$owner",
               },
+          
             },
           },
         ],
@@ -435,12 +437,13 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     },
   ]);
 
+  // console.log(user.watchhistory)
   return res
     .status(200)
     .json(
       new ApiResponse(
         200,
-        user[0].watchHistory,
+        user[0].watchhistory,
         "Watch history fetched successfully"
       )
     );

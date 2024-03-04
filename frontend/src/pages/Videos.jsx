@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import videoService from "../services/VideoService";
 import { useDispatch, useSelector } from "react-redux";
 import { BiLike } from "react-icons/bi";
@@ -99,7 +99,9 @@ const Videos = () => {
                     />
                   </div>
                   <div className="block">
+                    <Link to={``}>
                     <p className="text-green-200"> {video.owner?.userName}</p>
+                    </Link>
                     <p className="text-sm text-green-200">
                       {video.owner?.subscriberCount} Subscribers
                     </p>
