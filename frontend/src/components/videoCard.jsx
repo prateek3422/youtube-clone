@@ -15,8 +15,8 @@ const VideoCard = ({views, _id,title, thumbnail, owner,createdAt
             <div className="h-10 w-10 shrink-0">
               <img
                 className="h-full w-full rounded-full "
-                src="	https://images.pexels.com/photos/3532545/pexels-ph…jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
+                src={owner?.avatar}
+                alt="avatar"
               />
             </div>
             <div className="w-full">
