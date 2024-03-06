@@ -23,41 +23,42 @@ const getAllVideos = asyncHandler(async (req, res) => {
     });
   }
 
-  // console.log(req.user?._id)
-  if (userId) {
-    pipeline.push(
-      {
-        $match: {
-          owner: new mongoose.Types.ObjectId(req.user._id),
+  pipeline.push(
+    {
+      $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "owner",
+        pipeline: [
+          {
+            $project: {
+              userName: 1,
+              fullname: 1,
+              avatar: 1,
+            },
+          },
+        ],
+      },
+    },
+
+    {
+      $addFields: {
+        owner: {
+          $first: "$owner",
         },
       },
-      // {
-      //   $lookup: {
-      //     from: "users",
-      //     localField: "owner",
-      //     foreignField: "_id",
-      //     as: "owner",
-      //     pipeline:[
-      //       {
-      //         $project:{
-      //           userName: 1,
-      //           fullname: 1,
-      //           avatar:1
-      //         }
-      //       }
-      //     ]
-      //   },
-      // },
- 
-      // {
-      //   $addFields: {
-      //     owner: {
-      //       $first: "$owner",
-      //     },
-      //   },
-      // },
+    }
+  );
 
-    );
+
+  // console.log(req.user?._id)
+  if (userId) {
+    pipeline.push({
+      $match: {
+        owner: new mongoose.Types.ObjectId(req.user._id),
+      },
+    });
   }
 
   pipeline.push({
