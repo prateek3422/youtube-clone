@@ -23,7 +23,7 @@ const VideoCard = ({views, _id,title, thumbnail, owner,createdAt
               <h3 className="mb-1 font-semibold">{title}</h3>
               <p className="flex text-sm text-gray-600">
                 {" "}
-               {views}· 44min
+               {views} views· 44min
               </p>
               <p className="text-sm text-gray-600"></p>
             </div>

@@ -2,14 +2,46 @@ import React, { useEffect, useState } from "react";
 import videoService from "../services/VideoService";
 import { useSelector } from "react-redux";
 import authService from "../services/auth";
+import VideoCard from "../components/videoCard";
+import PlaylistCard from "../components/PlaylistCard";
+import { Comunity } from "../components";
+import Subscribed from "../components/Subscribed";
 
 const MyContent = () => {
-  const [myData, setMyData] = useState({});
+  const [myData, setMyData] = useState([]);
   const [channel, setChannel] = useState({});
+  const [toggleTab, setToggleTab] = useState("video");
+
   const userData = useSelector((state) => state.auth.userData);
+  const authStatus = useSelector((state) => state.auth.status);
+
   // console.log(userData.data?.userName);
 
-  console.log(channel);
+  // console.log(channel);
+
+  const btnList = [
+    {
+      name: "videos",
+      slug: "video",
+      active: authStatus,
+    },
+    {
+      name: "playlist",
+      slug: "playlist",
+      active: authStatus,
+    },
+    {
+      name: "comunity",
+      slug: "comunity",
+      active: authStatus,
+    },
+
+    {
+      name: "subscribed",
+      slug: "subscribed",
+      active: authStatus,
+    },
+  ];
 
   useEffect(() => {
     (async () => {
@@ -36,6 +68,10 @@ const MyContent = () => {
     })();
   }, []);
 
+  const handletabs = async (index) => {
+    // console.log(index);
+    setToggleTab(index);
+  };
   return (
     <>
       <div className="container">
@@ -72,27 +108,53 @@ const MyContent = () => {
             </div>
           </div>
           <ul className="no-scrollbar sticky top-[66px] z-2 overflow-auto border-b-2 border-gray-400 py-2 flex justify-between items-center ">
-            <li className="w-full">
-              <button className="w-full border-r-2  bg-white px-3 py-1.5 text-#ae7aff">
-                Videos
-              </button>
-            </li>
-            <li className="w-full">
-              <button className="w-full border-r-2  bg-white px-3 py-1.5 text-#ae7aff">
-                Playlist
-              </button>
-            </li>
-            <li className="w-full">
-              <button className="w-full border-r-2  bg-white px-3 py-1.5 text-#ae7aff">
-                Comunity
-              </button>
-            </li>
-            <li className="w-full">
-              <button className="w-full   bg-white px-3 py-1.5 text-[#ae7aff]">
-                Subscribed
-              </button>
-            </li>
+            {btnList.map((item) =>
+              item.active ? (
+                <li className="w-full" key={item.name}>
+                  <button
+                    onClick={() => handletabs(item.slug)}
+                    className={`w-full border-r-2  bg-white px-3 py-1.5 text-#ae7aff data-tab-type=${item.slug}`}
+                  >
+                    {item.name}
+                  </button>
+                </li>
+              ) : null
+            )}
           </ul>
+        </div>
+
+        <div className={toggleTab === "video" ? "block" : "hidden"}>
+          <div className="main  w-full mt-4 ">
+            <div className="grid grid-cols-3 gap-4">
+              {myData.map((vid) => (
+                <li key={vid._id} className="list-none">
+                  <VideoCard {...vid} />
+                </li>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className={toggleTab === "playlist" ? "block" : "hidden"}>
+          <div className="main  w-full mt-4 ">
+            <div className="grid grid-cols-3 gap-4">
+              <PlaylistCard />
+            </div>
+          </div>
+        </div>
+        <div className={toggleTab === "comunity" ? "block" : "hidden"}>
+          <div className="main  w-full mt-4 ">
+            <div className="grid grid-cols-3 gap-4">
+              <Comunity />
+            </div>
+          </div>
+        </div>
+        <div className={toggleTab === "subscribed" ? "block" : "hidden"}>
+          <div className="main  w-full mt-4 ">
+            <div className="grid grid-cols-3 gap-4">
+              <Subscribed />
+            </div>
+          </div>
         </div>
       </div>
     </>
