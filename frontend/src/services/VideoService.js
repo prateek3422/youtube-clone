@@ -28,17 +28,17 @@ export class VideoService {
       // console.log(response.data);
       return response;
     } catch (error) {
-      // console.log("get all video error", error);
-      toast.error(res?.data?.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      console.log("get all video error", error);
+      // toast.error(res?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
     }
   }
 
@@ -180,6 +180,238 @@ export class VideoService {
       );
 
       toast.success(commentres?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      // console.log(commentres);
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  // playlist
+
+  async createPlaylist(name, description) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const playlist = await axios.post(
+        `http://localhost:3000/api/v1/playlists/`,
+        {
+          name: name,
+          description: description,
+        },
+        config
+      );
+
+      toast.success(playlist?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      // console.log(commentres);
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  async  userplaylist(userId){
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const playlist = await axios.get(
+        `http://localhost:3000/api/v1/playlists//user/${userId}`,
+        {},
+        config
+      );
+
+      toast.success(playlist?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      // console.log(commentres);
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  async playlistById(playlistId){
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const playlist = await axios.get(
+        `http://localhost:3000/api/v1/playlists//user/${playlistId}`,
+        {},
+        config
+      );
+
+      toast.success(playlist?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      // console.log(commentres);
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  async addVideoOnPlaylist(videoId, playlistId){
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const playlist = await axios.patch(
+        `http://localhost:3000/api/v1/playlists/add/${videoId}/${playlistId}`,
+        {},
+        config
+      );
+
+      toast.success(playlist?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      // console.log(commentres);
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  async removeVideoFromPlaylist(videoId,playlistId,){
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const playlist = await axios.patch(
+        `http://localhost:3000/api/v1/playlists/remove/${videoId}/${playlistId}`,
+        {},
+        config
+      );
+
+      toast.success(playlist?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      // console.log(commentres);
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  async updatePlaylist(playlistId, name, description){
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const playlist = await axios.patch(
+        `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
+        {
+          name,name,
+          description:description
+        },
+        config
+      );
+
+      toast.success(playlist?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      // console.log(commentres);
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  async deletePlaylist(playlistId){
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const playlist = await axios.delete(
+        `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
+        {},
+        config
+      );
+
+      toast.success(playlist?.data?.message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

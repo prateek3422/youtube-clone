@@ -11,6 +11,7 @@ import CommentSection from "./commentSection.jsx"
 import Comunity from "./comunity.jsx"
 import PlaylistCard from "./PlaylistCard.jsx"
 import subscribed from "./Subscribed.jsx"
+import VideoPlayer from "./video/VideoPlayer.jsx"
 
 export{
     Header,
@@ -25,5 +26,6 @@ export{
     Input,
     Comunity,
     PlaylistCard,
-    subscribed
+    subscribed,
+    VideoPlayer
 }

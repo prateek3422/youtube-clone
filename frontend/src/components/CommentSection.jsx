@@ -22,7 +22,7 @@ const CommentSection = ({ slug }) => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [comment]);
 
   const handleCreateComment = async () => {
     try {

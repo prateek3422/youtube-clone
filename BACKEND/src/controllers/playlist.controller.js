@@ -33,18 +33,21 @@ const createPlaylist = asyncHandler(async (req, res) => {
 const getUserPlaylists = asyncHandler(async (req, res) => {
   const { userId } = req.params;
   //TODO: get user playlists
-  console.log(userId);
+  // console.log(userId);
 
   if (!isValidObjectId(userId)) {
     throw new ApiError(404, "user is missing");
   }
-
   const playlist = await Playlist.aggregate([
     {
       $match: { owner: new mongoose.Types.ObjectId(userId) },
     },
   ]);
-  console.log(playlist);
+  // console.log(playlist);
+  
+  return res
+    .status(200)
+    .json(new ApiResponse(200, playlist, " user playlist fetched successfully"));
 });
 
 const getPlaylistById = asyncHandler(async (req, res) => {
@@ -159,6 +162,33 @@ const updatePlaylist = asyncHandler(async (req, res) => {
   const { playlistId } = req.params;
   const { name, description } = req.body;
   //TODO: update playlist
+
+  if (!playlistId) {
+    throw new ApiError(404, "playlist is missing");
+  }
+
+
+  if(!name & !description){
+    throw new ApiError(404, "All field are required");
+  }
+
+  const updatePlaylist = await Playlist.findByIdAndUpdate(
+    playlistId,
+    {
+      $set:{
+        name,
+        description
+      }
+    },
+    {
+      new: true,
+    }
+  );
+
+  
+  return res
+    .status(200)
+    .json(new ApiResponse(200, updatePlaylist, "video removed from playlist"));
 });
 
 export {

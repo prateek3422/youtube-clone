@@ -4,7 +4,7 @@ import videoService from "../services/VideoService";
 import { useDispatch, useSelector } from "react-redux";
 import { BiLike } from "react-icons/bi";
 import { Subscribe, unSubscribe } from "../store/subscriberSlice";
-import { CommentSection } from "../components";
+import { CommentSection, VideoPlayer } from "../components";
 
 
 const Videos = () => {
@@ -75,6 +75,8 @@ const Videos = () => {
                 autoPlay
                 className="h-full w-full rounded-lg"
               ></video>
+
+               {/* <VideoPlayer src={video.videoFile}/> */}
             </div>
             <div className="border-white mt-4 border-2 rounded-xl p-4  ml-32">
               <div className="flex justify-between items-center">

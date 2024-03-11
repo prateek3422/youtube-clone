@@ -16,7 +16,7 @@ const MyContent = () => {
   const authStatus = useSelector((state) => state.auth.status);
 
   // console.log(userData.data?.userName);
-
+  console.log(myData)
   // console.log(channel);
 
   const btnList = [
@@ -126,11 +126,17 @@ const MyContent = () => {
         <div className={toggleTab === "video" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
             <div className="grid grid-cols-3 gap-4">
-              {myData.map((vid) => (
-                <li key={vid._id} className="list-none">
+              {
+            
+
+              myData.map((vid) => (
+               <li key={vid._id} className="list-none">
                   <VideoCard {...vid} />
                 </li>
-              ))}
+              )
+              )
+           
+            }
             </div>
           </div>
         </div>

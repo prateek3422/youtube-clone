@@ -98,6 +98,12 @@ const publishAVideo = asyncHandler(async (req, res) => {
   const videoLocalFilePath = req.files?.videoFile[0]?.path;
   const thumbnailFilePath = req.files?.thumbnail[0]?.path;
 
+// ffmpeg encode video
+
+
+
+// upload video 
+
   const thumbnail = await cloudinaryUpload(thumbnailFilePath);
   const videoFile = await cloudinaryUpload(videoLocalFilePath);
 
