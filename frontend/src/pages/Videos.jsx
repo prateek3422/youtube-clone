@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import videoService from "../services/VideoService";
-import { useDispatch, useSelector } from "react-redux";
 import { BiLike } from "react-icons/bi";
-import { Subscribe, unSubscribe } from "../store/subscriberSlice";
 import { CommentSection, VideoPlayer } from "../components";
 
 
 const Videos = () => {
-  const dispatch = useDispatch();
+
   const { slug } = useParams();
   const navigate = useNavigate();
   const [video, setVideo] = useState({});
 
-  // console.log(commentText);
-
-  const isSubscribe = useSelector((state) => state.subscribe.status);
-
-  // console.log(video);
-  // console.log(video.owner?._id);
-  // console.log(video.duration)
-  // console.log(subscribe)
 
   useEffect(() => {
     (async () => {
@@ -36,7 +26,7 @@ const Videos = () => {
         console.log(error);
       }
     })();
-  }, [isSubscribe]);
+  }, []);
 
   // subscription
 
@@ -45,14 +35,7 @@ const Videos = () => {
       const subs = await videoService.getSubscribe(video.owner?._id);
       // todo: dispatch to store
 
-      console.log(subs.data);
-      if (subs.data == "unsubscribe successully") {
-        // setSubscribe(true)
-        dispatch(unSubscribe());
-      } else {
-        dispatch(Subscribe(subs.data));
-        // setSubscribe(false)
-      }
+      
     } catch (error) {
       console.log(error);
     }
@@ -115,7 +98,7 @@ const Videos = () => {
                     onClick={handleSubscribe}
                     className="border-2 px-4 py-1 rounded-2xl"
                   >
-                    {isSubscribe ? "unsubscribe" : "subscribe"}
+                    {video.owner?.isSubscribed ? "unsubscribe" : "subscribe" }
                   </button>
                 </div>
               </div>

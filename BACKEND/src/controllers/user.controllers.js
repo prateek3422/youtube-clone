@@ -102,6 +102,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const { userName, email, password } = req.body;
 
+  // console.log(req.body)
   if (!userName && !email) {
     throw new ApiError(400, "userName or email are required");
   }
@@ -149,6 +150,7 @@ const loginUser = asyncHandler(async (req, res) => {
       )
     );
 });
+
 const logoutUser = asyncHandler(async (req, res) => {
   // console.log(req.user._id);
   await User.findByIdAndUpdate(
@@ -260,9 +262,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     { new: true }
   ).select("-password");
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, user, "Account details updated successfully"));
+                                                                                                           
 });
 
 const updateAvatar = asyncHandler(async (req, res) => {
@@ -366,6 +366,7 @@ const getChannelProfile = asyncHandler(async (req, res) => {
             then: true,
             else: false,
           },
+          
         },
       },
     },

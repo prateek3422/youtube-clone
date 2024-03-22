@@ -6,6 +6,8 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { cloudinaryUpload, clouldinaryDelete } from "../utils/fileUpload.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
+import { videoEncodeing } from "../utils/videoEncodeing.js";
+
 const getAllVideos = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
   //TODO: get all videos based on query, sort, pagination
@@ -23,8 +25,25 @@ const getAllVideos = asyncHandler(async (req, res) => {
     });
   }
 
+  if (userId) {
+    pipeline.push({
+      $match: {
+        owner: new mongoose.Types.ObjectId(req.user._id),
+      },
+    });
+  }
+
   pipeline.push(
     {
+      $lookup:{
+        from:"likes",
+        localField:"like",
+        foreignField:"_id",
+        as:"like"
+      }
+    },
+    {
+
       $lookup: {
         from: "users",
         localField: "owner",
@@ -51,16 +70,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
     }
   );
 
-
-  // console.log(req.user?._id)
-  if (userId) {
-    pipeline.push({
-      $match: {
-        owner: new mongoose.Types.ObjectId(req.user._id),
-      },
-    });
-  }
-
   pipeline.push({
     $match: { isPublished: true },
   });
@@ -72,11 +81,13 @@ const getAllVideos = asyncHandler(async (req, res) => {
   }
 
   const aggregate = Video.aggregate(pipeline);
+  // console.log(aggregate)
 
   const video = await Video.aggregatePaginate(aggregate, {
     page,
     limit,
   });
+
   res
     .status(200)
     .json(new ApiResponse(200, video, "video feached successfully"));
@@ -89,23 +100,28 @@ const publishAVideo = asyncHandler(async (req, res) => {
   // res
 
   const { title, description } = req.body;
+  // console.log(title)
 
   // TODO: get video, upload to cloudinary, create video
   if (!title && !description) {
     throw new ApiError(401, "All filds are required");
   }
 
+  // console.log(req.file)
   const videoLocalFilePath = req.files?.videoFile[0]?.path;
+  // let videoLocalFilePath
+  // console.log(videoLocalFilePath)
   const thumbnailFilePath = req.files?.thumbnail[0]?.path;
+  // upload video
 
-// ffmpeg encode video
-
-
-
-// upload video 
+  // const encodseVideoFile = await videoEncodeing(videoLocalFilePath)
 
   const thumbnail = await cloudinaryUpload(thumbnailFilePath);
+
   const videoFile = await cloudinaryUpload(videoLocalFilePath);
+
+  // console.log(videoFile)
+  // console.log(videoFile)
 
   if (!videoFile && !thumbnail) {
     throw new ApiError(500, "video and thumbnail field are required");
@@ -114,13 +130,13 @@ const publishAVideo = asyncHandler(async (req, res) => {
   const duration = Math.floor(videoFile.duration);
 
   const user = await User.findById(req.user._id);
-  // console.log(user)
+
   const videos = await Video.create({
-    videoFile: videoFile.url,
-    thumbnail: thumbnail.url,
+    videoFile: videoFile,
+    thumbnail: thumbnail,
     title,
     description,
-    duration,
+    duration: duration,
     owner: req.user._id,
   });
 
@@ -136,17 +152,27 @@ const publishAVideo = asyncHandler(async (req, res) => {
 const getVideoById = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
   //TODO: get video by id
-
+  // console.log(videoId)
   if (!videoId?.trim()) {
     throw new ApiError(400, "video id is missing");
   }
 
   const videoById = await Video.findById(videoId);
+  // console.log(videoById)
 
   const video = await Video.aggregate([
     {
       $match: { _id: new mongoose.Types.ObjectId(videoId) },
     },
+    {
+      $lookup:{
+        from:"likes",
+        localField:"like",
+        foreignField:"_id",
+        as:"like"
+      }
+    },
+ 
     {
       $lookup: {
         from: "users",
@@ -166,14 +192,24 @@ const getVideoById = asyncHandler(async (req, res) => {
           {
             $addFields: {
               subscriberCount: { $size: "$subscribers" },
+
+              isSubscribed: {
+                $cond: {
+                  if: { $in: [req.user?._id, "$subscribers.subscriber"] },
+                  then: true,
+                  else: false,
+                },
+              },
             },
           },
+
           {
             $project: {
               userName: 1,
               fullname: 1,
               avatar: 1,
               subscriberCount: 1,
+              isSubscribed: 1,
             },
           },
         ],
@@ -188,6 +224,7 @@ const getVideoById = asyncHandler(async (req, res) => {
     },
   ]);
 
+  // console.log(video)
   const user = await User.findById(req.user?._id);
 
   if (!user) {

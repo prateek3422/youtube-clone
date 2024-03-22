@@ -42,6 +42,53 @@ export class VideoService {
     }
   }
 
+  async publicVideo(videoFile, thubnail, title, description) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/videos/publishVideo`,
+        {
+          videoFile,
+          thubnail,
+          title,
+          description,
+        },
+        config
+      );
+      // console.log(response.data)
+      // toast.success(response?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
+      return response.data;
+    } catch (error) {
+      console.log("get video", error);
+      toast.error(res?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  }
+
   async getSingeVideo(slug) {
     // console.log(slug)
     try {
@@ -233,7 +280,8 @@ export class VideoService {
     }
   }
 
-  async  userplaylist(userId){
+  async userplaylist(userId) {
+    // console.log(userId)
     try {
       const config = {
         headers: {
@@ -243,29 +291,28 @@ export class VideoService {
         withCredentials: true,
       };
       const playlist = await axios.get(
-        `http://localhost:3000/api/v1/playlists//user/${userId}`,
-        {},
+        `http://localhost:3000/api/v1/playlists/user/${userId}`,
         config
       );
 
-      toast.success(playlist?.data?.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      // toast.success(playlist?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
       // console.log(commentres);
-      return commentres;
+      return playlist.data;
     } catch (error) {
-      console.log("create comment", error);
+      console.log(error);
     }
   }
 
-  async playlistById(playlistId){
+  async playlistById(playlistId) {
     try {
       const config = {
         headers: {
@@ -297,7 +344,7 @@ export class VideoService {
     }
   }
 
-  async addVideoOnPlaylist(videoId, playlistId){
+  async addVideoOnPlaylist(videoId, playlistId) {
     try {
       const config = {
         headers: {
@@ -329,7 +376,7 @@ export class VideoService {
     }
   }
 
-  async removeVideoFromPlaylist(videoId,playlistId,){
+  async removeVideoFromPlaylist(videoId, playlistId) {
     try {
       const config = {
         headers: {
@@ -361,7 +408,7 @@ export class VideoService {
     }
   }
 
-  async updatePlaylist(playlistId, name, description){
+  async updatePlaylist(playlistId, name, description) {
     try {
       const config = {
         headers: {
@@ -373,8 +420,9 @@ export class VideoService {
       const playlist = await axios.patch(
         `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
         {
-          name,name,
-          description:description
+          name,
+          name,
+          description: description,
         },
         config
       );
@@ -396,7 +444,7 @@ export class VideoService {
     }
   }
 
-  async deletePlaylist(playlistId){
+  async deletePlaylist(playlistId) {
     try {
       const config = {
         headers: {
@@ -427,6 +475,10 @@ export class VideoService {
       console.log("create comment", error);
     }
   }
+
+  // like
+
+  async getlikes() {}
 }
 
 const videoService = new VideoService();

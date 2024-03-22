@@ -9,7 +9,7 @@ const CommentSection = ({ slug }) => {
   const [hide, setHide] = useState(true);
 
 
-
+// console.log(comment)
   useEffect(() => {
     (async () => {
       try {
@@ -22,13 +22,16 @@ const CommentSection = ({ slug }) => {
         console.log(error);
       }
     })();
-  }, [comment]);
+  }, []);
 
   const handleCreateComment = async () => {
     try {
       if (commentText) {
-        const comment = await videoService.createComment(slug, commentText);
-        console.log(comment);
+        const newComment = await videoService.createComment(slug, commentText);
+        // setComment([...comment, newComment?.data.data])
+        // console.log(comment);
+        // setComment("")
+        // console.log(newComment)
       }
     } catch (error) {
       console.log(error);

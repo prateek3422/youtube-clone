@@ -5,13 +5,14 @@ import { FaForward } from "react-icons/fa";
 import { FaBackward } from "react-icons/fa";
 import Hls from "hls.js";
 
-const VideoPlayer = ({ src }) => {
+const VideoPlayer = () => {
   const [hide, setHide] = useState(false)
 
   const videoref = useRef(null);
   let hls;
 
-  console.log(videoref.current)
+  // console.log(videoref.current)
+
 
   const [currentTime, setCurrentTime] = useState()
   const [duration, setDuration] = useState()
@@ -20,15 +21,16 @@ const VideoPlayer = ({ src }) => {
   // console.log(currentTime)
   // console.log(duration)
 
+
 useEffect(() =>{
   if(Hls.isSupported()){
     const hls = new Hls()
-    hls.loadSource(src)
+    hls.loadSource(vidSrc)
     hls.attachMedia(videoref.current)
-  }else if(videoref.current.canPlayType('application/vnd.apple.mpegurl')){
-    videoref.current.src = src
+  }else if(videoref.current.canPlayType('application/../../../assets/video/video.mpegurl')){
+    videoref.current.src = vidSrc
   }
-  },[src])
+  })
 
 
 const handlePlay = () =>{

@@ -1,90 +1,134 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import Login from './pages/Login.jsx'
-import Signup from './pages/Signup.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistor, store } from './store/store.js'
-import Videos from './pages/Videos.jsx'
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify'
-import LikedVideos from './pages/likedVideos.jsx'
-import History from './pages/history.jsx'
-import Collection from './pages/Collection.jsx'
-import Subscribers from './pages/Subscribers.jsx'
-import MyContent from './pages/MyContent.jsx'
-
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./store/store.js";
+import Videos from "./pages/Videos.jsx";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import LikedVideos from "./pages/likedVideos.jsx";
+import History from "./pages/history.jsx";
+import Collection from "./pages/Collection.jsx";
+import Subscribers from "./pages/Subscribers.jsx";
+import MyContent from "./pages/MyContent.jsx";
+import AuthLayOut from "./components/authLayOut.jsx";
+import Customise from "./pages/Customise.jsx";
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element:<App/>,
-    children:[
+    path: "/",
+    element: <App />,
+    children: [
       {
-        path:'/',
-        element:<Home/>
+        path: "/",
+        element: (
+          <AuthLayOut authentication>
+            <Home />
+          </AuthLayOut>
+        ),
       },
       {
-        path:'/login',
-        element:<Login/>
+        path: "/login",
+        element: (
+          <AuthLayOut authentication={false}>
+            <Login />
+          </AuthLayOut>
+        ),
       },
       {
-        path:'/signup',
-        element:<Signup/>
+        path: "/signup",
+        element: (
+          <AuthLayOut authentication={false}>
+            <Signup />
+          </AuthLayOut>
+        ),
       },
       {
-        path:"/video/:slug",
-        element:<Videos/>
+        path: "/video/:slug",
+        element: (
+          <AuthLayOut authentication>
+            <Videos />
+          </AuthLayOut>
+        ),
       },
       {
-        path:"/liked-videos",
-        element:<LikedVideos/>
+        path: "/liked-videos",
+        element: (
+          <AuthLayOut authentication>
+            <LikedVideos />
+          </AuthLayOut>
+        ),
       },
       {
-        path:"/history",
-        element:<History/>
+        path: "/history",
+        element: (
+          <AuthLayOut authentication>
+            <History />
+          </AuthLayOut>
+        ),
       },
       {
-        path:"/collection",
-        element:<Collection/>
+        path: "/collection",
+        element: (
+          <AuthLayOut authentication>
+            <Collection />
+          </AuthLayOut>
+        ),
       },
       {
-        path:"/subscribers",
-        element:<Subscribers/>
+        path: "/subscribers",
+        element: (
+          <AuthLayOut authentication>
+            <Subscribers />
+          </AuthLayOut>
+        ),
       },
       {
-        path:"/content",
-        element:<MyContent/>
+        path: "/content",
+        element: (
+          <AuthLayOut authentication>
+            <MyContent />
+          </AuthLayOut>
+        ),
       },
-    ]
-  }
-])
+      {
+        path: "/customise",
+        element: (
+          <AuthLayOut authentication>
+            <Customise />
+          </AuthLayOut>
+        ),
+      },
+    ],
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-          <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        // transition="Bounce"
-      />
+    <ToastContainer
+      position="top-right"
+      autoClose={1000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      // transition="Bounce"
+    />
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-
-    <RouterProvider router={router}/>
+        <RouterProvider router={router} />
       </PersistGate>
-    </Provider> 
-  </React.StrictMode>,
-)
+    </Provider>
+  </React.StrictMode>
+);

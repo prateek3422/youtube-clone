@@ -9,6 +9,7 @@ import {
 } from "../controllers/video.controller.js";
 import { upload } from "../middleware/multer.middleware.js";
 import { veryfyJwt } from "../middleware/verifyJwt.js";
+import { videoEncodeing } from "../utils/videoEncodeing.js";
 
 const router = Router();
 router.use(veryfyJwt); // Apply verifyJWT middleware to all routes in this file
@@ -29,7 +30,9 @@ router
   publishAVideo
 );
 
-router.route("/getAllVideo").get(getAllVideos);
+router.route("/getAllVideo").get(getAllVideos)
+router.route("/encode").post(videoEncodeing)
+
 
 router
   .route("/:videoId")

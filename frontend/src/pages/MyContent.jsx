@@ -4,19 +4,23 @@ import { useSelector } from "react-redux";
 import authService from "../services/auth";
 import VideoCard from "../components/videoCard";
 import PlaylistCard from "../components/PlaylistCard";
-import { Comunity } from "../components";
+import { Button, Comunity } from "../components";
 import Subscribed from "../components/Subscribed";
+import { Link, useNavigate } from "react-router-dom";
+import { MdOutlineFileUpload } from "react-icons/md";
 
 const MyContent = () => {
   const [myData, setMyData] = useState([]);
   const [channel, setChannel] = useState({});
   const [toggleTab, setToggleTab] = useState("video");
 
+  // console.log(myData)
+
   const userData = useSelector((state) => state.auth.userData);
   const authStatus = useSelector((state) => state.auth.status);
 
   // console.log(userData.data?.userName);
-  console.log(myData)
+  // console.log(myData)
   // console.log(channel);
 
   const btnList = [
@@ -48,6 +52,8 @@ const MyContent = () => {
       try {
         const userId = userData.data?._id;
         const videoData = await videoService.getMyVideos(userId);
+
+        // console.log(videoData);
         setMyData(videoData.data?.data?.docs);
       } catch (error) {
         console.log(error);
@@ -106,6 +112,11 @@ const MyContent = () => {
                 {channel?.isSubscribed ? "unsubscribe" : "subscribe"}
               </button>
             </div>
+            <Link to="/customise">
+              <button className="border-2 px-4 py-1 rounded-2xl">
+                customise
+              </button>
+            </Link>
           </div>
           <ul className="no-scrollbar sticky top-[66px] z-2 overflow-auto border-b-2 border-gray-400 py-2 flex justify-between items-center ">
             {btnList.map((item) =>
@@ -125,18 +136,20 @@ const MyContent = () => {
 
         <div className={toggleTab === "video" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
-            <div className="grid grid-cols-3 gap-4">
-              {
-            
-
-              myData.map((vid) => (
-               <li key={vid._id} className="list-none">
-                  <VideoCard {...vid} />
-                </li>
-              )
-              )
-           
-            }
+            <div className="flex flex-col justify-center items-center">
+              <div className="grid grid-cols-3 gap-4">
+                {myData.map((vid) => {
+                  // console.log(vid)
+                  return (
+                    <li key={vid._id} className="list-none">
+                      <VideoCard {...vid} />
+                    </li>
+                  );
+                })}
+              </div>
+                <div className="upload">
+                  <button><MdOutlineFileUpload/></button>
+                </div>
             </div>
           </div>
         </div>
@@ -144,7 +157,7 @@ const MyContent = () => {
         <div className={toggleTab === "playlist" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
             <div className="grid grid-cols-3 gap-4">
-              <PlaylistCard />
+              <PlaylistCard userId={userData.data?._id} />
             </div>
           </div>
         </div>

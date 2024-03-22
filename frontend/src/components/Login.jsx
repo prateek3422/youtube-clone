@@ -11,12 +11,14 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  
   const login = async (data) => {
     try {
       const LoginSession = await authService.Login(data)
       if(LoginSession){
         const userData  = await authService.getCurrentUser()
-        console.log(userData)
+        // console.log(userData)
         if(userData)dispatch(authLogin(userData.data))
         navigate('/')
       }
