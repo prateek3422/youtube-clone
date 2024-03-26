@@ -126,12 +126,12 @@ const getChannelVideos = asyncHandler(async (req, res) => {
         month:1,
         year:1
       },
+      likes:1,
       isPublished:1
     }
   }
   ])
 
-  console.log(video)
   return res
   .status(200)
   .json(

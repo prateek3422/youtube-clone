@@ -15,7 +15,7 @@ const Home = () => {
         
 
         const videoData = await videoService.getAllVideos();
-        // console.log(videoData.data.data)
+        console.log(videoData.data.data)
         setVideo(videoData.data.data.docs);
       } catch (error) {
         console.log(error);

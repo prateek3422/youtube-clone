@@ -12,7 +12,7 @@ import Comunity from "./comunity.jsx"
 import PlaylistCard from "./PlaylistCard.jsx"
 import subscribed from "./Subscribed.jsx"
 import VideoPlayer from "./video/VideoPlayer.jsx"
-
+import Modal from "./modal.jsx"
 export{
     Header,
     Signup,
@@ -27,5 +27,6 @@ export{
     Comunity,
     PlaylistCard,
     subscribed,
-    VideoPlayer
+    VideoPlayer,
+    Modal
 }

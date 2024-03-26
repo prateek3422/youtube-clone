@@ -15,40 +15,40 @@ const SideBar = () => {
   const sideList = [
     {
       name: "Home",
-      icon: <IoMdHome />,
+      icon: <IoMdHome className="text-white" />,
       slug: "/",
       active: authStatus,
     },
 
     {
       name: "Liked videos",
-      icon: <AiFillLike />,
+      icon: <AiFillLike className="text-white" />,
       slug: "/liked-videos",
       active: authStatus,
     },
     {
       name: "History",
-      icon: <FaHistory />,
+      icon: <FaHistory className="text-white" />,
       slug: "/history",
       active: authStatus,
     },
 
     {
       name: "Collection",
-      icon: <BsCollectionPlay />,
+      icon: <BsCollectionPlay className="text-white" />,
       slug: "/collection",
       active: authStatus,
     },
 
     {
       name: "MyContent",
-      icon: <FaVideo />,
+      icon: <FaVideo className="text-white" />,
       slug: "/content",
       active: authStatus,
     },
     {
       name: "Subscribers",
-      icon: <FaUserCheck />,
+      icon: <FaUserCheck className="text-white" />,
       slug: "/subscribers",
       active: authStatus,
     },
@@ -61,11 +61,11 @@ const SideBar = () => {
           item.active ? (
             <li className="list-none w-full" key={item.name}>
               <button
-                className="flex  items-center justify-start border-2 w-full h-10 "
+                className="flex  items-center justify-start border-2 w-full h-10 p-2 gap-2 "
                 onClick={() => navigate(item.slug)}
               >
                 <span className="inline-block w-5 ">{item.icon}</span>
-                <span className="block ">{item.name}</span>
+                <span className="block text-white ">{item.name}</span>
               </button>
             </li>
           ) : null

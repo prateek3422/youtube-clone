@@ -29,18 +29,15 @@ function App() {
 
   return !loaing ? (
     <>
-      <div className="min-h-screen flex flex-wrap content-between ">
+      <div className=" flex flex-wrap content-between  dark:bg-gray-900 ">
         <div className="w-full block">
-          <Header />
+          <Header  />
+          
           <main>
-            <div className="grid-two-col gap-1">
-              <div className="w-full">
-                <div className="group  inset-l-0 z-40n w-full px-2 py-2">
-                  <SideBar />
-                </div>
-              </div>
+          
+              <div div className="flex flex-auto p-4">
               <Outlet />
-            </div>
+              </div>
           </main>
         </div>
       </div>

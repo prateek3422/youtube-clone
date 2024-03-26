@@ -35,15 +35,22 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
   pipeline.push(
     {
-      $lookup:{
-        from:"likes",
-        localField:"like",
-        foreignField:"_id",
-        as:"like"
-      }
+      $lookup: {
+        from: "likes",
+        localField: "like",
+        foreignField: "_id",
+        as: "like",
+      },
     },
     {
+      $addFields: {
+        createdAt: {
+          $dateToParts: { date: "$createdAt" },
+        },
+      },
+    },
 
+    {
       $lookup: {
         from: "users",
         localField: "owner",
@@ -165,14 +172,14 @@ const getVideoById = asyncHandler(async (req, res) => {
       $match: { _id: new mongoose.Types.ObjectId(videoId) },
     },
     {
-      $lookup:{
-        from:"likes",
-        localField:"like",
-        foreignField:"_id",
-        as:"like"
-      }
+      $lookup: {
+        from: "likes",
+        localField: "like",
+        foreignField: "_id",
+        as: "like",
+      },
     },
- 
+
     {
       $lookup: {
         from: "users",

@@ -26,6 +26,7 @@ export class VideoService {
       //   theme: "colored",
       // });
       // console.log(response.data);
+      
       return response;
     } catch (error) {
       console.log("get all video error", error);
@@ -478,7 +479,57 @@ export class VideoService {
 
   // like
 
-  async getlikes() {}
+  async getlikes() {
+
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // dashboard
+
+  async channelStatus() {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const dash = await axios.get(`http://localhost:3000/api/v1/dashboard/stats`,config)
+
+      return dash
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async channelVideo(){
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+
+      const video = await axios.get(`http://localhost:3000/api/v1/dashboard/videos`,config)
+
+      return video
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 const videoService = new VideoService();

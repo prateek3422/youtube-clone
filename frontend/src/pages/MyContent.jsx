@@ -124,7 +124,7 @@ const MyContent = () => {
                 <li className="w-full" key={item.name}>
                   <button
                     onClick={() => handletabs(item.slug)}
-                    className={`w-full border-r-2  bg-white px-3 py-1.5 text-#ae7aff data-tab-type=${item.slug}`}
+                    className={`w-full border-r-2   px-3 py-1.5 text-#ae7aff data-tab-type=${item.slug}`}
                   >
                     {item.name}
                   </button>

@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from "react";
+import SideBar from "../sideBar";
+
 
 const Logo = () => {
-  return (
-    <div>
-        <img src="/images/logo.png
-        " alt="logo" />
-    </div>
-  )
-}
+  const [slider, setSlider] = useState(false);
 
-export default Logo
+
+  return (
+    <>
+      <div className=" flex flex-wrap items-center justify-between mx-auto  " >
+        <img src="/images/logo.png" alt="logo" />
+      </div>
+
+   
+    </>
+  );
+};
+
+export default Logo;

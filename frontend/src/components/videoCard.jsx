@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const VideoCard = ({ views, _id, title, thumbnail, owner, createdAt }) => {
-  // console.log(owner);
+  // console.log(createdAt);
+
   return (
     <>
       <Link to={`/video/${_id}`}>

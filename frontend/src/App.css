@@ -1,3 +1,11 @@
+h1,h2,h3,h4,h5,h6{
+    color: white;
+}
+
+label{
+    color: white;
+}
+
 .card{
     width: 70%;
     border-radius:30px ;
@@ -13,14 +21,12 @@ box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
 
 }
 
-.auth{
-    height: 92vh;
-}
+
 
 .grid-two-col{
     display: grid;
     grid-template-columns:16rem 1fr;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .video-card{
