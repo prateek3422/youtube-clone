@@ -13,7 +13,8 @@ import PlaylistCard from "./PlaylistCard.jsx"
 import subscribed from "./Subscribed.jsx"
 import VideoPlayer from "./video/VideoPlayer.jsx"
 import Modal from "./modal.jsx"
-export{
+import UserVideoDetails from "./UserVideoDetails.jsx"
+ export{
     Header,
     Signup,
     Login,
@@ -28,5 +29,6 @@ export{
     PlaylistCard,
     subscribed,
     VideoPlayer,
-    Modal
+    Modal,
+    UserVideoDetails
 }

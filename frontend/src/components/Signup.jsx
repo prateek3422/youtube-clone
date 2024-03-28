@@ -31,8 +31,8 @@ const Signup = () => {
   };
   return (
     <>
-      <div className="auth flex justify-center items-center">
-        <div className="card  grid grid-cols-2 ">
+      <div className="auth  mt-24  flex justify-center items-center">
+        <div className="card  grid lg:grid-cols-2  p-4">
           <div className="auth-img flex justify-center items-center">
             <img src="/images/signup.svg" alt="signup-image" />
           </div>

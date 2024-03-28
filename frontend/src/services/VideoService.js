@@ -132,6 +132,47 @@ export class VideoService {
     }
   }
 
+  async toggleVideo(videoId){
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+
+      const response = await axios.patch(
+        ` http://localhost:3000/api/v1/videos/toggle/publish/${videoId}`,{}, config
+      );
+      // console.log(response.data)
+      // toast.success(response?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
+      return response.data;
+    } catch (error) {
+      console.log("get video", error);
+      // toast.error(res?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
+    }
+  }
+  
+
   //subscribe
   async getSubscribe(channelId) {
     // console.log(channelId)

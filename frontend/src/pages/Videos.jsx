@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import videoService from "../services/VideoService";
 import { BiLike } from "react-icons/bi";
-import { CommentSection, VideoPlayer } from "../components";
+import { Button, CommentSection, VideoPlayer } from "../components";
 
 
 const Videos = () => {
@@ -48,10 +48,10 @@ const Videos = () => {
 
   return (
     <>
-      <div className="video-container">
-        <div className="grid grid-two-col-video gap-4 mt-12">
+      <div className="container mx-auto">
+        <div className="flex w-full flex-wrap lg:flex-nowrap gap-4 p-4">
           <div>
-            <div className=" video flex justify-center  ml-32">
+            <div className=" video flex justify-center  lg:ml-32">
               <video
                 src={video.videoFile}
                 controls
@@ -61,7 +61,7 @@ const Videos = () => {
 
                {/* <VideoPlayer src={video.videoFile}/> */}
             </div>
-            <div className="border-white mt-4 border-2 rounded-xl p-4  ml-32">
+            <div className=" mt-4 rounded-xl p-4  lg:ml-32">
               <div className="flex justify-between items-center">
                 <div className="flex flex-col">
                   <h1 className="text-lg font-bold">{video.title}</h1>
@@ -69,9 +69,9 @@ const Videos = () => {
                     {video.views} views . 18 hours ago
                   </p>
                 </div>
-                <button className="border-2 px-4 py-1 rounded-2xl flex items-center gap-1">
+                <Button className=" px-4 py-1 rounded-2xl flex items-center gap-1 text-white">
                   <BiLike /> 350
-                </button>
+                </Button>
               </div>
 
               <div className=" mt-4 flex justify-between items-center">
@@ -94,18 +94,18 @@ const Videos = () => {
                 </div>
 
                 <div className="block">
-                  <button
+                  <Button
                     onClick={handleSubscribe}
-                    className="border-2 px-4 py-1 rounded-2xl"
+                    className=" px-4 py-1 rounded-2xl text-white"
                   >
                     {video.owner?.isSubscribed ? "unsubscribe" : "subscribe" }
-                  </button>
+                  </Button>
                 </div>
               </div>
-              <hr className="my-4 border-white" />
+              {/* <hr className="my-4 border-white" /> */}
 
-              <div className="h-10 overflow-hidden group-focus:h-auto">
-                <p className="text-sm">{video.description}</p>
+              <div className="h-10 overflow-hidden group-focus:h-auto my-4">
+                <p className="text-sm text-white">{video.description}</p>
               </div>
 
 
@@ -117,7 +117,10 @@ const Videos = () => {
 
           </div>
 
-          <div className="related-videos "></div>
+          <div className="related-videos  w-full">
+
+            related videos
+          </div>
         </div>
       </div>
     </>

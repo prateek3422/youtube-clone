@@ -8,8 +8,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistor, store } from "./store/store.js";
+import { store } from "./store/store.js";
 import Videos from "./pages/Videos.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
@@ -126,9 +125,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       // transition="Bounce"
     />
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+
         <RouterProvider router={router} />
-      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

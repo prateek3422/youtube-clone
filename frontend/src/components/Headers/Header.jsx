@@ -47,8 +47,9 @@ const Header = () => {
           </div>
 
       {slide && (
+        
             
-            <div className={`  w-40 absolute  top-16 dark:bg-gray-900 animate-slide-in`}>
+            <div className={`  w-40   absolute top-16 dark:bg-gray-900 animate-slide-in`}>
               <div className="w-full">
                 <div className="group inset-l-0 z-40n w-full p-2">
                   <div><SideBar/></div>

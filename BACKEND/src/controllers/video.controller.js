@@ -313,17 +313,21 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
     throw new ApiError(404, "video Id is missing");
   }
 
+  const videos =  await Video.findById(videoId)
+
   const video = await Video.findByIdAndUpdate(
     videoId,
     {
-      $set: { isPublished: !video?.isPublished },
+      $set: { isPublished: !videos?.isPublished },
     },
     { new: true }
   );
 
+  
+
   return res
     .status(200)
-    .json(new ApiResponse(200, isPublished, "video toggled"));
+    .json(new ApiResponse(200, video, "video toggled"));
 });
 
 export {

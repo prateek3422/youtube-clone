@@ -7,7 +7,7 @@ const VideoCard = ({ views, _id, title, thumbnail, owner, createdAt }) => {
   return (
     <>
       <Link to={`/video/${_id}`}>
-        <div className="video-card">
+        <div className="video-card ">
           <div className="thumbnail">
             <img className="rounded-lg thumb-img" src={thumbnail} alt="" />
           </div>

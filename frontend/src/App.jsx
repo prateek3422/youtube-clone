@@ -7,7 +7,7 @@ import authService from "./services/auth";
 import { login as authLogin, logout } from "./store/authSlice";
 
 function App() {
-  const [loaing, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,17 +27,13 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-  return !loaing ? (
+  return !loading ? (
     <>
-      <div className=" flex flex-wrap content-between  dark:bg-gray-900 ">
+      <div className="min-h-screen flex flex-wrap content-between  w-full">
         <div className="w-full block">
           <Header  />
-          
           <main>
-          
-              <div div className="flex flex-auto p-4">
-              <Outlet />
-              </div>
+            <Outlet />
           </main>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
-import { Input } from "../components";
+import { Button, Input } from "../components";
 import videoService from "../services/VideoService";
 
 const CommentSection = ({ slug }) => {
@@ -42,7 +42,7 @@ const CommentSection = ({ slug }) => {
 
   return (
     <>
-      <div className="border-white mt-4 border-2 rounded-xl p-4 ml-32 ">
+      <div className=" mt-4  rounded-xl p-4 lg:ml-32 ">
         <div className="block">
           <h6>{comment.length} comments</h6>
 
@@ -57,10 +57,10 @@ const CommentSection = ({ slug }) => {
             />
 
             <div className={`mt-2 ${hide ? "hidden" : ""}`}>
-              <button onClick={() => setHide(true)} className="mr-2">
+              <Button onClick={() => setHide(true)} className="mr-2">
                 cancel
-              </button>
-              <button onClick={handleCreateComment}>comment</button>
+              </Button>
+              <Button onClick={handleCreateComment}>comment</Button>
             </div>
           </div>
         </div>
@@ -77,11 +77,11 @@ const CommentSection = ({ slug }) => {
                   <p className="text-green-200">{item?.owner?.fullname}</p>
                   <p className="text-sm text-green-200">{item?.content}</p>
                 </div>
-                <div className="">
+                <div className="text-white">
                   <CiMenuKebab />
                   <div className="  hidden">
-                    <button className="mr-2">cancel</button>
-                    <button onClick={handleCreateComment}>comment</button>
+                    <Button className="mr-2">cancel</Button>
+                    <Button onClick={handleCreateComment}>comment</Button>
                   </div>
                 </div>
               </div>

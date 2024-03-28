@@ -1,3 +1,7 @@
+HTML{
+background-color: rgb(23, 23, 23);
+}
+
 h1,h2,h3,h4,h5,h6{
     color: white;
 }
@@ -31,7 +35,7 @@ box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
 
 .video-card{
     /* border: 1px solid rgb(187, 149, 149); */
-    height:21rem;
+    /* height:21rem; */
 }
 .thumb-img{
     width: 100%;

@@ -6,7 +6,7 @@ import VideoCard from "../components/videoCard";
 import PlaylistCard from "../components/PlaylistCard";
 import { Button, Comunity } from "../components";
 import Subscribed from "../components/Subscribed";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { MdOutlineFileUpload } from "react-icons/md";
 
 const MyContent = () => {
@@ -19,7 +19,7 @@ const MyContent = () => {
   const userData = useSelector((state) => state.auth.userData);
   const authStatus = useSelector((state) => state.auth.status);
 
-  // console.log(userData.data?.userName);
+  // console.log(userData?.data?._id);
   // console.log(myData)
   // console.log(channel);
 
@@ -80,7 +80,7 @@ const MyContent = () => {
   };
   return (
     <>
-      <div className="container">
+      <div className="container mt-16 px-4">
         <div className="coverImg">
           {channel?.coverImage ? (
             <img src={channel?.coverImage} alt="cover Image" />
@@ -108,12 +108,12 @@ const MyContent = () => {
               </p>
             </div>
             <div className="inline-block">
-              <button className="border-2 px-4 py-1 rounded-2xl">
+              <button className="border-2 px-4 py-1 rounded-2xl text-white">
                 {channel?.isSubscribed ? "unsubscribe" : "subscribe"}
               </button>
             </div>
             <Link to="/customise">
-              <button className="border-2 px-4 py-1 rounded-2xl">
+              <button className="border-2 px-4 py-1 rounded-2xl text-white">
                 customise
               </button>
             </Link>
@@ -121,7 +121,7 @@ const MyContent = () => {
           <ul className="no-scrollbar sticky top-[66px] z-2 overflow-auto border-b-2 border-gray-400 py-2 flex justify-between items-center ">
             {btnList.map((item) =>
               item.active ? (
-                <li className="w-full" key={item.name}>
+                <li className="w-full text-white" key={item.name}>
                   <button
                     onClick={() => handletabs(item.slug)}
                     className={`w-full border-r-2   px-3 py-1.5 text-#ae7aff data-tab-type=${item.slug}`}

@@ -19,7 +19,7 @@ const History = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container mx-auto">
         <div className="main  w-full">
           <div className="flex flex-col items-start">
             {history.map((item) => {
@@ -42,7 +42,7 @@ const History = () => {
                       </p>
 
                       <div className="h-10 w-72 mt-4 overflow-hidden group-focus:h-auto">
-                        <p className="text-sm">{item.description}</p>
+                        <p className="text-sm text-white">{item.description}</p>
                       </div>
                     </div>
                   </div>
