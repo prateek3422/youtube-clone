@@ -106,15 +106,16 @@ const publishAVideo = asyncHandler(async (req, res) => {
   // video and thumbnails file upload on cloudinary
   // res
 
+
   const { title, description } = req.body;
-  // console.log(title)
+  
 
   // TODO: get video, upload to cloudinary, create video
   if (!title && !description) {
-    throw new ApiError(401, "All filds are required");
+    throw new ApiError(400, "All filds are required");
   }
 
-  // console.log(req.file)
+  console.log(req.file)
   const videoLocalFilePath = req.files?.videoFile[0]?.path;
   // let videoLocalFilePath
   // console.log(videoLocalFilePath)
@@ -139,8 +140,8 @@ const publishAVideo = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   const videos = await Video.create({
-    videoFile: videoFile,
-    thumbnail: thumbnail,
+    videoFile: videoFile.url,
+    thumbnail: thumbnail.url,
     title,
     description,
     duration: duration,

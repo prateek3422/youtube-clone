@@ -8,11 +8,8 @@ cloudinary.config({
 });
 
 
-const cloudinaryUpload = async () => {
+const cloudinaryUpload = async (localFilPath) => {
   try {
-    const localFilPath = "./public/temp/"
-
-    console.log(localFilPath)
 
     if (!localFilPath) return null;
 

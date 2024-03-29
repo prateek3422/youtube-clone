@@ -1,8 +1,30 @@
 import React, { useState } from "react";
 import Input from "./Input";
+import Button from "./Button";
+import videoService from "../services/VideoService";
 
 const modal = () => {
   const [hide, setHide] = useState();
+  const [video, setVideo] = useState()
+  const [thumb, setThumb] = useState( ) 
+  const [title, setTitle] = useState( ) 
+  const [des, setDes] = useState( ) 
+ 
+
+  const handleSubmit = async(e) =>{
+    e.preventDefault()
+
+    try {
+      const res =  await videoService.publishVideo(video, thumb, title, des)
+    } catch (error) {
+     console.log(error) 
+    }
+
+    console.log(video)
+    console.log(thumb)
+    console.log(title)
+    console.log(des)
+  }
   return (
     <>
       {/* <!-- Modal toggle --> */}
@@ -31,7 +53,7 @@ const modal = () => {
             {/* <!-- Modal header --> */}
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Sign in to our platform
+                upload video
               </h3>
               <button
                 onClick={() => setHide(false)}
@@ -58,14 +80,16 @@ const modal = () => {
               </button>
             </div>
             {/* <!-- Modal body --> */}
-            <div>
-              <form>
-                <Input lable="video file" type="file" />
-                <Input lable="Thumbnail" type="file" />
+            <div className="p-4">
+              <form onSubmit={handleSubmit}>
+                <Input lable="video file" type="file" value={video} onChange={(e) => setVideo(e.target.value)}  />
+                <Input lable="Thumbnail" type="file" value={thumb} onChange={(e) => setThumb(e.target.value)} />
 
-                <Input lable="Title" type="text" />
+                <Input lable="Title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
 
-                <Input lable="Description" type="text" height='48' />
+                <Input lable="Description" type="text" height='48' value={des} onChange={(e) => setDes(e.target.value)} />
+
+                <Button className="mt-4">save</Button>
               </form>
             </div>
           </div>
@@ -76,3 +100,4 @@ const modal = () => {
 };
 
 export default modal;
+

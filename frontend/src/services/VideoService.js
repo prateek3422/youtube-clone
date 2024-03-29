@@ -26,7 +26,7 @@ export class VideoService {
       //   theme: "colored",
       // });
       // console.log(response.data);
-      
+
       return response;
     } catch (error) {
       console.log("get all video error", error);
@@ -43,7 +43,9 @@ export class VideoService {
     }
   }
 
-  async publicVideo(videoFile, thubnail, title, description) {
+  async publishVideo(video, thumb, title, des) {
+    console.log(video);
+    // console.log(videoFile[0])
     try {
       const config = {
         headers: {
@@ -53,40 +55,19 @@ export class VideoService {
         withCredentials: true,
       };
 
-      const response = await axios.get(
+      const response = await axios.post(
         `http://localhost:3000/api/v1/videos/publishVideo`,
         {
-          videoFile,
-          thubnail,
-          title,
-          description,
+          videoFile: video,
+          thumbnail: thumb,
+          title: title,
+          description: des,
         },
         config
       );
-      // console.log(response.data)
-      // toast.success(response?.data?.message, {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "colored",
-      // });
       return response.data;
     } catch (error) {
-      console.log("get video", error);
-      toast.error(res?.data?.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      console.log("publish video", error);
     }
   }
 
@@ -132,7 +113,7 @@ export class VideoService {
     }
   }
 
-  async toggleVideo(videoId){
+  async toggleVideo(videoId) {
     try {
       const config = {
         headers: {
@@ -143,7 +124,9 @@ export class VideoService {
       };
 
       const response = await axios.patch(
-        ` http://localhost:3000/api/v1/videos/toggle/publish/${videoId}`,{}, config
+        ` http://localhost:3000/api/v1/videos/toggle/publish/${videoId}`,
+        {},
+        config
       );
       // console.log(response.data)
       // toast.success(response?.data?.message, {
@@ -171,7 +154,6 @@ export class VideoService {
       // });
     }
   }
-  
 
   //subscribe
   async getSubscribe(channelId) {
@@ -520,8 +502,7 @@ export class VideoService {
 
   // like
 
-  async getlikes() {
-
+  async ToggleVideolikes(videoId) {
     try {
       const config = {
         headers: {
@@ -530,8 +511,41 @@ export class VideoService {
         },
         withCredentials: true,
       };
+
+      const res = await axios.post(
+        `http://localhost:3000/api/v1/likes/toggle/v/${videoId}`,
+        {},
+        config
+      );
+
+      return res;
     } catch (error) {
-      console.log(error)
+      console.log(error);
+
+      console.log(error);
+    }
+  }
+  async ToggleCommentlikes(videoId) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+
+      const res = await axios.post(
+        `http://localhost:3000/api/v1/likes/toggle/v/${videoId}`,
+        {},
+        config
+      );
+
+      return res;
+    } catch (error) {
+      console.log(error);
+
+      console.log(error);
     }
   }
 
@@ -546,15 +560,18 @@ export class VideoService {
         },
         withCredentials: true,
       };
-      const dash = await axios.get(`http://localhost:3000/api/v1/dashboard/stats`,config)
+      const dash = await axios.get(
+        `http://localhost:3000/api/v1/dashboard/stats`,
+        config
+      );
 
-      return dash
+      return dash;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async channelVideo(){
+  async channelVideo() {
     try {
       const config = {
         headers: {
@@ -564,11 +581,14 @@ export class VideoService {
         withCredentials: true,
       };
 
-      const video = await axios.get(`http://localhost:3000/api/v1/dashboard/videos`,config)
+      const video = await axios.get(
+        `http://localhost:3000/api/v1/dashboard/videos`,
+        config
+      );
 
-      return video
+      return video;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 }
