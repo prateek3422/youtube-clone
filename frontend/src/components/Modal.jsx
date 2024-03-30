@@ -3,28 +3,31 @@ import Input from "./Input";
 import Button from "./Button";
 import videoService from "../services/VideoService";
 
+import { useForm } from "react-hook-form";
+
 const modal = () => {
   const [hide, setHide] = useState();
-  const [video, setVideo] = useState()
-  const [thumb, setThumb] = useState( ) 
-  const [title, setTitle] = useState( ) 
-  const [des, setDes] = useState( ) 
- 
+  
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = async(e) =>{
-    e.preventDefault()
-
+  const upload = async (data) => {
     try {
-      const res =  await videoService.publishVideo(video, thumb, title, des)
-    } catch (error) {
-     console.log(error) 
-    }
+      // console.log("oldData", data)
+      const newData = {
+        videoFile: data.video[0],
+        thumbnail: data.thumb[0],
+        title: data.title,
+        description: data.des,
+      };
 
-    console.log(video)
-    console.log(thumb)
-    console.log(title)
-    console.log(des)
-  }
+      // console.log(newData)
+
+      const res = await videoService.publishVideo(newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {/* <!-- Modal toggle --> */}
@@ -81,15 +84,33 @@ const modal = () => {
             </div>
             {/* <!-- Modal body --> */}
             <div className="p-4">
-              <form onSubmit={handleSubmit}>
-                <Input lable="video file" type="file" value={video} onChange={(e) => setVideo(e.target.value)}  />
-                <Input lable="Thumbnail" type="file" value={thumb} onChange={(e) => setThumb(e.target.value)} />
+              <form onSubmit={handleSubmit(upload)}>
+                <Input
+                  lable="video file"
+                  type="file"
+                  {...register("video", { required: true })}
+                />
+                <Input
+                  lable="Thumbnail"
+                  type="file"
+                  {...register("thumb", { required: true })}
+                />
+                <Input
+                  lable="Title"
+                  type="text"
+                  value={title}
+                  {...register("title", { required: true })}
+                />
+                <Input
+                  lable="Description"
+                  type="text"
+                  height="48"
+                  {...register("des", { required: true })}
+                />
 
-                <Input lable="Title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-
-                <Input lable="Description" type="text" height='48' value={des} onChange={(e) => setDes(e.target.value)} />
-
-                <Button className="mt-4">save</Button>
+                <Button type="submit" className="mt-4">
+                  save
+                </Button>
               </form>
             </div>
           </div>
@@ -100,4 +121,3 @@ const modal = () => {
 };
 
 export default modal;
-

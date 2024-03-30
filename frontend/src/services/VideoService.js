@@ -43,27 +43,19 @@ export class VideoService {
     }
   }
 
-  async publishVideo(video, thumb, title, des) {
-    console.log(video);
-    // console.log(videoFile[0])
+  async publishVideo(data) {
+    console.log(data)
     try {
       const config = {
         headers: {
-          "content-type": "application/json",
-          accept: "application/json",
+          "content-type": "multipart/form-data",
+          // accept: "application/json",
         },
         withCredentials: true,
       };
 
       const response = await axios.post(
-        `http://localhost:3000/api/v1/videos/publishVideo`,
-        {
-          videoFile: video,
-          thumbnail: thumb,
-          title: title,
-          description: des,
-        },
-        config
+        `http://localhost:3000/api/v1/videos/publishVideo`,data,config
       );
       return response.data;
     } catch (error) {
