@@ -13,12 +13,11 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
     throw new ApiError(404, "video not found");
   }
 
-  const isLike = await Like.find({
+  const isLike = await Like.findOne({
     video: videoId,
-    likedBy: req.user._id,
+    likedBy: req.user?._id,
   });
 
-  // console.log(isLike);
 
   if (isLike) {
     const unLike = await Like.findByIdAndDelete(isLike._id);
@@ -27,7 +26,7 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
 
   const like = await Like.create({
     video: videoId,
-    likedBy: req.user._id,
+    likedBy: req.user?._id,
   });
 
   // console.log(like)

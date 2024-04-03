@@ -29,7 +29,7 @@ const Header = () => {
   ];
   return (
     <>
-      <div className="Head my-px">
+      <div className="Head my-4 mx-1">
         <nav className="flex justify-between items-center mx-4 ">
           <div className="grid grid-flow-col gap-4 w-16">
             <button

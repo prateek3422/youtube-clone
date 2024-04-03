@@ -6,7 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
-
+import { QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 import Videos from "./pages/Videos.jsx";
@@ -19,7 +19,8 @@ import Subscribers from "./pages/Subscribers.jsx";
 import MyContent from "./pages/MyContent.jsx";
 import AuthLayOut from "./components/authLayOut.jsx";
 import Customise from "./pages/Customise.jsx";
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import {queryClient} from "./utils/query-client.js"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -124,9 +125,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       theme="light"
       // transition="Bounce"
     />
-    <Provider store={store}>
 
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false}/>
         <RouterProvider router={router} />
+      </QueryClientProvider>
     </Provider>
   </React.StrictMode>
 );

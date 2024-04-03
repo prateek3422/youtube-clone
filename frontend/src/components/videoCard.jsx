@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { format, } from 'timeago.js';
 
 const VideoCard = ({ views, _id, title, thumbnail, owner, createdAt }) => {
   // console.log(createdAt);
@@ -23,7 +24,7 @@ const VideoCard = ({ views, _id, title, thumbnail, owner, createdAt }) => {
               <h3 className="mb-1 font-semibold">{title}</h3>
               <p className="flex text-sm text-gray-600">
                 {" "}
-                {views} views· 44min
+                {views} views· 44agos
               </p>
               <p className="text-sm text-gray-600"></p>
             </div>

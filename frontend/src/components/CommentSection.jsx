@@ -2,49 +2,77 @@ import React, { useEffect, useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
 import { Button, Input } from "../components";
 import videoService from "../services/VideoService";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {queryClient} from "../utils/query-client.js";
+
 
 const CommentSection = ({ slug }) => {
-  const [comment, setComment] = useState([]);
-  const [commentText, setCommentText] = useState("");
   const [hide, setHide] = useState(true);
-
-
-// console.log(comment)
-  useEffect(() => {
-    (async () => {
-      try {
-        if (slug) {
-          const commentData = await videoService.getVideoComments(slug);
-          // console.log(commentData.data.docs)
-          setComment(commentData.data.docs);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-
-  const handleCreateComment = async () => {
+const [commentText, setCommentText] = useState("");
+  // ===========get comment =========0
+  const fetchedComment = async () => {
     try {
-      if (commentText) {
-        const newComment = await videoService.createComment(slug, commentText);
-        // setComment([...comment, newComment?.data.data])
-        // console.log(comment);
-        // setComment("")
-        // console.log(newComment)
+      if (slug) {
+        const commentData = await videoService.getVideoComments(slug);
+        // console.log(commentData.data.docs)
+        return commentData.data.docs;
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  // =====CREATE COMMENT=======
+  const handleCreateComment = async () => {
 
+    try {
+      if (commentText) {
+        const newComment = await videoService.createComment(slug, commentText);
+
+        return newComment;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // ==========update comment ===========
+
+  const handleDeleteComment = async (commentId) => {
+    console.log(commentId)
+    try {
+      if (commentId) {
+        const deleteComment = await videoService.deleteComment(commentId);
+        return deleteComment;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { data: comment } = useQuery({
+    queryKey: ["comment"],
+    queryFn: fetchedComment,
+  });
+
+  const { mututate: createComment } = useMutation({ 
+    mutationFn: handleCreateComment
+    
+  
+   });
+  const { mutate: deleteComment } = useMutation({ 
+    mutationFn:(_id) => handleDeleteComment(_id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comment"] })
+    }
+   });
+// console.log(deleteComment);
 
   return (
     <>
       <div className=" mt-4  rounded-xl p-4 lg:ml-32 ">
         <div className="block">
-          <h6>{comment.length} comments</h6>
+          <h6>{comment?.length} comments</h6>
 
           <div className="flex flex-col items-end">
             <Input
@@ -60,13 +88,13 @@ const CommentSection = ({ slug }) => {
               <Button onClick={() => setHide(true)} className="mr-2">
                 cancel
               </Button>
-              <Button onClick={handleCreateComment}>comment</Button>
+              <Button onClick={() => createComment()}>comment</Button>
             </div>
           </div>
         </div>
         <hr className="my-4 border-white" />
 
-        {comment.map((item) => (
+        {comment?.map((item) => (
           <div key={item?._id}>
             <div className="flex gap-x-4">
               <div className="h-10 w-10 shrink-0">
@@ -79,9 +107,16 @@ const CommentSection = ({ slug }) => {
                 </div>
                 <div className="text-white">
                   <CiMenuKebab />
-                  <div className="  hidden">
-                    <Button className="mr-2">cancel</Button>
-                    <Button onClick={handleCreateComment}>comment</Button>
+
+                  <div className="">
+                    <button
+                      className="mr-2"
+                    >
+                      Edit
+                    </button>
+                    <Button onClick={() => deleteComment(item?._id)}>
+                      delete
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -96,5 +131,3 @@ const CommentSection = ({ slug }) => {
 };
 
 export default CommentSection;
-
-

@@ -259,6 +259,47 @@ export class VideoService {
     }
   }
 
+  async deleteComment(commentId) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const commentres = await axios.delete(
+        `http://localhost:3000/api/v1/comments/c/${commentId}`,
+        config
+      );
+      // console.log(commentres);
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  async updateComment(commentId, comment) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const commentres = await axios.put(
+        `http://localhost:3000/api/v1/comments/c/${commentId}`,
+        { content: comment },
+        config
+      );
+
+      return commentres;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
   // playlist
 
   async createPlaylist(name, description) {

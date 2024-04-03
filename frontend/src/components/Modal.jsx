@@ -10,23 +10,23 @@ const modal = () => {
   
   const { register, handleSubmit } = useForm();
 
-  const upload = async (data) => {
-    try {
-      // console.log("oldData", data)
-      const newData = {
-        videoFile: data.video[0],
-        thumbnail: data.thumb[0],
-        title: data.title,
-        description: data.des,
-      };
+  // const upload = async (data) => {
+  //   try {
+  //     // console.log("oldData", data)
+  //     // const newData = {
+  //     //   videoFile: data.video[0],
+  //     //   thumbnail: data.thumb[0],
+  //     //   title: data?.title,
+  //     //   description: data.des,
+  //     };
 
-      // console.log(newData)
+  //     // console.log(newData)
 
-      const res = await videoService.publishVideo(newData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     const res = await videoService.publishVideo(newData);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
@@ -84,7 +84,7 @@ const modal = () => {
             </div>
             {/* <!-- Modal body --> */}
             <div className="p-4">
-              <form onSubmit={handleSubmit(upload)}>
+              <form >
                 <Input
                   lable="video file"
                   type="file"
@@ -98,8 +98,7 @@ const modal = () => {
                 <Input
                   lable="Title"
                   type="text"
-                  value={title}
-                  {...register("title", { required: true })}
+                     {...register("title", { required: true })}
                 />
                 <Input
                   lable="Description"

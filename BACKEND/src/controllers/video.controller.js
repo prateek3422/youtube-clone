@@ -35,14 +35,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
   pipeline.push(
     {
-      $lookup: {
-        from: "likes",
-        localField: "like",
-        foreignField: "_id",
-        as: "like",
-      },
-    },
-    {
       $addFields: {
         createdAt: {
           $dateToParts: { date: "$createdAt" },
@@ -115,7 +107,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All filds are required");
   }
 
-  console.log(req.file)
+  // console.log(req.file)
   const videoLocalFilePath = req.files?.videoFile[0]?.path;
   // let videoLocalFilePath
   // console.log(videoLocalFilePath)
@@ -175,11 +167,19 @@ const getVideoById = asyncHandler(async (req, res) => {
     {
       $lookup: {
         from: "likes",
-        localField: "like",
-        foreignField: "_id",
+        localField: "_id",
+        foreignField: "video",
         as: "like",
+        
       },
     },
+
+    {
+      $addFields: {
+        likeCount: { $size: "$like" },
+      }
+    },
+ 
 
     {
       $lookup: {
@@ -210,7 +210,7 @@ const getVideoById = asyncHandler(async (req, res) => {
               },
             },
           },
-
+    
           {
             $project: {
               userName: 1,
@@ -218,6 +218,7 @@ const getVideoById = asyncHandler(async (req, res) => {
               avatar: 1,
               subscriberCount: 1,
               isSubscribed: 1,
+              likeCount:1
             },
           },
         ],
