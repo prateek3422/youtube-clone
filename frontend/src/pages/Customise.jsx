@@ -2,40 +2,40 @@ import React, { useEffect, useState } from "react";
 import videoService from "../services/VideoService";
 import { FaRegEye } from "react-icons/fa6";
 import { Button, Modal, UserVideoDetails } from "../components";
+import { useQuery } from "@tanstack/react-query";
 
 const Customise = () => {
-  const [detail, setDetail] = useState({});
-  const [video, setVideo] = useState([]);
- 
-  // console.log(publish)
-  // console.log(detail);
-  // console.log(video);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const stats = await videoService.channelStatus();
-        if (stats) {
-          setDetail(stats.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+  const channelData = async () => {
+    try {
+      const stats = await videoService.channelStatus();
+      if (stats) {
+        return stats.data.data;
+        
       }
-    })();
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const stats = await videoService.channelVideo();
-        if (stats) {
-          setVideo(stats.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+
+  const videoData = async () => {
+    try {
+      const stats = await videoService.channelVideo();
+      if (stats) {
+        return stats.data.data;
+        
       }
-    })();
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  const { data: detail} = useQuery({queryKey: ["stats"], queryFn: channelData});
+  const { data: video} = useQuery({queryKey: ["video"], queryFn: videoData});
+
+
+
 
   
 
@@ -61,7 +61,7 @@ const Customise = () => {
               </div>
               <h6 className="text-gray-300"> Total Views</h6>
 
-              <p className="text-3xl text-white font-semibold"> {detail.totalViews}</p>
+              <p className="text-3xl text-white font-semibold"> {detail?.totalViews}</p>
             </div>
           </div>
 
@@ -74,7 +74,7 @@ const Customise = () => {
               </div>
               <h6 className="text-gray-300"> Total likes</h6>
 
-              <p className="text-3xl text-white font-semibold"> {detail.totalLikes}</p>
+              <p className="text-3xl text-white font-semibold"> {detail?.totalLikes}</p>
             </div>
           </div>
 
@@ -89,7 +89,7 @@ const Customise = () => {
 
               <p className="text-3xl text-white font-semibold">
                 {" "}
-                {detail.totalSubcribers}
+                {detail?.totalSubcribers}
               </p>
             </div>
           </div>
@@ -113,7 +113,7 @@ const Customise = () => {
           </div>
         </div>
 
-        {video.map((item) => {
+        {video?.map((item) => {
           // console.log(item)
           return (
             <UserVideoDetails item = {item } key={item?._id}/>

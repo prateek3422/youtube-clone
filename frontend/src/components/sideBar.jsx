@@ -15,40 +15,40 @@ const SideBar = () => {
   const sideList = [
     {
       name: "Home",
-      icon: <IoMdHome className="text-white" />,
+      icon: <IoMdHome className="text-white"fontSize={"1.5rem"}  />,
       slug: "/",
       active: authStatus,
     },
 
     {
       name: "Liked videos",
-      icon: <AiFillLike className="text-white" />,
+      icon: <AiFillLike className="text-white" fontSize={"1.5rem"} />,
       slug: "/liked-videos",
       active: authStatus,
     },
     {
       name: "History",
-      icon: <FaHistory className="text-white" />,
+      icon: <FaHistory className="text-white" fontSize={"1.5rem"} />,
       slug: "/history",
       active: authStatus,
     },
 
-    {
-      name: "Collection",
-      icon: <BsCollectionPlay className="text-white" />,
-      slug: "/collection",
-      active: authStatus,
-    },
+    // {
+    //   name: "Collection",
+    //   icon: <BsCollectionPlay className="text-white" />,
+    //   slug: "/collection",
+    //   active: authStatus,
+    // },
 
     {
       name: "MyContent",
-      icon: <FaVideo className="text-white" />,
+      icon: <FaVideo className="text-white"  fontSize={"1.5rem"}/>,
       slug: "/content",
       active: authStatus,
     },
     {
       name: "Subscribers",
-      icon: <FaUserCheck className="text-white" />,
+      icon: <FaUserCheck className="text-white" fontSize={"1.5rem"}/>,
       slug: "/subscribers",
       active: authStatus,
     },
@@ -61,11 +61,16 @@ const SideBar = () => {
           item.active ? (
             <li className="list-none w-full" key={item.name}>
               <button
-                className="flex  items-center justify-start border-2 w-full h-10 p-2 gap-2 "
+                className="flex  items-center justify-start w-full h-10 p-2 gap-4 "
                 onClick={() => navigate(item.slug)}
               >
-                <span className="inline-block w-5 ">{item.icon}</span>
+              <div  >
+              <span className="inline-block  w-5 ">{item.icon}</span>
+              </div>
+              <div>
+
                 <span className="block text-white ">{item.name}</span>
+              </div>
               </button>
             </li>
           ) : null

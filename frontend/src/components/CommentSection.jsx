@@ -3,12 +3,11 @@ import { CiMenuKebab } from "react-icons/ci";
 import { Button, Input } from "../components";
 import videoService from "../services/VideoService";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {queryClient} from "../utils/query-client.js";
-
+import { queryClient } from "../utils/query-client.js";
 
 const CommentSection = ({ slug }) => {
   const [hide, setHide] = useState(true);
-const [commentText, setCommentText] = useState("");
+  const [commentText, setCommentText] = useState("");
   // ===========get comment =========0
   const fetchedComment = async () => {
     try {
@@ -24,7 +23,6 @@ const [commentText, setCommentText] = useState("");
 
   // =====CREATE COMMENT=======
   const handleCreateComment = async () => {
-
     try {
       if (commentText) {
         const newComment = await videoService.createComment(slug, commentText);
@@ -39,7 +37,7 @@ const [commentText, setCommentText] = useState("");
   // ==========update comment ===========
 
   const handleDeleteComment = async (commentId) => {
-    console.log(commentId)
+    console.log(commentId);
     try {
       if (commentId) {
         const deleteComment = await videoService.deleteComment(commentId);
@@ -55,18 +53,16 @@ const [commentText, setCommentText] = useState("");
     queryFn: fetchedComment,
   });
 
-  const { mututate: createComment } = useMutation({ 
-    mutationFn: handleCreateComment
-    
-  
-   });
-  const { mutate: deleteComment } = useMutation({ 
-    mutationFn:(_id) => handleDeleteComment(_id),
+  const { mututate: createComment } = useMutation({
+    mutationFn: handleCreateComment,
+  });
+  const { mutate: deleteComment } = useMutation({
+    mutationFn: (_id) => handleDeleteComment(_id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comment"] })
-    }
-   });
-// console.log(deleteComment);
+      queryClient.invalidateQueries({ queryKey: ["comment"] });
+    },
+  });
+  // console.log(deleteComment);
 
   return (
     <>
@@ -109,11 +105,7 @@ const [commentText, setCommentText] = useState("");
                   <CiMenuKebab />
 
                   <div className="">
-                    <button
-                      className="mr-2"
-                    >
-                      Edit
-                    </button>
+                    <button className="mr-2">Edit</button>
                     <Button onClick={() => deleteComment(item?._id)}>
                       delete
                     </Button>

@@ -6,23 +6,17 @@ import VideoCard from "../components/videoCard";
 import PlaylistCard from "../components/PlaylistCard";
 import { Button, Comunity } from "../components";
 import Subscribed from "../components/Subscribed";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdOutlineFileUpload } from "react-icons/md";
+import { useQuery } from "@tanstack/react-query";
 
 const MyContent = () => {
-  const [myData, setMyData] = useState([]);
-  const [channel, setChannel] = useState({});
   const [toggleTab, setToggleTab] = useState("video");
-
-  // console.log(myData)
 
   const userData = useSelector((state) => state.auth.userData);
   const authStatus = useSelector((state) => state.auth.status);
 
-  // console.log(userData?.data?._id);
-  // console.log(myData)
-  // console.log(channel);
-
+ 
   const btnList = [
     {
       name: "videos",
@@ -47,35 +41,38 @@ const MyContent = () => {
     },
   ];
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const userId = userData.data?._id;
-        const videoData = await videoService.getMyVideos(userId);
+  const fetchedVideoData = async () => {
+    try {
+      const userId = userData.data?._id;
+      const videoData = await videoService.getMyVideos(userId);
+      return videoData.data?.data?.docs;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-        // console.log(videoData);
-        setMyData(videoData.data?.data?.docs);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const fetchChannelData = async () => {
+    try {
+      const username = userData.data?.userName;
+      const getChannelDetail = await authService.getChannelDetails(username);
+      return getChannelDetail?.data?.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const username = userData.data?.userName;
-        const getChannelDetail = await authService.getChannelDetails(username);
-        // console.log(getChannelDetail.data.data)
-        setChannel(getChannelDetail.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const { data: myData } = useQuery({
+    queryKey: ["video"],
+    queryFn: fetchedVideoData,
+  });
+
+  const { data: channel } = useQuery({
+    queryKey: ["channel"],
+    queryFn: fetchChannelData,
+  });
 
   const handletabs = async (index) => {
-    // console.log(index);
+
     setToggleTab(index);
   };
   return (
@@ -138,18 +135,20 @@ const MyContent = () => {
           <div className="main  w-full mt-4 ">
             <div className="flex flex-col justify-center items-center">
               <div className="grid grid-cols-3 gap-4">
-                {myData.map((vid) => {
+                {myData?.map((vid) => {
                   // console.log(vid)
                   return (
-                    <li key={vid._id} className="list-none">
+                    <li key={vid?._id} className="list-none">
                       <VideoCard {...vid} />
                     </li>
                   );
                 })}
               </div>
-                <div className="upload">
-                  <button><MdOutlineFileUpload/></button>
-                </div>
+              <div className="upload">
+                <button>
+                  <MdOutlineFileUpload />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -157,7 +156,7 @@ const MyContent = () => {
         <div className={toggleTab === "playlist" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
             <div className="grid grid-cols-3 gap-4">
-              <PlaylistCard userId={userData.data?._id} />
+              <PlaylistCard userId={userData?.data?._id} />
             </div>
           </div>
         </div>

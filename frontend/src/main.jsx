@@ -74,14 +74,14 @@ const router = createBrowserRouter([
           </AuthLayOut>
         ),
       },
-      {
-        path: "/collection",
-        element: (
-          <AuthLayOut authentication>
-            <Collection />
-          </AuthLayOut>
-        ),
-      },
+      // {
+      //   path: "/collection",
+      //   element: (
+      //     <AuthLayOut authentication>
+      //       <Collection />
+      //     </AuthLayOut>
+      //   ),
+      // },
       {
         path: "/subscribers",
         element: (

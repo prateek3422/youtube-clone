@@ -8,10 +8,11 @@ import SideBar from "../sideBar";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 
-const Header = () => {
+const Header = ({setSlide, slide}) => {
   const authStatus = useSelector((state) => state.auth.status);
   // console.log(authStatus);
-  const [slide, setSlide] = useState(false);
+  // const [slide, setSlide] = useState(false);
+  // console.log(slide)
 
   const navigate = useNavigate();
 
@@ -29,35 +30,22 @@ const Header = () => {
   ];
   return (
     <>
-      <div className="Head my-4 mx-1">
-        <nav className="flex justify-between items-center mx-4 ">
+      <div className="Head my-4 mx-1 relative">
+        <nav className="flex justify-between sticky top-0 items-center mx-4 ">
           <div className="grid grid-flow-col gap-4 w-16">
             <button
-              onClick={() => setSlide(!slide)}
+              onClick={setSlide}
               className="text-2xl text-white "
             >
-              
-               
-                {authStatus ? slide ? <RxCross2 /> : <GiHamburgerMenu /> : " "}
-              
+              {authStatus ? slide ? <RxCross2 /> : <GiHamburgerMenu /> : " "}
             </button>
             <div className="log0 w-12 ">
               <Logo />
             </div>
           </div>
 
-      {slide && (
-        
-            
-            <div className={`  w-40   absolute top-16 dark:bg-gray-900 animate-slide-in`}>
-              <div className="w-full">
-                <div className="group inset-l-0 z-40n w-full p-2">
-                  <div><SideBar/></div>
-                </div>
-              </div>
-            </div>
-          )}
-          <ul className="Nav-btn flex justify-between gap-4 items-center">
+     
+          <ul className="Nav-btn  flex justify-between gap-4 items-center">
             {navItem.map((item) =>
               item.active ? (
                 <li key={item.name}>
@@ -78,7 +66,6 @@ const Header = () => {
               </li>
             )}
           </ul>
-  
         </nav>
       </div>
     </>
