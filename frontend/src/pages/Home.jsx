@@ -12,8 +12,6 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       try {
-        
-
         const videoData = await videoService.getAllVideos();
         console.log(videoData.data.data)
         setVideo(videoData.data.data.docs);

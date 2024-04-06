@@ -169,10 +169,10 @@ const MyContent = () => {
         </div>
         <div className={toggleTab === "subscribed" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
-            <div className="grid grid-cols-3 gap-4">
-              <Subscribed />
+       
+              <Subscribed userId={userData?.data?._id} channel={channel} />
             </div>
-          </div>
+       
         </div>
       </div>
     </>

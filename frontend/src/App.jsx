@@ -54,7 +54,7 @@ function App() {
                 </div>
               )}
 
-              <div className={`absolute flex flex-col  ${slide ? " w-full items-end": "w-full"} `} onClick={handleSlide}>
+              <div className={`absolute flex flex-col  ${slide ? " w-full items-end": "w-full"} `} onClick={() => setSlide(false)}>
                 <Outlet />
               </div>
             </div>

@@ -44,7 +44,7 @@ export class VideoService {
   }
 
   async publishVideo(data) {
-    console.log(data)
+    console.log(data);
     try {
       const config = {
         headers: {
@@ -55,7 +55,9 @@ export class VideoService {
       };
 
       const response = await axios.post(
-        `http://localhost:3000/api/v1/videos/publishVideo`,data,config
+        `http://localhost:3000/api/v1/videos/publishVideo`,
+        data,
+        config
       );
       return response.data;
     } catch (error) {
@@ -198,6 +200,27 @@ export class VideoService {
         theme: "colored",
       });
       return ourVideo;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getSubscribedChannels(subscriberId) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+
+      const channel = axios.get(
+        `http://localhost:3000/api/v1/subscriptions/u/${subscriberId}`,
+        config
+      );
+
+      return channel;
     } catch (error) {
       console.log(error);
     }
