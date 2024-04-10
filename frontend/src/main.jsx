@@ -21,6 +21,8 @@ import AuthLayOut from "./components/authLayOut.jsx";
 import Customise from "./pages/Customise.jsx";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {queryClient} from "./utils/query-client.js"
+
+
 const router = createBrowserRouter([
   {
     path: "/",

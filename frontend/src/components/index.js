@@ -14,6 +14,10 @@ import subscribed from "./Subscribed.jsx"
 import VideoPlayer from "./video/VideoPlayer.jsx"
 import Modal from "./modal.jsx"
 import UserVideoDetails from "./UserVideoDetails.jsx"
+import Loader from "./loader.jsx"
+import Slider from "./Slider.jsx"
+import UpdateVideo from "./containers/UpdateVideo.jsx"
+
  export{
     Header,
     Signup,
@@ -30,5 +34,8 @@ import UserVideoDetails from "./UserVideoDetails.jsx"
     subscribed,
     VideoPlayer,
     Modal,
-    UserVideoDetails
+    UserVideoDetails,
+    Loader,
+    Slider,
+    UpdateVideo
 }

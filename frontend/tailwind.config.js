@@ -14,6 +14,21 @@ export default {
       },
 
     },
+    // colors: {
+    //   transparent: 'transparent',
+    //   current: 'currentColor',
+    //   'grey-dark': 'rgb(23, 23, 23)',
+    // },
+    screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px',
+    },
+    fontFamily: {
+      display: 'Oswald, ui-serif', // Adds a new `font-display` class
+    }
+  
   },
   plugins: [],
 };

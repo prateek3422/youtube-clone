@@ -4,15 +4,11 @@ import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogOut from "./LogOut";
-import SideBar from "../sideBar";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 
 const Header = ({setSlide, slide}) => {
   const authStatus = useSelector((state) => state.auth.status);
-  // console.log(authStatus);
-  // const [slide, setSlide] = useState(false);
-  // console.log(slide)
 
   const navigate = useNavigate();
 
@@ -30,8 +26,8 @@ const Header = ({setSlide, slide}) => {
   ];
   return (
     <>
-      <div className="Head my-4 mx-1 relative">
-        <nav className="flex justify-between sticky top-0 items-center mx-4 ">
+      <div className="Head my-4 mx-1 fixed top-0 left-0 right-0 z-[100]  bg-slate-600">
+        <nav className="flex justify-between items-center mx-4 ">
           <div className="grid grid-flow-col gap-4 w-16">
             <button
               onClick={setSlide}

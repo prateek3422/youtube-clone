@@ -149,6 +149,43 @@ export class VideoService {
     }
   }
 
+  async deleteVideo(videoId) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+        withCredentials: true,
+      };
+      
+      const response = await axios.delete(`http://localhost:3000/api/v1/videos/${videoId}`, config);
+
+      return response.data
+    } catch (error) {
+      
+    }
+  }
+
+  async updateVideo(data) {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const response = await axios.patch(
+        `http://localhost:3000/api/v1/videos/${data._id}`,
+        data,
+        config
+      );
+      // console.log(response.data)
+      return response.data;
+    } catch (error) {
+      console.log("update video", error);
+    }
+  }
   //subscribe
   async getSubscribe(channelId) {
     // console.log(channelId)

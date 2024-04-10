@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import videoService from "../services/VideoService";
 import { FaRegEye } from "react-icons/fa6";
-import { Button, Modal, UserVideoDetails } from "../components";
+import { Button, Loader, Modal, UserVideoDetails } from "../components";
 import { useQuery } from "@tanstack/react-query";
 
 const Customise = () => {
@@ -10,36 +10,33 @@ const Customise = () => {
       const stats = await videoService.channelStatus();
       if (stats) {
         return stats.data.data;
-        
       }
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   const videoData = async () => {
     try {
       const stats = await videoService.channelVideo();
       if (stats) {
         return stats.data.data;
-        
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
+  const {
+    isLoading,
+    isError,
+    data: detail,
+  } = useQuery({ queryKey: ["stats"], queryFn: channelData });
+  const { data: video } = useQuery({ queryKey: ["video"], queryFn: videoData });
 
-  const { data: detail} = useQuery({queryKey: ["stats"], queryFn: channelData});
-  const { data: video} = useQuery({queryKey: ["video"], queryFn: videoData});
-
-
-
-
-  
-
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <div className="container">
         <div className=" flex flex-wrap justify-between gap-4 mx-4 mt-8">
@@ -61,7 +58,10 @@ const Customise = () => {
               </div>
               <h6 className="text-gray-300"> Total Views</h6>
 
-              <p className="text-3xl text-white font-semibold"> {detail?.totalViews}</p>
+              <p className="text-3xl text-white font-semibold">
+                {" "}
+                {detail?.totalViews}
+              </p>
             </div>
           </div>
 
@@ -74,7 +74,10 @@ const Customise = () => {
               </div>
               <h6 className="text-gray-300"> Total likes</h6>
 
-              <p className="text-3xl text-white font-semibold"> {detail?.totalLikes}</p>
+              <p className="text-3xl text-white font-semibold">
+                {" "}
+                {detail?.totalLikes}
+              </p>
             </div>
           </div>
 
@@ -115,9 +118,7 @@ const Customise = () => {
 
         {video?.map((item) => {
           // console.log(item)
-          return (
-            <UserVideoDetails item = {item } key={item?._id}/>
-          )
+          return <UserVideoDetails item={item} key={item?._id} />;
         })}
       </div>
     </>

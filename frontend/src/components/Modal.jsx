@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import videoService from "../services/VideoService";
-
 import { useForm } from "react-hook-form";
 
 const modal = () => {
@@ -10,23 +9,21 @@ const modal = () => {
   
   const { register, handleSubmit } = useForm();
 
-  // const upload = async (data) => {
-  //   try {
-  //     // console.log("oldData", data)
-  //     // const newData = {
-  //     //   videoFile: data.video[0],
-  //     //   thumbnail: data.thumb[0],
-  //     //   title: data?.title,
-  //     //   description: data.des,
-  //     };
+  const upload = async (data) => {
+    try {
+   
+      const newData = {
+        videoFile: data.video[0],
+        thumbnail: data.thumb[0],
+        title: data?.title,
+        description: data.des,
+      };
 
-  //     // console.log(newData)
-
-  //     const res = await videoService.publishVideo(newData);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      const res = await videoService.publishVideo(newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -84,7 +81,7 @@ const modal = () => {
             </div>
             {/* <!-- Modal body --> */}
             <div className="p-4">
-              <form >
+              <form onSubmit={handleSubmit(upload)}>
                 <Input
                   lable="video file"
                   type="file"
