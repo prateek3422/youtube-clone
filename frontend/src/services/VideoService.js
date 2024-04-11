@@ -166,17 +166,17 @@ export class VideoService {
     }
   }
 
-  async updateVideo(data) {
+  async updateVideo(data, videoId) {
+    console.log(videoId)
     try {
       const config = {
         headers: {
-          "content-type": "application/json",
-          accept: "application/json",
+          "content-type": "multipart/form-data",
         },
         withCredentials: true,
       };
       const response = await axios.patch(
-        `http://localhost:3000/api/v1/videos/${data._id}`,
+        `http://localhost:3000/api/v1/videos/${videoId}`,
         data,
         config
       );

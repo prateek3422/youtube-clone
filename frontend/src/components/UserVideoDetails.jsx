@@ -8,6 +8,7 @@ import Button from "./Button";
 import { MdEdit } from "react-icons/md";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../utils/query-client.js";
+import { UpdateVideo } from "./index.js";
 
 const UserVideoDetails = ({ item }) => {
   // console.log(item)
@@ -79,7 +80,7 @@ const UserVideoDetails = ({ item }) => {
       <div className="flex justify-around items-center text-white">
         {`${item.createdAt.day}/${item.createdAt.month}/${item.createdAt.year}`}
         <div className="">
-        <button  className="mr-2"><MdEdit /></button>
+        <button  className="mr-2"> <UpdateVideo id={item?._id}/></button>
         <button onClick={video}><MdDelete /></button>
       </div>
       </div>

@@ -16,7 +16,7 @@ import Modal from "./modal.jsx"
 import UserVideoDetails from "./UserVideoDetails.jsx"
 import Loader from "./loader.jsx"
 import Slider from "./Slider.jsx"
-import UpdateVideo from "./containers/UpdateVideo.jsx"
+import UpdateVideo from "../components/UpdateVideo.jsx"
 
  export{
     Header,
