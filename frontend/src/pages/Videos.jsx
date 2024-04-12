@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+
 import { Link, useNavigate, useParams } from "react-router-dom";
 import videoService from "../services/VideoService";
 import { BiLike } from "react-icons/bi";
-import { Button, CommentSection, VideoPlayer } from "../components";
+import { Button, CommentSection, } from "../components";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../utils/query-client.js";
 
@@ -55,7 +55,8 @@ const Videos = () => {
     queryKey: ["video"],
     queryFn: fetchedVideo,
   });
-``
+
+  console.log(video)
   const { mutate: Like } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
@@ -77,7 +78,7 @@ const Videos = () => {
           <div>
             <div className=" video flex justify-center  lg:ml-32">
               <video
-                src={video?.videoFile}
+                src={video?.videoFile?.url}
                 controls
                 autoPlay
                 className="h-full w-full rounded-lg"

@@ -132,8 +132,8 @@ const publishAVideo = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   const videos = await Video.create({
-    videoFile: videoFile.url,
-    thumbnail: thumbnail.url,
+    videoFile: videoFile,
+    thumbnail: thumbnail,
     title,
     description,
     duration: duration,
@@ -264,17 +264,31 @@ const updateVideo = asyncHandler(async (req, res) => {
     throw new ApiError(400, "videoId is missing");
   }
 
-  const thumbnailFilePath = req.file?.path;
+
+  const isVideo  = await Video.findById(videoId)
+
+  const removeThumbnail = clouldinaryDelete(isVideo.public_id)
+
+  
+  if (!isVideo) {
+    throw new ApiError(404, "video is not find");
+  }
+
+
+const thumbnailFilePath = req.file?.path;
+
 
   if (!thumbnailFilePath) {
     throw new ApiError(400, "thumbnail file is missig");
   }
 
-  const thumbnail = cloudinaryUpload(thumbnailFilePath);
 
+  const thumbnail = await cloudinaryUpload(thumbnailFilePath);
+  
   if (!thumbnail) {
     throw new ApiError(400, "somethin went worng while uploading thumbnail");
   }
+  console.log(thumbnail)
 
   const video = await Video.findByIdAndUpdate(
     videoId,
@@ -282,7 +296,7 @@ const updateVideo = asyncHandler(async (req, res) => {
       $set: {
         title,
         description,
-        thumbnail: thumbnail?.url,
+        thumbnail: thumbnail,
       },
     },
     { new: true }

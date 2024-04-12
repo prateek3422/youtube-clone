@@ -1,12 +1,12 @@
-import React, { Children, useEffect, useState } from "react";
+import   {useEffect, useState } from "react";
 import { VideoCard } from "../components";
 import videoService from "../services/VideoService";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const Home = () => {
   const [video, setVideo] = useState([]);
-  const [query, setQuery] = useState("jjk");
-  // console.log(video);
+  // const [query, setQuery] = useState("jjk");
+  console.log(video);
 
 
   useEffect(() => {

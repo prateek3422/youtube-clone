@@ -25,6 +25,7 @@ router
     {
       name: "thumbnail",
       maxCount: 1,
+      
     },
   ]),
   publishAVideo

@@ -27,28 +27,21 @@ const cloudinaryUpload = async (localFilPath) => {
   }
 };
 
-const clouldinaryDelete = async (fileUrl) =>{
+const clouldinaryDelete = async (public_id) =>{
     try {
-        if(!fileUrl?.trim()) return
+        if(!public_id?.trim()) return
 
-        // console.log(fileUrl)
-        // const public_id = fileUrl.split("/").pop().split(".")[0]
     
-        // console.log(public_id)
+        console.log(public_id)
 
-        const response = await cloudinary.uploader.destroy(fileUrl,{
-          resource_type:"image"
-        })
+        const response = await cloudinary.api.delete_resources(public_id)
 
         console.log(response)
 
-        if(response.result  == "ok"){
-            console.log('File deleted successfully.');
-        }else{
-            console.error('Failed to delete the File.');
-        }
+        return response
     } catch (error) {
         console.log(error)
+        throw error
     }
 
 }

@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { format, } from 'timeago.js';
+/* eslint-disable react/prop-types */
 
-const VideoCard = ({ views, _id, title, thumbnail, owner, createdAt }) => {
-  // console.log(createdAt);
+import { Link } from "react-router-dom";
+
+
+const VideoCard = ({ views, _id, title, thumbnail, owner,  }) => {
+
 
   return (
     <>
       <Link to={`/video/${_id}`}>
         <div className="video-card ">
           <div className="thumbnail">
-            <img className="rounded-lg thumb-img" src={thumbnail} alt="" />
+            <img className="rounded-lg thumb-img" src={thumbnail?.url} alt="" />
           </div>
           <div className="flex gap-x-2">
             <div className="h-10 w-10 shrink-0">
