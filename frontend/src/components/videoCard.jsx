@@ -1,11 +1,7 @@
-/* eslint-disable react/prop-types */
-
+import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
-
-const VideoCard = ({ views, _id, title, thumbnail, owner,  }) => {
-
-
+const VideoCard = ({ views, _id, title, thumbnail, owner }) => {
   return (
     <>
       <Link to={`/video/${_id}`}>
@@ -13,14 +9,12 @@ const VideoCard = ({ views, _id, title, thumbnail, owner,  }) => {
           <div className="thumbnail">
             <img className="rounded-lg thumb-img" src={thumbnail?.url} alt="" />
           </div>
-          <div className="flex gap-x-2">
-            <div className="h-10 w-10 shrink-0">
-              <img
-                className="h-full w-full rounded-full "
-                src={owner?.avatar}
-                alt="avatar"
-              />
-            </div>
+          <div className="flex gap-x-2 mt-2">
+            <Avatar
+              alt="channel avatar"
+              src={owner?.avatar}
+              sx={{ width: 40, height: 40 }}
+            />
             <div className="w-full">
               <h3 className="mb-1 font-semibold">{title}</h3>
               <p className="flex text-sm text-gray-600">

@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "./Logo";
-import SearchBar from "./SearchBar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogOut from "./LogOut";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 
-const Header = ({setSlide, slide}) => {
+
+
+const Header = ({ setSlide, slide }) => {
   const authStatus = useSelector((state) => state.auth.status);
 
   const navigate = useNavigate();
+
 
   const navItem = [
     {
@@ -24,23 +26,25 @@ const Header = ({setSlide, slide}) => {
       active: !authStatus,
     },
   ];
+
+ 
+
+  
+
   return (
     <>
-      <div className="Head my-4 mx-1 fixed top-0 left-0 right-0 z-[100]  bg-slate-600">
+      <div className="Head my-4 mx-1 w-full ">
         <nav className="flex justify-between items-center mx-4 ">
           <div className="grid grid-flow-col gap-4 w-16">
-            <button
-              onClick={setSlide}
-              className="text-2xl text-white "
-            >
-              {authStatus ? slide ? <RxCross2 /> : <GiHamburgerMenu /> : " "}
+            <button onClick={setSlide} className="text-2xl text-white ">
+       
+              {/* {authStatus ? slide ? <RxCross2 /> : <GiHamburgerMenu /> : " "} */}
             </button>
             <div className="log0 w-12 ">
               <Logo />
             </div>
           </div>
 
-     
           <ul className="Nav-btn  flex justify-between gap-4 items-center">
             {navItem.map((item) =>
               item.active ? (

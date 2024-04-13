@@ -23,14 +23,13 @@ const History = () => {
         <div className="main  w-full">
           <div className="flex flex-col items-start">
             {history.map((item) => {
-              console.log(item);
               return (
                 <li className="list-none" key={item._id}>
                   <div className="flex items-start gap-x-4">
                     <div className="img mb-4 mt-2 w-3/12 ">
                       <img
-                        className="w-full rounded-xl"
-                        src={item.thumbnail}
+                        className="w-full rounded-xl object-cover"
+                        src={item.thumbnail.url}
                         alt=""
                       />
                     </div>

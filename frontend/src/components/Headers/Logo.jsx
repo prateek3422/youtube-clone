@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import SideBar from "../sideBar";
+
+
 
 
 const Logo = () => {
-  const [slider, setSlider] = useState(false);
 
 
   return (

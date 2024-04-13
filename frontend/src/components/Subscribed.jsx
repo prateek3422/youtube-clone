@@ -4,6 +4,7 @@ import videoService from "../services/VideoService";
 import Button from "./Button";
 import { useMutation} from "@tanstack/react-query";
 import { queryClient } from "../utils/query-client";
+import { Avatar } from "@mui/material";
 
 const Subscribed = ({ userId, channel} ) => {
 
@@ -50,13 +51,11 @@ const Subscribed = ({ userId, channel} ) => {
               <div className=" px-4 py-4">
               <div className="flex justify-between w-full mb-8">
                 <div className="flex items-center gap-x-2">
-                  <div className="h-16 w-16 shrink-0">
-                    <img
-                      className="h-full w-full rounded-full "
-                      src={item?.channelData?.avatar}
-                      alt="avatar"
-                    />
-                  </div>
+                <Avatar
+        alt="channel avatar"
+        src={item?.channelData?.avatar}
+        sx={{ width: 56, height: 56 }}
+      />
                   <div className="block">
                     <h6 className="font-semibold">
                       {item?.channelData?.userName}

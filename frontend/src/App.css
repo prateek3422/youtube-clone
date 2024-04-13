@@ -1,6 +1,15 @@
-HTML{
+HTML,body{
 background-color: rgb(23, 23, 23);
+overflow-x: hidden;
 }
+
+.bgDark{
+    background-color: #282828;
+}
+
+
+
+
 
 h1,h2,h3,h4,h5,h6{
     color: white;

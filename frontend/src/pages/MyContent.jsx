@@ -9,6 +9,7 @@ import Subscribed from "../components/Subscribed";
 import { Link } from "react-router-dom";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
+import { Avatar } from "@mui/material";
 
 const MyContent = () => {
   const [toggleTab, setToggleTab] = useState("video");
@@ -87,15 +88,20 @@ const MyContent = () => {
         </div>
 
         <div className="px-2 pb-2">
-          <div className="flex flex-wrap gap-4 pb-4 pt-6">
-            <span className="relative -mt-12 inline-block h-28 w-28 shrink-0 overflow-hidden rounded-full border-2">
+          <div className="flex flex-wrap gap-4 pb-4">
+            {/* <span className="relative -mt-12 inline-block h-28 w-28 shrink-0 overflow-hidden rounded-full border-2">
               <img
                 className="w-full h-full"
                 src={channel?.avatar}
                 alt="channel avatar"
               />
-            </span>
+            </span> */}
 
+<Avatar
+        alt="channel avatar"
+        src={channel?.avatar}
+        sx={{ width: 80, height: 80 }}
+      />
             <div className="mr-auto inline-block">
               <h1 className="text-xl">{channel?.fullname}</h1>
               <p className="text-sm text-gray-400">{channel?.userName}</p>
