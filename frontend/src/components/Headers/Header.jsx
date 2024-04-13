@@ -35,15 +35,11 @@ const Header = ({ setSlide, slide }) => {
     <>
       <div className="Head my-4 mx-1 w-full ">
         <nav className="flex justify-between items-center mx-4 ">
-          <div className="grid grid-flow-col gap-4 w-16">
-            <button onClick={setSlide} className="text-2xl text-white ">
-       
-              {/* {authStatus ? slide ? <RxCross2 /> : <GiHamburgerMenu /> : " "} */}
-            </button>
+
+        
             <div className="log0 w-12 ">
               <Logo />
             </div>
-          </div>
 
           <ul className="Nav-btn  flex justify-between gap-4 items-center">
             {navItem.map((item) =>

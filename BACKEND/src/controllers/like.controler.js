@@ -18,7 +18,6 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
     likedBy: req.user?._id,
   });
 
-
   if (isLike) {
     const unLike = await Like.findByIdAndDelete(isLike._id);
     return res.status(200).json(new ApiResponse(200, unLike, "video unlike"));
@@ -65,8 +64,30 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
 });
 
 const toggleTweetLike = asyncHandler(async (req, res) => {
-  const { tweetId } = req.params;
+  const { commentId } = req.params;
   //TODO: toggle like on tweet
+
+  if (!commentId) {
+    throw new ApiError(400, "commentId is missing");
+  }
+
+  const isLike = await Like.findOne({
+    comment: commentId,
+    likedBy: req.user?._id,
+  });
+
+  if (isLike) {
+    const unLike = await Like.findByIdAndDelete(isLike._id);
+    return res.status(200).json(new ApiResponse(200, unLike, "unlike successfully"));
+  }
+
+  const like = await Like.create({
+    
+    comment: commentId,
+    likedBy: req.user?._id,
+  });
+  
+  return res.status(200).json(new ApiResponse(200, like, "like successfully"));
 });
 
 const getLikedVideos = asyncHandler(async (req, res) => {
@@ -74,17 +95,37 @@ const getLikedVideos = asyncHandler(async (req, res) => {
 
   const likedVideos = await Like.aggregate([
     {
-      $match:{likedBy : new mongoose.Types.ObjectId(req.user?._id)}
-
-      
+      $match: {
+        likedBy: new mongoose.Types.ObjectId(req.user?._id),
+      },
     },
-    
-  ])
+    {
+      $lookup: {
+        from: "videos",
+        localField: "video",
+        foreignField: "_id",
+        as: "video",
+      },
+    },
 
-  console.log(likedVideos)
+    {
+      $addFields: {
+        video: {
+          $first: "$video",
+        },
+      },
+    },
 
 
-  
+  ]);
+
+  // console.log(likedVideos);
+
+  if (!likedVideos) {
+    throw new ApiError(400, "liked videos not found");
+  }
+
+  return res.status(200).json(new ApiResponse(200, likedVideos, "liked videos"));
 });
 
 export { toggleCommentLike, toggleTweetLike, toggleVideoLike, getLikedVideos };

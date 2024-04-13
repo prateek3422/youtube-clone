@@ -642,6 +642,23 @@ export class VideoService {
     }
   }
 
+
+  async LikedVideos() {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      };
+      const res = await axios.get(`http://localhost:3000/api/v1/likes`, config)
+    } catch (error) {
+       console.log(error)
+    }
+
+      
+  }
   // dashboard
 
   async channelStatus() {

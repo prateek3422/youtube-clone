@@ -78,7 +78,7 @@ const MyContent = () => {
   };
   return (
     <>
-      <div className="container mt-16 px-4">
+      <div className="container px-4">
         <div className="coverImg">
           {channel?.coverImage ? (
             <img src={channel?.coverImage} alt="cover Image" />
