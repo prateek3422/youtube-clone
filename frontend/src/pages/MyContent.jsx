@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import authService from "../services/auth";
 import VideoCard from "../components/videoCard";
 import PlaylistCard from "../components/PlaylistCard";
-import { Button, Comunity } from "../components";
+import { Button, Comunity, Loader } from "../components";
 import Subscribed from "../components/Subscribed";
 import { Link } from "react-router-dom";
 import { MdOutlineFileUpload } from "react-icons/md";
@@ -62,7 +62,7 @@ const MyContent = () => {
     }
   };
 
-  const { data: myData } = useQuery({
+  const { isLoading, data: myData } = useQuery({
     queryKey: ["video"],
     queryFn: fetchedVideoData,
   });
@@ -76,7 +76,9 @@ const MyContent = () => {
 
     setToggleTab(index);
   };
-  return (
+  return  isLoading ? (
+    <Loader/>
+  ):(
     <>
       <div className="container px-4">
         <div className="coverImg">

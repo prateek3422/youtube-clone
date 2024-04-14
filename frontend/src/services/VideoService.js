@@ -652,7 +652,9 @@ export class VideoService {
         },
         withCredentials: true,
       };
-      const res = await axios.get(`http://localhost:3000/api/v1/likes`, config)
+      const res = await axios.get(` http://localhost:3000/api/v1/likes/videos`, config)
+
+      return res.data.data
     } catch (error) {
        console.log(error)
     }

@@ -78,15 +78,16 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
 
   if (isLike) {
     const unLike = await Like.findByIdAndDelete(isLike._id);
-    return res.status(200).json(new ApiResponse(200, unLike, "unlike successfully"));
+    return res
+      .status(200)
+      .json(new ApiResponse(200, unLike, "unlike successfully"));
   }
 
   const like = await Like.create({
-    
     comment: commentId,
     likedBy: req.user?._id,
   });
-  
+
   return res.status(200).json(new ApiResponse(200, like, "like successfully"));
 });
 
@@ -105,6 +106,42 @@ const getLikedVideos = asyncHandler(async (req, res) => {
         localField: "video",
         foreignField: "_id",
         as: "video",
+        pipeline:[
+          {
+            $lookup: {
+              from:"users",
+              localField:"owner",
+              foreignField:"_id",
+              as:"owner",
+            }
+          },
+          {
+            $addFields:{
+              owner:{
+                $first:"$owner"
+              }
+            }
+          },
+
+          {
+            $project:{
+              _id:1,
+              title:1,
+              videoFile:1,
+              description:1,
+              thumbnail:1,
+              createdAt:1,
+              views:1,
+              
+              owner:{
+                _id:1,
+                userName:1,
+                fullname:1,
+                avatar:1
+              }
+            }
+          }
+        ]
       },
     },
 
@@ -115,8 +152,6 @@ const getLikedVideos = asyncHandler(async (req, res) => {
         },
       },
     },
-
-
   ]);
 
   // console.log(likedVideos);
@@ -125,7 +160,9 @@ const getLikedVideos = asyncHandler(async (req, res) => {
     throw new ApiError(400, "liked videos not found");
   }
 
-  return res.status(200).json(new ApiResponse(200, likedVideos, "liked videos"));
+  return res
+    .status(200)
+    .json(new ApiResponse(200, likedVideos, "liked videos"));
 });
 
 export { toggleCommentLike, toggleTweetLike, toggleVideoLike, getLikedVideos };

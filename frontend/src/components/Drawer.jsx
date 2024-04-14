@@ -156,7 +156,7 @@ export default function MiniDrawer({children}) {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={() => setOpen(!open)}
             edge="start"
             sx={{
               marginRight: 5,

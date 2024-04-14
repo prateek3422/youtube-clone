@@ -34,10 +34,13 @@ const Customise = () => {
   } = useQuery({ queryKey: ["stats"], queryFn: channelData });
   const { data: video } = useQuery({ queryKey: ["video"], queryFn: videoData });
 
+  
+<Loader />
   return isLoading ? (
     <Loader />
   ) : (
     <>
+
       <div className="container">
         <div className=" flex flex-wrap justify-between gap-4 mx-4 mt-8">
           <div className="block">
