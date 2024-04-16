@@ -1,27 +1,28 @@
 import   {useEffect, useState } from "react";
-import { VideoCard } from "../components";
+import { Loader, VideoCard } from "../components";
 import videoService from "../services/VideoService";
+import { useQuery } from "@tanstack/react-query";
 // import { useSelector } from "react-redux";
 
 const Home = () => {
-  const [video, setVideo] = useState([]);
+
   // const [query, setQuery] = useState("jjk");
-  console.log(video);
+  // console.log(video);
 
+  const handleVideo = async() => {
+    try {
+      const videoData = await videoService.getAllVideos();
+      // console.log(videoData.data.data)
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const videoData = await videoService.getAllVideos();
-        console.log(videoData.data.data)
-        setVideo(videoData.data.data.docs);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+      return videoData.data.data.docs
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  return (
+  const { isLoading, data:video} = useQuery({queryKey:["video"],queryFn:handleVideo});
+
+  return isLoading ? <Loader /> : (
     <>
       <div className="container mx-auto">
         <div className="main  w-full">

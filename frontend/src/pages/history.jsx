@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import auth from "../services/auth";
 import VideoService from "../services/VideoService";
+import { useQuery } from "@tanstack/react-query";
+import { Loader } from "../components";
 
 const History = () => {
-  const [history, setHistory] = useState([]);
-  // console.log(history);
-  useEffect(() => {
-    (async () => {
-      try {
-        const his = await auth.getWatchHistory();
-        // console.log(his.data)
-        setHistory(his.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const fetchedHistory = async () => {
+    try {
+      const history = await auth.getWatchHistory();
+      return history.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  return (
+  const {isLoading ,data:history} = useQuery({ queryKey: ["history"], queryFn: fetchedHistory });
+
+  
+  return isLoading ? <Loader /> : (
     <>
       <div className="container mx-auto">
         <div className="main  w-full">

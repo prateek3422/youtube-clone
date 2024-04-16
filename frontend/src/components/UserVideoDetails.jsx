@@ -75,7 +75,7 @@ const UserVideoDetails = ({ item }) => {
         {item.title}
       </div>
       <div className=" flex justify-center items-center text-white">
-        {item.likes.length}
+        {4}
       </div>
       <div className="flex justify-around items-center text-white">
         {`${item.createdAt.day}/${item.createdAt.month}/${item.createdAt.year}`}

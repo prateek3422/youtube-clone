@@ -13,11 +13,10 @@ import { Avatar } from "@mui/material";
 
 const MyContent = () => {
   const [toggleTab, setToggleTab] = useState("video");
-
-  const userData = useSelector((state) => state.auth.userData);
+ 
+ const userData = useSelector((state) => state.auth.userData);
   const authStatus = useSelector((state) => state.auth.status);
 
- 
   const btnList = [
     {
       name: "videos",
@@ -73,12 +72,11 @@ const MyContent = () => {
   });
 
   const handletabs = async (index) => {
-
     setToggleTab(index);
   };
-  return  isLoading ? (
-    <Loader/>
-  ):(
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <div className="container px-4">
         <div className="coverImg">
@@ -99,11 +97,11 @@ const MyContent = () => {
               />
             </span> */}
 
-<Avatar
-        alt="channel avatar"
-        src={channel?.avatar}
-        sx={{ width: 80, height: 80 }}
-      />
+            <Avatar
+              alt="channel avatar"
+              src={channel?.avatar}
+              sx={{ width: 80, height: 80 }}
+            />
             <div className="mr-auto inline-block">
               <h1 className="text-xl">{channel?.fullname}</h1>
               <p className="text-sm text-gray-400">{channel?.userName}</p>
@@ -177,10 +175,8 @@ const MyContent = () => {
         </div>
         <div className={toggleTab === "subscribed" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
-       
-              <Subscribed userId={userData?.data?._id} channel={channel} />
-            </div>
-       
+            <Subscribed userId={userData?.data?._id} channel={channel} />
+          </div>
         </div>
       </div>
     </>

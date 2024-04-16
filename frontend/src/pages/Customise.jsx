@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import videoService from "../services/VideoService";
 import { FaRegEye } from "react-icons/fa6";
 import { Button, Loader, Modal, UserVideoDetails } from "../components";
