@@ -17,7 +17,7 @@ import UserVideoDetails from "./UserVideoDetails.jsx"
 import Loader from "./loader.jsx"
 import Slider from "./Slider.jsx"
 import UpdateVideo from "../components/UpdateVideo.jsx"
-
+import ChannelComponent from "./ChannelComponent.jsx"
  export{
     Header,
     Signup,
@@ -37,5 +37,6 @@ import UpdateVideo from "../components/UpdateVideo.jsx"
     UserVideoDetails,
     Loader,
     Slider,
-    UpdateVideo
+    UpdateVideo,
+    ChannelComponent
 }

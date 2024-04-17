@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+
 import { toast } from "react-toastify";
 
 export class AuthService {
@@ -158,6 +158,7 @@ export class AuthService {
   }
 
   async getChannelDetails(userName) {
+  
 try {
       const config = {
         headers: {
@@ -166,9 +167,8 @@ try {
         },
         withCredentials: true,
       };
-      const chdetail = axios.get(` http://localhost:3000/api/v1/users/c/${userName}`, config);
-
-      return chdetail
+      const channel = axios.get(` http://localhost:3000/api/v1/users/c/${userName}`, config);
+      return channel
 } catch (error) {
   console.log(error)
 }

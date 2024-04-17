@@ -15,13 +15,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import LikedVideos from "./pages/likedVideos.jsx";
 import History from "./pages/history.jsx";
-import Collection from "./pages/Collection.jsx";
+
 import Subscribers from "./pages/Subscribers.jsx";
 import MyContent from "./pages/MyContent.jsx";
 import AuthLayOut from "./components/authLayOut.jsx";
 import Customise from "./pages/Customise.jsx";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {queryClient} from "./utils/query-client.js"
+import Channel from "./pages/channel.jsx";
 
 
 const router = createBrowserRouter([
@@ -77,14 +78,14 @@ const router = createBrowserRouter([
           </AuthLayOut>
         ),
       },
-      // {
-      //   path: "/collection",
-      //   element: (
-      //     <AuthLayOut authentication>
-      //       <Collection />
-      //     </AuthLayOut>
-      //   ),
-      // },
+      {
+        path: "/channel/:userName",
+        element: (
+          <AuthLayOut authentication>
+            <Channel/>
+          </AuthLayOut>
+        ),
+      },
       {
         path: "/subscribers",
         element: (

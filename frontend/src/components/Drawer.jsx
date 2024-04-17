@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -9,8 +9,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -91,18 +89,14 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer({ children }) {
+// eslint-disable-next-line react/prop-types
+export default function MiniDrawer({children}) {
   const authStatus = useSelector((state) => state.auth.status);
-  const theme = useTheme();
+  
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+
 
   const sideList = [
     {
@@ -148,7 +142,7 @@ export default function MiniDrawer({ children }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ backgroundColor: "#282828" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#282828", boxShadow: "none" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -172,21 +166,15 @@ export default function MiniDrawer({ children }) {
         }}
       >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
+      
+         
         </DrawerHeader>
         <Divider />
         <List>
-          {sideList.map((text, index) =>
+          {sideList.map((text,) =>
             text.active ? (
-              <Link to={text.slug}>
+              <Link to={text.slug} key={text.name}>
                 <ListItem
-                  key={text.name}
                   disablePadding
                   sx={{ display: "block" }}
                 >
@@ -223,7 +211,7 @@ export default function MiniDrawer({ children }) {
       </Drawer>
 
       <Box component="main" sx={{ flexGrow: 1 }}>
-        <DrawerHeader />
+        {/* <DrawerHeader /> */}
         {children}
       </Box>
     </Box>

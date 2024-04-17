@@ -2,6 +2,7 @@ import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const VideoCard = ({ views, _id, title, thumbnail, owner }) => {
+  console.log(owner)
   return (
     <>
       <div className="video-card ">
@@ -20,7 +21,7 @@ const VideoCard = ({ views, _id, title, thumbnail, owner }) => {
           <div className="w-full">
             <h3 className="mb-1 font-semibold">{title}</h3>
             <Link
-              to={`/channel/${owner?._id}`}
+              to={`/channel/${owner?.userName}`}
               className="mb-1 text-sm text-gray-600 cursor-pointer"
             >
               {owner?.userName}

@@ -47,7 +47,7 @@ const Subscribed = ({ userId, channel }) => {
         {data?.map((item) => {
           return (
             <div key={item?._id}>
-              <Link to={`/channel/${owner?._id}`}>
+              <Link to={`/channel`}>
               <div className=" px-4 py-4">
                 <div className="flex justify-between w-full mb-8">
                   <div className="flex items-center gap-x-2">

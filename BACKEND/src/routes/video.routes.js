@@ -32,7 +32,7 @@ router
 );
 
 router.route("/getAllVideo").get(getAllVideos)
-router.route("/encode").post(videoEncodeing)
+// router.route("/encode").post(videoEncodeing)
 
 
 router
