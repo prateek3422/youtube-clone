@@ -39,8 +39,6 @@ const Channel = () => {
     queryKey: ["video"],
     queryFn: fetchedVideoData,
   });
-
-  console.log(myData)
   
   return (
     <>

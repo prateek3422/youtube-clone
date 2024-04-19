@@ -89,10 +89,9 @@ export class AuthService {
         " http://localhost:3000/api/v1/users/current-user",
         config
       );
-      // const res = await axios.get(' http://localhost:8080/api/v1/users/current-user',config)
       return res;
     } catch (error) {
-      console.log("getCurrentUsser", error);
+      console.log("getCurrentUsser", error.message);
     }
 
     return null;

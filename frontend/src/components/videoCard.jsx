@@ -2,7 +2,6 @@ import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const VideoCard = ({ views, _id, title, thumbnail, owner }) => {
-  console.log(owner)
   return (
     <>
       <div className="video-card ">

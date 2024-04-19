@@ -23,6 +23,7 @@ import Customise from "./pages/Customise.jsx";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {queryClient} from "./utils/query-client.js"
 import Channel from "./pages/channel.jsx";
+import EditUser from "./pages/EditUser.jsx";
 
 
 const router = createBrowserRouter([
@@ -107,6 +108,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayOut authentication>
             <Customise />
+          </AuthLayOut>
+        ),
+      },
+      {
+        path: "/Account",
+        element: (
+          <AuthLayOut authentication>
+            <EditUser/>
           </AuthLayOut>
         ),
       },
