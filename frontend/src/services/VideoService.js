@@ -439,7 +439,7 @@ export class VideoService {
         withCredentials: true,
       };
       const playlist = await axios.get(
-        `http://localhost:3000/api/v1/playlists//user/${playlistId}`,
+        `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
         {},
         config
       );

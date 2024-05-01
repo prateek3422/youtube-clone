@@ -4,7 +4,7 @@ import { Avatar } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import VideoCard from "./videoCard";
-import EditUser from "../pages/EditUser";
+
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -16,7 +16,6 @@ const ChannelComponent = ({
   myData,
   userData,
   authStatus = false,
-  username,
 }) => {
   const [value, setValue] = useState("video");
 
@@ -72,13 +71,13 @@ const ChannelComponent = ({
               indicatorColor="secondary"
               aria-label="secondary tabs example"
             >
-              <Tab value="video" label="video" />
-              <Tab value="playlist" label="playlist" />
-              <Tab value="comunity" label="comunity" />
-              {
+              <Tab value="video" label="video" sx={{ color: "white" }} />
+              <Tab value="playlist" label="playlist" sx={{ color: "white" }}/>
+              <Tab value="comunity" label="comunity" sx={{ color: "white" }} />
+              {/* {
                 authStatus &&
-                <Tab value="edit" label="edit" />
-              }
+                <Tab value="edit" label="edit" sx={{ color: "white" }}/>
+              } */}
             </Tabs>
           </Box>
         </div>
@@ -113,11 +112,11 @@ const ChannelComponent = ({
             </div>
           </div>
         </div>
-        <div className={value === "edit" ? "block" : "hidden"}>
+        {/* <div className={value === "edit" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
                 <EditUser/>
           </div>
-        </div> 
+        </div>  */}
       </div>
     </>
   );
