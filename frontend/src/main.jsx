@@ -24,6 +24,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {queryClient} from "./utils/query-client.js"
 import Channel from "./pages/channel.jsx";
 import EditUser from "./pages/EditUser.jsx";
+import AddVideoOnPlaylist from "./components/AddVideoOnPlaylsit.jsx"
 
 
 const router = createBrowserRouter([
@@ -116,6 +117,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayOut authentication>
             <EditUser/>
+          </AuthLayOut>
+        ),
+      },
+      {
+        path: "/Edit-Playlist",
+        element: (
+          <AuthLayOut authentication>
+            <AddVideoOnPlaylist/>
           </AuthLayOut>
         ),
       },

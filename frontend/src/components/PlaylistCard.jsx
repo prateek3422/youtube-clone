@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import videoService from "../services/VideoService";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-
-import { styled, alpha } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import EditIcon from '@mui/icons-material/Edit';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { styled, alpha } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import EditIcon from "@mui/icons-material/Edit";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import DeleteIcon from "@mui/icons-material/Delete";
+import VideocamOffIcon from "@mui/icons-material/VideocamOff";
+import AddIcon from "@mui/icons-material/Add";
 import { useMutation, useQuery } from "@tanstack/react-query";
-
+import { useNavigate } from "react-router-dom";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -57,6 +58,9 @@ const StyledMenu = styled((props) => (
 }));
 
 const PlaylistCard = ({ userId }) => {
+
+
+  const navigate  = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -83,21 +87,24 @@ const PlaylistCard = ({ userId }) => {
 
   const updatePlaylist = async (playlistId, Name, description) => {
     try {
-
-      const playlist = await videoService.updatePlaylist(playlistId,  Name, description);
-      return playlist
+      const playlist = await videoService.updatePlaylist(
+        playlistId,
+        Name,
+        description
+      );
+      return playlist;
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-
-  const { mutate: update } = useMutation({mutationFn: updatePlaylist,
+  const { mutate: update } = useMutation({
+    mutationFn: updatePlaylist,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["video"] });
-    },})
+    },
+  });
 
-    console.log(update)
   return (
     <>
       {playlist?.map((item) => {
@@ -105,31 +112,31 @@ const PlaylistCard = ({ userId }) => {
         return item?.length == 0 ? (
           "playlist not available"
         ) : (
-          <div className="video-card" key={item._id}>
-            <div className="thumbnail">
-              <img className="rounded-lg thumb-img" src="" alt="" />
-            </div>
-            <div className="flex">
-              {/* <div className="h-10 w-10 shrink-0">
-              <img
-                className="h-full w-full rounded-full "
-                // src={owner?.avatar}
-                alt="avatar"
-              />
-            </div> */}
+          <div className="video-card w-[80%]" key={item._id}>
+            {item?.thumbnail ? (
 
+              <div className="thumbnail">
+                <img className="rounded-lg thumb-img" src="" alt="" />
+              </div>
+            ) : (
+              <div className="thumbnail h-full w-full border-2 border-solid border-red-400  flex justify-center items-center flex-col"  onClick={() => navigate(`/Edit-Playlist`)}>
+                <VideocamOffIcon className="rounded-lg thumb-img" />
+                <p>0 video found</p>
+                <p>Add videos</p>
+           
+              </div>
+            )}
+            <div className="flex">
               <div className="w-full">
                 <h3 className="mb-1 font-semibold"></h3>
                 <p className="flex text-xl text-gray-600">{item?.name}</p>
                 <p className="text-sm text-gray-600">{item?.description}</p>
               </div>
 
-              <div>
-                <Button
-                  onClick={handleClick}
-                >
-                  <MoreVertIcon/>
-                </Button>
+              <div className="mt-2">
+                <div onClick={handleClick}>
+                  <MoreVertIcon />
+                </div>
                 <StyledMenu
                   id="demo-customized-menu"
                   MenuListProps={{

@@ -362,7 +362,8 @@ export class VideoService {
 
   // playlist
 
-  async createPlaylist(name, description) {
+  async createPlaylist(data) {
+    console.log( data)
     try {
       const config = {
         headers: {
@@ -374,8 +375,8 @@ export class VideoService {
       const playlist = await axios.post(
         `http://localhost:3000/api/v1/playlists/`,
         {
-          name: name,
-          description: description,
+          name: data.title,
+          description: data.description,
         },
         config
       );
@@ -391,9 +392,9 @@ export class VideoService {
         theme: "colored",
       });
       // console.log(commentres);
-      return commentres;
+      return playlist;
     } catch (error) {
-      console.log("create comment", error);
+      console.log("create playlist", error);
     }
   }
 

@@ -56,7 +56,7 @@ const UpdateVideo = (video) => {
             {/* <!-- Modal header --> */}
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                upload video
+                update video
               </h3>
               <button
                 onClick={() => setHide(false)}
