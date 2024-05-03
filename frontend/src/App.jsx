@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Header, SideBar } from "./components";
+import { Header} from "./components";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import authService from "./services/auth";
@@ -9,9 +9,6 @@ import MiniDrawer from "./components/Drawer";
 
 function App() {
   const [loading, setLoading] = useState(true);
-
-  const [slide, setSlide] = useState(false);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,9 +27,6 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleSlide = () => {
-    setSlide(!slide);
-  };
 
   return !loading ? (
     <>
