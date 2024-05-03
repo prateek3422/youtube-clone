@@ -13,16 +13,15 @@ import { store } from "./store/store.js";
 import Videos from "./pages/Videos.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import LikedVideos from "./pages/likedVideos.jsx";
-import History from "./pages/history.jsx";
+import LikedVideos from "./pages/LikedVideos.jsx";
+import History from "./pages/History.jsx";
 
 import Subscribers from "./pages/Subscribers.jsx";
 import MyContent from "./pages/MyContent.jsx";
-
 import Customise from "./pages/Customise.jsx";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {queryClient} from "./utils/query-client.js"
-import Channel from "./pages/channel.jsx";
+import Channel from "./pages/Channel.jsx";
 import EditUser from "./pages/EditUser.jsx";
 import AddVideoOnPlaylist from "./components/AddVideoOnPlaylsit.jsx"
 import AuthLayOut from "./components/AuthLayOut.jsx";

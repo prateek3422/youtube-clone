@@ -19,7 +19,7 @@ const Channel = () => {
 
 
 
-  const { isLoading, data: channel } = useQuery({
+  const {  data: channel } = useQuery({
     queryKey: ["channel"],
     queryFn: fetchedChannel,
   })
