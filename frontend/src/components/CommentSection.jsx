@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
-import { Button, Input } from "../components";
+import { Button,  } from "../components";
 import videoService from "../services/VideoService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../utils/query-client.js";
+import Input from "./Inputs.jsx";
 
 const CommentSection = ({ slug }) => {
   const [hide, setHide] = useState(true);
