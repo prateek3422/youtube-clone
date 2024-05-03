@@ -1,9 +1,8 @@
-
 import videoService from "../services/VideoService";
 import { useQuery } from "@tanstack/react-query";
-import { Loader, VideoCard } from "../components";
+import { Loader, VideoCard } from "../components/index";
 
-const LikedVideos = () => {
+const LikedVideo = () => {
   const handleLikeVideo = async () => {
     try {
       const LikeData = await videoService.LikedVideos();
@@ -39,4 +38,4 @@ const LikedVideos = () => {
   )
 };
 
-export default LikedVideos;
+export default LikedVideo;

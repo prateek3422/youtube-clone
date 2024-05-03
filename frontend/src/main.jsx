@@ -13,7 +13,7 @@ import { store } from "./store/store.js";
 import Videos from "./pages/Videos.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import LikedVideos from "./pages/LikedVideos.jsx";
+
 import History from "./pages/History.jsx";
 import Subscribers from "./pages/Subscribers.jsx";
 import MyContent from "./pages/MyContent.jsx";
@@ -24,6 +24,7 @@ import Channel from "./pages/Channel.jsx";
 import EditUser from "./pages/EditUser.jsx";
 import AddVideoOnPlaylist from "./components/AddVideoOnPlaylsit.jsx"
 import AuthLayOut from "./components/AuthLayOut.jsx";
+import LikedVideo from "./pages/LikedVideo.jsx";
 
 
 const router = createBrowserRouter([
@@ -67,7 +68,7 @@ const router = createBrowserRouter([
         path: "/liked-videos",
         element: (
           <AuthLayOut authentication>
-            <LikedVideos />
+            <LikedVideo/>
           </AuthLayOut>
         ),
       },
