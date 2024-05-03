@@ -1,9 +1,9 @@
-import Header from "./Headers/Header"
-import Signup from "./Signup"
-import Login from './Login'
-import Button from "./Button"
+import Header from "./Headers/Header.jsx"
+import Signup from "./Signup.jsx"
+import Login from './Login.jsx'
+import Button from "./Button.jsx"
 import Container from "./containers/Container.jsx"
-import logOut  from './Headers/LogOut'
+import logOut  from './Headers/LogOut.jsx'
 
 import VideoCard from "./videoCard.jsx"
 import CommentSection from "./CommentSection.jsx"
