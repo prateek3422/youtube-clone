@@ -1,6 +1,5 @@
 import Header from "./Headers/Header"
 import Signup from "./Signup"
-import Input from './Input.jsx'
 import Login from './Login'
 import Button from "./Button"
 import Container from "./containers/container"
@@ -30,7 +29,6 @@ import AuthLayOut from "./AuthLayOut.jsx"
     SideBar, 
     VideoCard,
     CommentSection,
-    Input,
     Comunity,
     PlaylistCard,
     subscribed,
