@@ -3,7 +3,7 @@ import auth from "../services/auth";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../components";
 
-const History = () => {
+const VideoHistory = () => {
   const fetchedHistory = async () => {
     try {
       const history = await auth.getWatchHistory();
@@ -54,4 +54,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default VideoHistory;
