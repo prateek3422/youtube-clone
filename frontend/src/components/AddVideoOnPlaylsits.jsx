@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import Input from "./Input";
+import Input from "./Inputs";
 import { useForm } from "react-hook-form";
 
 import Textarea from "@mui/joy/Textarea";

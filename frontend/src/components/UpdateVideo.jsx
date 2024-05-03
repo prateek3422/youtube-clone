@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Input from "./Input";
+import Input from "./Inputs";
 import Button from "./Button";
 import videoService from "../services/VideoService";
 import { useForm } from "react-hook-form";

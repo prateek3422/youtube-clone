@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { forwardRef, useId } from 'react'
 
-const Input = ({
+const Inputs = ({
   type='text',
   lable='',
   className='',
@@ -28,4 +28,4 @@ const Input = ({
     )
 }
 
-export default forwardRef(Input)
+export default forwardRef(Inputs)
