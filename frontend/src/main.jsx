@@ -21,10 +21,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {queryClient} from "./utils/query-client.js"
 import Channel from "./pages/Channel.jsx";
 import EditUser from "./pages/EditUser.jsx";
-import AddVideoOnPlaylist from "./components/AddVideoOnPlaylsit.jsx"
+
 import AuthLayOut from "./components/AuthLayOut.jsx";
 import LikedVideo from "./pages/LikedVideo.jsx";
 import VideoHistory from "./pages/VideoHistory.jsx";
+import { AddVideoOnPlaylsit } from "./components/index.js";
 
 
 const router = createBrowserRouter([
@@ -124,7 +125,7 @@ const router = createBrowserRouter([
         path: "/Edit-Playlist",
         element: (
           <AuthLayOut authentication>
-            <AddVideoOnPlaylist/>
+            <AddVideoOnPlaylsit/>
           </AuthLayOut>
         ),
       },

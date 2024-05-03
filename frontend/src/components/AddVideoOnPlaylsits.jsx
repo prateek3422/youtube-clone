@@ -11,7 +11,7 @@ import Typography from "@mui/joy/Typography";
 import Button from "./Button";
 import videoService from "../services/VideoService";
 import { useMutation } from "@tanstack/react-query";
-const AddVideoOnPlaylsit = () => {
+const AddVideoOnPlaylsits = () => {
   const { register, handleSubmit } = useForm();
   const [value, setValue] = useState("details");
   const handleChange = (event, newValue) => {
@@ -87,4 +87,4 @@ const AddVideoOnPlaylsit = () => {
   );
 };
 
-export default AddVideoOnPlaylsit;
+export default AddVideoOnPlaylsits;
