@@ -18,13 +18,14 @@ import History from "./pages/history.jsx";
 
 import Subscribers from "./pages/Subscribers.jsx";
 import MyContent from "./pages/MyContent.jsx";
-import AuthLayOut from "./components/authLayOut.jsx";
+
 import Customise from "./pages/Customise.jsx";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {queryClient} from "./utils/query-client.js"
 import Channel from "./pages/channel.jsx";
 import EditUser from "./pages/EditUser.jsx";
 import AddVideoOnPlaylist from "./components/AddVideoOnPlaylsit.jsx"
+import AuthLayOut from "./components/AuthLayOut.jsx";
 
 
 const router = createBrowserRouter([

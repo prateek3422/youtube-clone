@@ -19,6 +19,7 @@ import Slider from "./Slider.jsx"
 import UpdateVideo from "../components/UpdateVideo.jsx"
 import ChannelComponent from "./ChannelComponent.jsx"
 import AddVideoOnPlaylsit from "./AddVideoOnPlaylsit.jsx"
+import AuthLayOut from "./AuthLayOut.jsx"
  export{
     Header,
     Signup,
@@ -40,5 +41,6 @@ import AddVideoOnPlaylsit from "./AddVideoOnPlaylsit.jsx"
     Slider,
     UpdateVideo,
     ChannelComponent,
-    AddVideoOnPlaylsit
+    AddVideoOnPlaylsit,
+    AuthLayOut
 }
