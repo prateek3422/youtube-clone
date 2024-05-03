@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import {Button, Input, Login} from './index'
+import {Button,} from './index'
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/auth";
 import { useDispatch } from "react-redux";
 import {login as authLogin} from '../store/authSlice'
+import Input from "./Inputs";
 
 const Signup = () => {
   const { register, handleSubmit } = useForm();

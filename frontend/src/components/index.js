@@ -4,7 +4,6 @@ import Login from './Login.jsx'
 import Button from "./Button.jsx"
 import Container from "./containers/Container.jsx"
 import logOut  from './Headers/LogOut.jsx'
-
 import VideoCard from "./videoCard.jsx"
 import CommentSection from "./CommentSection.jsx"
 import Comunity from "./comunity.jsx"
@@ -19,6 +18,7 @@ import UpdateVideo from "../components/UpdateVideo.jsx"
 import ChannelComponent from "./ChannelComponent.jsx"
 import AddVideoOnPlaylsits from "./AddVideoOnPlaylsits.jsx"
 import AuthLayOut from "./AuthLayOut.jsx"
+
  export{
     Header,
     Signup,
@@ -26,7 +26,6 @@ import AuthLayOut from "./AuthLayOut.jsx"
     Button,
     Container,
     logOut,
-
     VideoCard,
     CommentSection,
     Comunity,
@@ -40,5 +39,6 @@ import AuthLayOut from "./AuthLayOut.jsx"
     UpdateVideo,
     ChannelComponent,
     AddVideoOnPlaylsits,
-    AuthLayOut
+    AuthLayOut,
+ 
 }
