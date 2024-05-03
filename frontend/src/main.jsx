@@ -25,7 +25,7 @@ import EditUser from "./pages/EditUser.jsx";
 import AuthLayOut from "./components/AuthLayOut.jsx";
 import LikedVideo from "./pages/LikedVideo.jsx";
 import VideoHistory from "./pages/VideoHistory.jsx";
-import { AddVideoOnPlaylsit } from "./components/index.js";
+import { AddVideoOnPlaylsit, AddVideoOnPlaylsits } from "./components/index.js";
 
 
 const router = createBrowserRouter([
@@ -125,7 +125,7 @@ const router = createBrowserRouter([
         path: "/Edit-Playlist",
         element: (
           <AuthLayOut authentication>
-            <AddVideoOnPlaylsit/>
+          <AddVideoOnPlaylsits/>
           </AuthLayOut>
         ),
       },
