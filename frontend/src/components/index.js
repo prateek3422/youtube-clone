@@ -6,7 +6,7 @@ import Container from "./containers/container"
 import logOut  from './Headers/LogOut'
 import SideBar from './sideBar.jsx'
 import VideoCard from "./videoCard.jsx"
-import CommentSection from "./commentSection.jsx"
+import CommentSection from "./CommentSection.jsx"
 import Comunity from "./comunity.jsx"
 import PlaylistCard from "./PlaylistCard.jsx"
 import subscribed from "./Subscribed.jsx"
