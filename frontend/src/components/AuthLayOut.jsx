@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// eslint-disable-next-line react/prop-types
 const AuthLayOut = ({ children, authentication = true }) => {
   const [loading, setLoading] = useState(true);
 
@@ -17,7 +18,7 @@ const AuthLayOut = ({ children, authentication = true }) => {
     }
 
     setLoading(false)
-  }, [authStatus, authentication, loading]);
+  }, [authStatus, authentication, loading, navigate]);
 
 
   return loading ? <h1>Loading...</h1> : <>{children}</>

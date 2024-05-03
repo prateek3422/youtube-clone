@@ -19,8 +19,7 @@ const AddVideoOnPlaylsit = () => {
   };
   const createPlaylist = async (data) => {
     try {
-      const playlist = await videoService.createPlaylist(data);
-   console.log(playlist)
+      await videoService.createPlaylist(data);
     } catch (error) {
       console.log(error);
     }
@@ -79,6 +78,10 @@ const AddVideoOnPlaylsit = () => {
             </Button>
           </form>
         </div>
+      </div>
+
+      <div className={value === "video" ? "block" : "hidden"}>
+        
       </div>
     </>
   );

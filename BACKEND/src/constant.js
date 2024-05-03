@@ -1,1 +1,1 @@
-export const dbName = 'youtube'
+export const dbName = 'videoMate'
