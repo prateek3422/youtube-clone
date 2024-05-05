@@ -2,7 +2,7 @@ import mongoose, { isValidObjectId } from "mongoose";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponses.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { Comunity } from "../models/comunity.model.js";
+import  {Comunity} from "../models/Comunity.model.js";
 
 const createComunity = asyncHandler(async (req, res) => {
   //TODO: create tweet
