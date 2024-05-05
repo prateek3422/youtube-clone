@@ -26,10 +26,16 @@ const userSchema = new Schema(
       index: true,
     },
     avatar: {
-      type: String, //Coudnary upload
+      type:{
+        url:String,
+        public_Id:String
+      }, //Coudnary upload
     },
     coverImage: {
-      type: String, // cloudnary upload
+      type:{
+        url:String,
+        public_Id:String
+      }, //Coudnary upload
     },
 
     watchhistory: [

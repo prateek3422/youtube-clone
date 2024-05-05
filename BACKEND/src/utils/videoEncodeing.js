@@ -1,4 +1,4 @@
-import { ApiResponse } from "./ApiResponse.js"
+import { ApiResponse } from "./ApiResponses.js"
 import ffmpeg from  "fluent-ffmpeg"
 import ffmpegStatic from "ffmpeg-static"
 

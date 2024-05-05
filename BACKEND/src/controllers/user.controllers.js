@@ -2,9 +2,10 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { cloudinaryUpload } from "../utils/fileUpload.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import { ApiResponse } from "../utils/ApiResponses.js";
+
 
 const genrateAccessAndRefreshToken = async (userId) => {
   try {
@@ -75,8 +76,14 @@ const registerUser = asyncHandler(async (req, res) => {
     userName,
     email,
     fullname,
-    avatar: avatar.url,
-    coverImage: coverImage?.url || "",
+    avatar:{
+      url:avatar.url,
+      public_Id:avatar.public_Id
+    },
+    coverImage:{
+      url: coverImage?.url || "",
+      public_Id: coverImage?.public_Id || ""
+    },
     password,
   });
 
