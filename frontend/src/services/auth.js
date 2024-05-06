@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { api } from "./axios";
 
 export class AuthService {
   async createAccount({ name, email, password }) {
@@ -29,23 +30,20 @@ export class AuthService {
     }
   }
 
-  async Login({ email, password }) {
+  async Login(data ) {
+
+
     try {
-      const config = {
+      const res = await api({
+        url: `/api/v1/users/login`,
+        method: "post",
+        data,
         headers: {
           "content-type": "application/json",
         },
         withCredentials: true,
-      };
-      const res = await axios.post(
-        "http://localhost:3000/api/v1/users/login",
-        {
-          email: email,
-          password: password,
-        },
-        config
-      );
-
+      });
+    
       // console.log(res)
       toast.success(res?.data?.message, {
         position: "top-right",
@@ -60,7 +58,7 @@ export class AuthService {
       });
       return res;
     } catch (error) {
-      // console.log('login', error)
+      console.log('login', error)
       toast.error(error.response?.data?.message, {
         position: "top-right",
         autoClose: 5000,
@@ -77,17 +75,14 @@ export class AuthService {
 
   async getCurrentUser() {
     try {
-      const config = {
+      const res = await api({
+        url: `/api/v1/users/current-user`,
+        method: "get",
         headers: {
           "content-type": "application/json",
-          accept: "application/json",
         },
         withCredentials: true,
-      };
-      const res = await axios.get(
-        " http://localhost:3000/api/v1/users/current-user",
-        config
-      );
+      });
       return res;
     } catch (error) {
       console.log("getCurrentUsser", error.message);
@@ -97,17 +92,18 @@ export class AuthService {
   }
   async getWatchHistory() {
     try {
-      const config = {
+      const history = await api({
+        url: `/api/v1/users/history`,
+        method: "get",
         headers: {
           "content-type": "application/json",
-          accept: "application/json",
         },
         withCredentials: true,
-      };
-      const history = await axios.get(
-        "http://localhost:3000/api/v1/users/history",
-        config
-      );
+      });
+      // const history = await axios.get(
+      //   "http://localhost:3000/api/v1/users/history",
+      //   config
+      // );
       return history.data;
     } catch (error) {
       console.log("getWatchHistory", error);
@@ -118,15 +114,14 @@ export class AuthService {
 
   async logout() {
     try {
-      const config = {
+      const res = await api({
+        url: `/api/v1/users/logout`,
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
         withCredentials: true,
-      };
-      const res = await axios.post(
-        "http://localhost:3000/api/v1/users/logout",
-        {},
-        config
-      );
-      // console.log(res);
+      });
       toast.success(res?.data?.message, {
         position: "top-right",
         autoClose: 5000,
@@ -158,14 +153,15 @@ export class AuthService {
   async getChannelDetails(userName) {
   
 try {
-      const config = {
-        headers: {
-          "content-type": "application/json",
-          accept: "application/json",
-        },
-        withCredentials: true,
-      };
-      const channel = axios.get(` http://localhost:3000/api/v1/users/c/${userName}`, config);
+  const channel = await api({
+    url: `/api/v1/users/c/${userName}`,
+    method: "get",
+    headers: {
+      "content-type": "application/json",
+    },
+    withCredentials: true,
+  });
+      // const channel = axios.get(` http://localhost:3000/api/v1/users/c/${userName}`, config);
       return channel
 } catch (error) {
   console.log(error)

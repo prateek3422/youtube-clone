@@ -1,31 +1,20 @@
-import axios from "axios";
+
 import { toast } from "react-toastify";
+import { api } from "./axios";
 
 export class VideoService {
   async getAllVideos() {
     try {
-      const config = {
+      const response = await api({
+        url: `/api/v1/videos/getAllVideo/?page=1&limit=10`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const response = await axios.get(
-        `http://localhost:3000/api/v1/videos/getAllVideo/?page=1&limit=10`,
-        config
-      );
-      // toast.success(response?.data?.message, {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "colored",
-      // });
-      // console.log(response.data);
+      });
+  
 
       return response;
     } catch (error) {
@@ -44,21 +33,27 @@ export class VideoService {
   }
 
   async publishVideo(data) {
-    console.log(data);
     try {
-      const config = {
+      const response = await api({
+        url: `api/v1/videos/publishVideo`,
+        method: "post",
+        data,
         headers: {
           "content-type": "multipart/form-data",
-          // accept: "application/json",
         },
         withCredentials: true,
-      };
-
-      const response = await axios.post(
-        `http://localhost:3000/api/v1/videos/publishVideo`,
-        data,
-        config
-      );
+      });
+      console.log(response);
+      toast.error(response?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return response.data;
     } catch (error) {
       console.log("publish video", error);
@@ -68,33 +63,19 @@ export class VideoService {
   async getSingeVideo(slug) {
     // console.log(slug)
     try {
-      const config = {
+      const response = await api({
+        url: `/api/v1/videos/${slug}`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-
-      const response = await axios.get(
-        `http://localhost:3000/api/v1/videos/${slug}`,
-        config
-      );
-      // console.log(response.data)
-      // toast.success(response?.data?.message, {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "colored",
-      // });
+      });
       return response.data;
     } catch (error) {
       console.log("get video", error);
-      toast.error(res?.data?.message, {
+      toast.error(error?.message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -109,121 +90,170 @@ export class VideoService {
 
   async toggleVideo(videoId) {
     try {
-      const config = {
+      const response = await api({
+        url: `api/v1/videos/toggle/publish/${videoId}`,
+        method: "patch",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-
-      const response = await axios.patch(
-        ` http://localhost:3000/api/v1/videos/toggle/publish/${videoId}`,
-        {},
-        config
-      );
+      });
       // console.log(response.data)
-      // toast.success(response?.data?.message, {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "colored",
-      // });
+      toast.success(response?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return response.data;
     } catch (error) {
       console.log("get video", error);
-      // toast.error(res?.data?.message, {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "colored",
-      // });
+      toast.error(error?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }
 
   async deleteVideo(videoId) {
     try {
-      const config = {
+      const response = await api({
+        url: `api/v1/videos/${videoId}`,
+        method: "delete",
         headers: {
-          "content-type": "multipart/form-data",
+          "content-type": "application/json",
+          accept: "application/json",
         },
         withCredentials: true,
-      };
-      
-      const response = await axios.delete(`http://localhost:3000/api/v1/videos/${videoId}`, config);
-
-      return response.data
+      });
+      toast.success(response?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return response.data;
     } catch (error) {
-      
+      console.log(error);
+      toast.success(error?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }
 
   async updateVideo(data, videoId) {
-    console.log(videoId)
     try {
-      const config = {
+      const response = await api({
+        url: `/api/v1/videos/${videoId}`,
+        method: "patch",
+        data,
         headers: {
           "content-type": "multipart/form-data",
         },
         withCredentials: true,
-      };
-      const response = await axios.patch(
-        `http://localhost:3000/api/v1/videos/${videoId}`,
-        data,
-        config
-      );
+      });
+
+      toast.success(response?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       // console.log(response.data)
       return response.data;
     } catch (error) {
       console.log("update video", error);
+      toast.success(error?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }
   //subscribe
   async getSubscribe(channelId) {
     // console.log(channelId)
     try {
-      const config = {
+      const response = await api({
+        url: `/api/v1/subscriptions/c/${channelId}`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
+      });
 
-      const response = await axios.post(
-        `http://localhost:3000/api/v1/subscriptions/c/${channelId}`,
-        {},
-        config
-      );
+      toast.success(response?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
 
       // console.log(response)
       return response.data;
     } catch (error) {
       console.log("toggle subscribe", error);
+      toast.success(error?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }
 
   async getMyVideos(userId) {
     try {
-      const config = {
+      const ourVideo = await api({
+        url: `/api/v1/videos/getAllVideo/?page=1&limit=10&userId=${userId}`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const ourVideo = axios.get(
-        `http://localhost:3000/api/v1/videos/getAllVideo/?page=1&limit=10&userId=${userId}`,
-        config
-      );
+      });
       // console.log(ourVideo)
 
       toast.success(ourVideo?.data?.message, {
@@ -244,18 +274,27 @@ export class VideoService {
 
   async getSubscribedChannels(subscriberId) {
     try {
-      const config = {
+      const channel = await  api({
+        url: `/api/v1/subscriptions/u/${subscriberId}`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
+      });
+      // console.log(ourVideo)
 
-      const channel = axios.get(
-        `http://localhost:3000/api/v1/subscriptions/u/${subscriberId}`,
-        config
-      );
+      toast.success(channel?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
 
       return channel;
     } catch (error) {
@@ -267,18 +306,17 @@ export class VideoService {
 
   async getVideoComments(videoId) {
     try {
-      const config = {
+      const response = await api({
+        url: `/api/v1/comments/${videoId}`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
+      });
+      // console.log(ourVideo)
 
-      const response = await axios.get(
-        `http://localhost:3000/api/v1/comments/${videoId}`,
-        config
-      );
       return response.data;
     } catch (error) {
       console.log("get comment", error);
@@ -286,21 +324,49 @@ export class VideoService {
   }
 
   async createComment(videoId, comment) {
-    // console.log(comment);
-    // console.log(videoId);
     try {
-      const config = {
+      const response =await api({
+        url: `/api/v1/comments/${videoId}`,
+        method: "post",
+        content: comment,
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const commentres = await axios.post(
-        `http://localhost:3000/api/v1/comments/${videoId}`,
-        { content: comment },
-        config
-      );
+      });
+      // console.log(ourVideo)
+
+      toast.success(response?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+      // console.log(commentres);
+      return response;
+    } catch (error) {
+      console.log("create comment", error);
+    }
+  }
+
+  async deleteComment(commentId) {
+    try {
+      const commentres = await api({
+        url: `/api/v1/comments/c/${commentId}`,
+        method: "delete",
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        withCredentials: true,
+      });
+      // console.log(ourVideo)
 
       toast.success(commentres?.data?.message, {
         position: "top-right",
@@ -319,40 +385,30 @@ export class VideoService {
     }
   }
 
-  async deleteComment(commentId) {
-    try {
-      const config = {
-        headers: {
-          "content-type": "application/json",
-          accept: "application/json",
-        },
-        withCredentials: true,
-      };
-      const commentres = await axios.delete(
-        `http://localhost:3000/api/v1/comments/c/${commentId}`,
-        config
-      );
-      // console.log(commentres);
-      return commentres;
-    } catch (error) {
-      console.log("create comment", error);
-    }
-  }
-
   async updateComment(commentId, comment) {
     try {
-      const config = {
+      const commentres = await api({
+        url: `/api/v1/comments/c/${commentId}`,
+        method: "put",
+        content: comment,
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const commentres = await axios.put(
-        `http://localhost:3000/api/v1/comments/c/${commentId}`,
-        { content: comment },
-        config
-      );
+      });
+      // console.log(ourVideo)
+
+      toast.success(commentres?.data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
 
       return commentres;
     } catch (error) {
@@ -363,23 +419,19 @@ export class VideoService {
   // playlist
 
   async createPlaylist(data) {
-    console.log( data)
     try {
-      const config = {
+      const playlist =await  api({
+        url: `/api/v1/playlists/`,
+        method: "post",
+        name: data.title,
+        description: data.description,
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const playlist = await axios.post(
-        `http://localhost:3000/api/v1/playlists/`,
-        {
-          name: data.title,
-          description: data.description,
-        },
-        config
-      );
+      });
+      // console.log(ourVideo)
 
       toast.success(playlist?.data?.message, {
         position: "top-right",
@@ -401,17 +453,16 @@ export class VideoService {
   async userplaylist(userId) {
     // console.log(userId)
     try {
-      const config = {
+      const playlist = await  api({
+        url: `/api/v1/playlists/user/${userId}`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const playlist = await axios.get(
-        `http://localhost:3000/api/v1/playlists/user/${userId}`,
-        config
-      );
+      });
+      //  // console.log(ourVideo)
 
       // toast.success(playlist?.data?.message, {
       //   position: "top-right",
@@ -423,7 +474,16 @@ export class VideoService {
       //   progress: undefined,
       //   theme: "colored",
       // });
-      // console.log(commentres);
+      // const playlist = await axios.get(
+      //   `http://localhost:3000/api/v1/playlists/user/${userId}`,
+      //   {
+      //   headers:{
+      //        "content-type": "application/json",
+      //        accept: "application/json",
+      //      },
+      //      withCredentials: true,
+      //      }
+      // );
       return playlist.data;
     } catch (error) {
       console.log(error);
@@ -432,31 +492,17 @@ export class VideoService {
 
   async playlistById(playlistId) {
     try {
-      const config = {
+      const playlist = await api({
+        url: `/api/v1/playlists/user/${playlistId}`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const playlist = await axios.get(
-        `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
-        {},
-        config
-      );
-
-      toast.success(playlist?.data?.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
       // console.log(commentres);
-      return commentres;
+      return playlist;
     } catch (error) {
       console.log("create comment", error);
     }
@@ -464,18 +510,20 @@ export class VideoService {
 
   async addVideoOnPlaylist(videoId, playlistId) {
     try {
-      const config = {
+      const playlist = await api({
+        url: `/api/v1/playlists/add/${videoId}/${playlistId}`,
+        method: "patch",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const playlist = await axios.patch(
-        `http://localhost:3000/api/v1/playlists/add/${videoId}/${playlistId}`,
-        {},
-        config
-      );
+      });
+      // const playlist = await axios.patch(
+      //   `http://localhost:3000/api/v1/playlists/add/${videoId}/${playlistId}`,
+      //   {},
+      //   config
+      // );
 
       toast.success(playlist?.data?.message, {
         position: "top-right",
@@ -488,7 +536,7 @@ export class VideoService {
         theme: "colored",
       });
       // console.log(commentres);
-      return commentres;
+      return playlist;
     } catch (error) {
       console.log("create comment", error);
     }
@@ -496,18 +544,20 @@ export class VideoService {
 
   async removeVideoFromPlaylist(videoId, playlistId) {
     try {
-      const config = {
+      const playlist = await api({
+        url: `/api/v1/playlists/remove/${videoId}/${playlistId}`,
+        method: "patch",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const playlist = await axios.patch(
-        `http://localhost:3000/api/v1/playlists/remove/${videoId}/${playlistId}`,
-        {},
-        config
-      );
+      });
+      // const playlist = await axios.patch(
+      //   `http://localhost:3000/api/v1/playlists/remove/${videoId}/${playlistId}`,
+      //   {},
+      //   config
+      // );
 
       toast.success(playlist?.data?.message, {
         position: "top-right",
@@ -520,7 +570,7 @@ export class VideoService {
         theme: "colored",
       });
       // console.log(commentres);
-      return commentres;
+      return playlist;
     } catch (error) {
       console.log("create comment", error);
     }
@@ -528,22 +578,26 @@ export class VideoService {
 
   async updatePlaylist(playlistId, name, description) {
     try {
-      const config = {
+      const playlist = await  api({
+        url: `/api/v1/playlists/user/${playlistId}`,
+        method: "patch",
+        name,
+        description: description,
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const playlist = await axios.patch(
-        `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
-        {
-          name,
-          name,
-          description: description,
-        },
-        config
-      );
+      });
+      // const playlist = await axios.patch(
+      //   `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
+      //   {
+      //     
+      //     name,
+      //     description: description,
+      //   },
+      //   config
+      // );
 
       toast.success(playlist?.data?.message, {
         position: "top-right",
@@ -556,7 +610,7 @@ export class VideoService {
         theme: "colored",
       });
       // console.log(commentres);
-      return commentres;
+      return playlist;
     } catch (error) {
       console.log("create comment", error);
     }
@@ -564,18 +618,20 @@ export class VideoService {
 
   async deletePlaylist(playlistId) {
     try {
-      const config = {
+      const playlist = await  api({
+        url: `/api/v1/playlists/user/${playlistId}`,
+        method: "delete",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const playlist = await axios.delete(
-        `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
-        {},
-        config
-      );
+      });
+      // const playlist = await axios.delete(
+      //   `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
+      //   {},
+      //   config
+      // );
 
       toast.success(playlist?.data?.message, {
         position: "top-right",
@@ -588,7 +644,7 @@ export class VideoService {
         theme: "colored",
       });
       // console.log(commentres);
-      return commentres;
+      return playlist;
     } catch (error) {
       console.log("create comment", error);
     }
@@ -598,42 +654,45 @@ export class VideoService {
 
   async ToggleVideolikes(videoId) {
     try {
-      const config = {
+      const res = await api({
+        url: `/api/v1/likes/toggle/v/${videoId}`,
+        method: "post",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
+      });
 
-      const res = await axios.post(
-        `http://localhost:3000/api/v1/likes/toggle/v/${videoId}`,
-        {},
-        config
-      );
+      // const res = await axios.post(
+      //   `http://localhost:3000/api/v1/likes/toggle/v/${videoId}`,
+      //   {},
+      //   config
+      // );
 
       return res;
     } catch (error) {
-      console.log(error);
-
       console.log(error);
     }
   }
   async ToggleCommentlikes(videoId) {
     try {
-      const config = {
+       const res = await api({
+        url: `/api/v1/likes/toggle/v/${videoId}`,
+        method: "post",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
+      });
 
-      const res = await axios.post(
-        `http://localhost:3000/api/v1/likes/toggle/v/${videoId}`,
-        {},
-        config
-      );
+
+      // const res = await axios.post(
+      //   `http://localhost:3000/api/v1/likes/toggle/v/${videoId}`,
+      //   {},
+      //   config
+      // );
 
       return res;
     } catch (error) {
@@ -643,41 +702,36 @@ export class VideoService {
     }
   }
 
-
   async LikedVideos() {
     try {
-      const config = {
+      const res = await api({
+        url: `/api/v1/likes/videos`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const res = await axios.get(` http://localhost:3000/api/v1/likes/videos`, config)
+      });
 
-      return res.data.data
+      return res.data.data;
     } catch (error) {
-       console.log(error)
+      console.log(error);
     }
-
-      
   }
   // dashboard
 
   async channelStatus() {
     try {
-      const config = {
+      const dash = await api({
+        url: `/api/v1/dashboard/stats`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-      const dash = await axios.get(
-        `http://localhost:3000/api/v1/dashboard/stats`,
-        config
-      );
-
+      });
       return dash;
     } catch (error) {
       console.log(error);
@@ -686,18 +740,19 @@ export class VideoService {
 
   async channelVideo() {
     try {
-      const config = {
+      const video = await api({
+        url: `/api/v1/dashboard/videos`,
+        method: "get",
         headers: {
           "content-type": "application/json",
           accept: "application/json",
         },
         withCredentials: true,
-      };
-
-      const video = await axios.get(
-        `http://localhost:3000/api/v1/dashboard/videos`,
-        config
-      );
+      });
+      // const video = await axios.get(
+      //   `http://localhost:3000/api/v1/dashboard/videos`,
+      //   config
+      // );
 
       return video;
     } catch (error) {

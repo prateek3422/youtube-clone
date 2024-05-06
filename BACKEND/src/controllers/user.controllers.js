@@ -312,7 +312,9 @@ const updateCoverImage = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Cover image file is missing");
   }
 
-  const coverImage = cloudinaryUpload(coverImageLocalPath);
+  
+
+  const coverImage = await cloudinaryUpload(coverImageLocalPath);
 
   if (!coverImage.url) {
     throw new ApiError(400, "Error while uploading on avatar");

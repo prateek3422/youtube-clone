@@ -10,6 +10,7 @@
     "start": "vite preview"
   },
   "dependencies": {
+    "@cloudinary/url-gen": "^1.19.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.15",
@@ -19,6 +20,7 @@
     "@tanstack/react-query": "^5.28.9",
     "@tanstack/react-query-devtools": "^5.28.10",
     "axios": "^1.6.7",
+    "cloudinary-video-player": "^2.0.1",
     "hls.js": "^1.5.7",
     "js-cookie": "^3.0.5",
     "multer": "^1.4.5-lts.1",
@@ -49,6 +51,7 @@
     "globals": "^15.1.0",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
+    "video.js": "^8.12.0",
     "vite": "^5.0.8"
   }
 }

@@ -2,7 +2,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import videoService from "../services/VideoService";
 import { BiLike } from "react-icons/bi";
-import { Button, CommentSection, } from "../components";
+import { Button, CommentSection,  } from "../components";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../utils/query-client.js";
 
@@ -56,7 +56,7 @@ const Videos = () => {
     queryFn: fetchedVideo,
   });
 
-  console.log(video)
+  
   const { mutate: Like } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
@@ -84,7 +84,7 @@ const Videos = () => {
                 className="h-full w-full rounded-lg"
               ></video>
 
-              {/* <VideoPlayer src={video.videoFile}/> */}
+              {/* <VideoPlayer video={video}/> */}
             </div>
             <div className=" mt-4 rounded-xl p-4  lg:ml-32">
               <div className="flex justify-between items-center">

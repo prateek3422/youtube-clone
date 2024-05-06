@@ -6,7 +6,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { cloudinaryUpload, clouldinaryDelete } from "../utils/fileUpload.js";
 import { ApiResponse } from "../utils/ApiResponses.js";
 
-import { videoEncodeing } from "../utils/videoEncodeing.js";
 
 const getAllVideos = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
@@ -109,19 +108,17 @@ const publishAVideo = asyncHandler(async (req, res) => {
 
   // console.log(req.file)
   const videoLocalFilePath = req.files?.videoFile[0]?.path;
-  // let videoLocalFilePath
-  // console.log(videoLocalFilePath)
+
   const thumbnailFilePath = req.files?.thumbnail[0]?.path;
   // upload video
 
-  // const encodseVideoFile = await videoEncodeing(videoLocalFilePath)
+
 
   const thumbnail = await cloudinaryUpload(thumbnailFilePath);
 
   const videoFile = await cloudinaryUpload(videoLocalFilePath);
 
-  // console.log(videoFile)
-  // console.log(videoFile)
+
 
   if (!videoFile && !thumbnail) {
     throw new ApiError(500, "video and thumbnail field are required");
