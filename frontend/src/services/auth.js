@@ -1,49 +1,31 @@
-import axios from "axios";
 import { toast } from "react-toastify";
-import { api } from "./axios";
+import { api } from "./axios.js";
+
+// import axios from "axios";
 
 export class AuthService {
-  async createAccount({ name, email, password }) {
+  async createAccount(data) {
     try {
-      const config = {
+      const userAccount = await api.post("/api/v1/users/register", data, {
         headers: {
-          "content-type": "application/json",
+          "content-type": "multipart/form-data",
         },
-        withCredentials: true,
-      };
-      const userAccount = await axios.post(
-        "http://localhost:3000/api/v1/users/register",
-        {
-          username: name,
-          email: email,
-          password: password,
-        },
-        config
-      );
+      });
+
       if (userAccount) {
-        return this.Login({ email, password });
+        return this.Login(data.email, data.password);
       } else {
         return userAccount;
       }
     } catch (error) {
-      throw new error();
+      console.log(error);
     }
   }
 
-  async Login(data ) {
-
-
+  async Login(data) {
     try {
-      const res = await api({
-        url: `/api/v1/users/login`,
-        method: "post",
-        data,
-        headers: {
-          "content-type": "application/json",
-        },
-        withCredentials: true,
-      });
-    
+      const res = await api.post(`/api/v1/users/login`, data);
+
       // console.log(res)
       toast.success(res?.data?.message, {
         position: "top-right",
@@ -58,7 +40,7 @@ export class AuthService {
       });
       return res;
     } catch (error) {
-      console.log('login', error)
+      console.log("login", error);
       toast.error(error.response?.data?.message, {
         position: "top-right",
         autoClose: 5000,
@@ -151,21 +133,20 @@ export class AuthService {
   }
 
   async getChannelDetails(userName) {
-  
-try {
-  const channel = await api({
-    url: `/api/v1/users/c/${userName}`,
-    method: "get",
-    headers: {
-      "content-type": "application/json",
-    },
-    withCredentials: true,
-  });
+    try {
+      const channel = await api({
+        url: `/api/v1/users/c/${userName}`,
+        method: "get",
+        headers: {
+          "content-type": "application/json",
+        },
+        withCredentials: true,
+      });
       // const channel = axios.get(` http://localhost:3000/api/v1/users/c/${userName}`, config);
-      return channel
-} catch (error) {
-  console.log(error)
-}
+      return channel;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

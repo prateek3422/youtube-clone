@@ -6,7 +6,6 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { ApiResponse } from "../utils/ApiResponses.js";
 
-
 const genrateAccessAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -31,10 +30,10 @@ const registerUser = asyncHandler(async (req, res) => {
   // if user not exist then check password and email vlidated or not
   // after checking validation save the user in database
   const { userName, fullname, email, password } = req.body;
+  console.log(req.body)
 
-  if (
-    [userName, fullname, email, password].some((filds) => filds.trim() == "")
-  ) {
+  console.log(userName, fullname, email, password)
+  if (!userName || !email || !fullname || !password) {
     throw new ApiError(409, "All filds are required");
   }
 
@@ -76,13 +75,13 @@ const registerUser = asyncHandler(async (req, res) => {
     userName,
     email,
     fullname,
-    avatar:{
-      url:avatar.url,
-      public_Id:avatar.public_Id
+    avatar: {
+      url: avatar.url,
+      public_Id: avatar.public_Id,
     },
-    coverImage:{
+    coverImage: {
       url: coverImage?.url || "",
-      public_Id: coverImage?.public_Id || ""
+      public_Id: coverImage?.public_Id || "",
     },
     password,
   });
@@ -140,10 +139,7 @@ const loginUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    
   };
-
-
 
   return res
     .status(201)
@@ -168,7 +164,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     req.user._id,
     {
       $unset: {
-        refreshtoken:1,
+        refreshtoken: 1,
       },
     },
     {
@@ -272,8 +268,6 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     },
     { new: true }
   ).select("-password");
-
-                                                                                                           
 });
 
 const updateAvatar = asyncHandler(async (req, res) => {
@@ -311,8 +305,6 @@ const updateCoverImage = asyncHandler(async (req, res) => {
   if (!coverImageLocalPath) {
     throw new ApiError(400, "Cover image file is missing");
   }
-
-  
 
   const coverImage = await cloudinaryUpload(coverImageLocalPath);
 
@@ -379,7 +371,6 @@ const getChannelProfile = asyncHandler(async (req, res) => {
             then: true,
             else: false,
           },
-          
         },
       },
     },
@@ -443,7 +434,6 @@ const getWatchHistory = asyncHandler(async (req, res) => {
               owner: {
                 $first: "$owner",
               },
-          
             },
           },
         ],

@@ -16,9 +16,17 @@ const Signup = () => {
   // todo: create avatar
 
   const signup = async(data) => {
-    // console.log(data)
+
+    const newData = {
+      avatar: data.avatar[0],
+      coverImage: data.coverImage[0],
+      fullname:data?.fullname,
+      userName:data?.userName,
+      email: data?.email,
+      password: data.password,
+    };  
     try {
-      const createSession = await authService.createAccount(data);
+      const createSession = await authService.createAccount(newData);
       console.log(createSession)
       if(createSession){
         const userData  = await authService.getCurrentUser()
@@ -43,12 +51,32 @@ const Signup = () => {
             </div>
             <form onSubmit={handleSubmit(signup)}>
             <div className="space-y-5">
+            <Input
+                  lable="avatar"
+                  type="file"
+                  {...register("avatar", { required: true })}
+                />
+            
+            <Input
+                  lable="cover"
+                  type="file"
+                  {...register("coverImage", { required: true })}
+                />
               <Input
                 lable="Full Name"
                 type="text"
                 className="mb-2"
                 placeholder="Enter your name"
-                {...register("name", {
+                {...register("fullname", {
+                  required: true,
+                })}
+              />
+              <Input
+                lable="Username"
+                type="text"
+                className="mb-2"
+                placeholder="Enter your name"
+                {...register("userName", {
                   required: true,
                 })}
               />

@@ -19,7 +19,7 @@ const modal = () => {
         description: data.des,
       };
 
-      const res = await videoService.publishVideo(newData);
+      await videoService.publishVideo(newData);
     } catch (error) {
       console.log(error);
     }
