@@ -1,4 +1,3 @@
-
 import { toast } from "react-toastify";
 import { api } from "./axios";
 
@@ -14,7 +13,6 @@ export class VideoService {
         },
         withCredentials: true,
       });
-  
 
       return response;
     } catch (error) {
@@ -274,7 +272,7 @@ export class VideoService {
 
   async getSubscribedChannels(subscriberId) {
     try {
-      const channel = await  api({
+      const channel = await api({
         url: `/api/v1/subscriptions/u/${subscriberId}`,
         method: "get",
         headers: {
@@ -325,16 +323,11 @@ export class VideoService {
 
   async createComment(videoId, comment) {
     try {
-      const response =await api({
-        url: `/api/v1/comments/${videoId}`,
-        method: "post",
-        content: comment,
-        headers: {
-          "content-type": "application/json",
-          accept: "application/json",
-        },
-        withCredentials: true,
-      });
+      const response = await api.post(
+        `/api/v1/comments/${videoId}`,
+
+        { content: comment }
+      );
       // console.log(ourVideo)
 
       toast.success(response?.data?.message, {
@@ -420,7 +413,7 @@ export class VideoService {
 
   async createPlaylist(data) {
     try {
-      const playlist =await  api({
+      const playlist = await api({
         url: `/api/v1/playlists/`,
         method: "post",
         name: data.title,
@@ -453,7 +446,7 @@ export class VideoService {
   async userplaylist(userId) {
     // console.log(userId)
     try {
-      const playlist = await  api({
+      const playlist = await api({
         url: `/api/v1/playlists/user/${userId}`,
         method: "get",
         headers: {
@@ -578,7 +571,7 @@ export class VideoService {
 
   async updatePlaylist(playlistId, name, description) {
     try {
-      const playlist = await  api({
+      const playlist = await api({
         url: `/api/v1/playlists/user/${playlistId}`,
         method: "patch",
         name,
@@ -592,7 +585,7 @@ export class VideoService {
       // const playlist = await axios.patch(
       //   `http://localhost:3000/api/v1/playlists/user/${playlistId}`,
       //   {
-      //     
+      //
       //     name,
       //     description: description,
       //   },
@@ -618,7 +611,7 @@ export class VideoService {
 
   async deletePlaylist(playlistId) {
     try {
-      const playlist = await  api({
+      const playlist = await api({
         url: `/api/v1/playlists/user/${playlistId}`,
         method: "delete",
         headers: {
@@ -677,7 +670,7 @@ export class VideoService {
   }
   async ToggleCommentlikes(videoId) {
     try {
-       const res = await api({
+      const res = await api({
         url: `/api/v1/likes/toggle/v/${videoId}`,
         method: "post",
         headers: {
@@ -686,7 +679,6 @@ export class VideoService {
         },
         withCredentials: true,
       });
-
 
       // const res = await axios.post(
       //   `http://localhost:3000/api/v1/likes/toggle/v/${videoId}`,

@@ -133,6 +133,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
     thumbnail: thumbnail,
     title,
     description,
+    view:0,
     duration: duration,
     owner: req.user._id,
   });
@@ -141,6 +142,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
     throw new ApiError(401, "something went worng while publishing video");
   }
 
+ 
   return res
     .status(200)
     .json(new ApiResponse(200, videos, "video publish successfully"));
@@ -149,13 +151,12 @@ const publishAVideo = asyncHandler(async (req, res) => {
 const getVideoById = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
   //TODO: get video by id
-  // console.log(videoId)
   if (!videoId?.trim()) {
     throw new ApiError(400, "video id is missing");
   }
 
   const videoById = await Video.findById(videoId);
-  // console.log(videoById)
+
 
   const video = await Video.aggregate([
     {
@@ -239,13 +240,13 @@ const getVideoById = asyncHandler(async (req, res) => {
   user.watchhistory.push(videoId);
   await user.save({ validateBeforeSave: false });
 
-  videoById.views += 1;
-  const view = await videoById.save({ validateBeforeSave: false });
+  // videoById.views += 1;
+  // const view = await videoById.save({ validateBeforeSave: false });
 
-  if (!view) {
-    throw new ApiError(400, "somethin went wrong while updating views");
-  }
-
+  // if (!view) {
+  //   throw new ApiError(400, "somethin went wrong while updating views");
+  // }
+  // console.log(video)
   return res
     .status(200)
     .json(new ApiResponse(200, video[0], "video by id feched successfully"));
@@ -264,7 +265,7 @@ const updateVideo = asyncHandler(async (req, res) => {
 
   const isVideo  = await Video.findById(videoId)
 
-  const removeThumbnail = clouldinaryDelete(isVideo.public_id)
+  clouldinaryDelete(isVideo.public_id)
 
   
   if (!isVideo) {

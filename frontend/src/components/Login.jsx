@@ -30,10 +30,10 @@ const Login = () => {
   };
   return (
     <>
-      <div className="auth h-[92vh] flex justify-center items-center">
-        <div className="card  grid  lg:grid-cols-2  ">
-          <div className="auth-img flex justify-center items-center">
-            <img src="/images/login.svg" alt="signup-image" />
+      <div className="auth  flex justify-center items-center">
+        <div className="card mt-16 min-h-[calc(100vh-300px)]  p-8  grid  lg:grid-cols-2  ">
+          <div className="auth-img flex justify-center items-center ">
+            <img  src="/images/login.svg" alt="signup-image" />
           </div>
           <div className="auth-details flex justify-center flex-col items-center">
             <div className="auth-title">

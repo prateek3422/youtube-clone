@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import videoService from "../services/VideoService";
 import Slider from "./Slider";
-import Swal from "sweetalert2";
-import { CiMenuKebab } from "react-icons/ci";
+
 import { MdDelete } from "react-icons/md";
-import Button from "./Button";
-import { MdEdit } from "react-icons/md";
+
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../utils/query-client.js";
 import { UpdateVideo } from "./index.js";

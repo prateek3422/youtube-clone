@@ -37,7 +37,7 @@ const Header = ({ setSlide, slide }) => {
         <nav className="flex justify-between items-center mx-4 ">
 
         
-            <div className="log0 w-12 ">
+            <div className="log0 w-32 ">
               <Logo />
             </div>
 

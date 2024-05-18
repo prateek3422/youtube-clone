@@ -6,7 +6,9 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../utils/query-client";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
+// eslint-disable-next-line react/prop-types
 const Subscribed = ({ userId, channel }) => {
   const fetchedChannels = async () => {
     try {
@@ -35,7 +37,10 @@ const Subscribed = ({ userId, channel }) => {
   });
 
   const { mutate: Subscribe } = useMutation({
-    mutationFn: handleSubscribe,
+    mutationFn: async() => {
+      const res = await axios.post(``,{data},{headers:{}})
+      return res
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["subscribedChannels"] });
     },

@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 
 export const veryfyJwt = asyncHandler(async (req, _, next) => {
   try {
+
+
     const token =
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
