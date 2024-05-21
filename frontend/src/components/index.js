@@ -5,7 +5,7 @@ import Button from "./Button.jsx"
 import Container from "./containers/Container.jsx"
 import logOut  from './Headers/LogOut.jsx'
 import VideoCard from "./videoCard.jsx"
-import CommentSection from "./CommentSection.jsx"
+import CommentSection from "./commet/CommentSection.jsx"
 import Comunity from "./comunity.jsx"
 import PlaylistCard from "./PlaylistCard.jsx"
 import subscribed from "./Subscribed.jsx"

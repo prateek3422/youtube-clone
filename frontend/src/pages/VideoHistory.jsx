@@ -25,7 +25,7 @@ const VideoHistory = () => {
               return (
                 <li className="list-none" key={item._id}>
                   <div className="flex items-start gap-x-4">
-                    <div className="img mb-4 mt-2 w-3/12 ">
+                    <div className="img mb-4 mt-2 w-[50vw] md:w-[20vw]">
                       <img
                         className="w-full rounded-xl object-cover"
                         src={item.thumbnail.url}

@@ -1,13 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { api } from "../../../../services/axios";
+import { queryClient } from "../../../../utils/query-client";
 
-const updateCommentQuery = () => {
-
+const updateCommentQuery = (comment) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useMutation({
-    mutationFn: (commentId,comment) => {
-     console.log(commentId, comment)
+    mutationFn: (commentId) => {
       return api
         .patch(`/api/v1/comments/c/${commentId}`, { content: comment })
         .then((res) => res?.data);
@@ -18,6 +17,7 @@ const updateCommentQuery = () => {
     },
 
     onSuccess: (data) => {
+      // console.log(data)
       toast.success(data?.message, {
         position: "top-right",
         autoClose: 5000,
@@ -28,7 +28,9 @@ const updateCommentQuery = () => {
         progress: undefined,
         theme: "colored",
       });
+      queryClient.invalidateQueries({ queryKey: ["comment"] });
     },
+    
   });
 };
 

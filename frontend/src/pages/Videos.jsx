@@ -82,7 +82,8 @@ const Videos = () => {
             </div>
             {/* ===============comment section========== */}
 
-            <CommentSection slug={slug} />
+            <CommentSection slug={slug}/>
+            
           </div>
 
           {/* <div className="related-videos ">related videos</div> */}

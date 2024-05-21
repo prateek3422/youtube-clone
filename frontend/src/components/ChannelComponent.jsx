@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 import { Avatar } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -11,12 +9,7 @@ import Box from "@mui/material/Box";
 import PlaylistCard from "./PlaylistCard";
 import Comunity from "./comunity";
 
-const ChannelComponent = ({
-  channel,
-  myData,
-  userData,
-  authStatus = false,
-}) => {
+const ChannelComponent = ({channel, myData,userData,authStatus = false,}) => {
   const [value, setValue] = useState("video");
 
   const handleChange = (event, newValue) => {
@@ -72,7 +65,7 @@ const ChannelComponent = ({
               aria-label="secondary tabs example"
             >
               <Tab value="video" label="video" sx={{ color: "white" }} />
-              <Tab value="playlist" label="playlist" sx={{ color: "white" }}/>
+              <Tab value="playlist" label="playlist" sx={{ color: "white" }} />
               <Tab value="comunity" label="comunity" sx={{ color: "white" }} />
               {/* {
                 authStatus &&
@@ -101,14 +94,16 @@ const ChannelComponent = ({
         <div className={value === "playlist" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
             <div className="grid grid-cols-3 gap-4">
-              <PlaylistCard userId={userData?.data?._id} />
+              {<h1>comming soon ...</h1>}
+              {/* <PlaylistCard userId={userData?.data?._id} /> */}
             </div>
           </div>
         </div>
         <div className={value === "comunity" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
             <div className="grid grid-cols-3 gap-4">
-              <Comunity />
+              {<h1>comming soon....</h1>}
+              {/* <Comunity /> */}
             </div>
           </div>
         </div>
