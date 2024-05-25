@@ -240,12 +240,12 @@ const getVideoById = asyncHandler(async (req, res) => {
   user.watchhistory.push(videoId);
   await user.save({ validateBeforeSave: false });
 
-  // videoById.views += 1;
-  // const view = await videoById.save({ validateBeforeSave: false });
+  videoById.views += 1;
+  const view = await videoById.save({ validateBeforeSave: false });
 
-  // if (!view) {
-  //   throw new ApiError(400, "somethin went wrong while updating views");
-  // }
+  if (!view) {
+    throw new ApiError(400, "somethin went wrong while updating views");
+  }
   // console.log(video)
   return res
     .status(200)

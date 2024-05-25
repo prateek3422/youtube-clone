@@ -13,7 +13,7 @@ const Signup = () => {
   const navigate = useNavigate()
 
 
-  // todo: create avatar
+  //* create avatar
 
   const signup = async(data) => {
 
@@ -40,9 +40,9 @@ const Signup = () => {
   };
   return (
     <>
-      <div className="auth  mt-24  flex justify-center items-center">
+      <div className="auth mt-2 flex justify-center items-center">
         <div className="card  grid lg:grid-cols-2  p-4">
-          <div className="auth-img flex justify-center items-center">
+          <div className=" lg:auth-img flex justify-center items-center">
             <img src="/images/signup.svg" alt="signup-image" />
           </div>
           <div className="auth-details flex justify-center flex-col items-center">
@@ -50,18 +50,21 @@ const Signup = () => {
               <h1 className="mb-4">Welcome</h1>
             </div>
             <form onSubmit={handleSubmit(signup)}>
-            <div className="space-y-5">
+            <div className="space-y-4  ">
+              <div className="flex justify-between items-center gap-2"  >
+
             <Input
-                  lable="avatar"
+                  lable="Avatar"
                   type="file"
                   {...register("avatar", { required: true })}
-                />
+                  />
             
             <Input
-                  lable="cover"
+                  lable="Cover Image"
                   type="file"
                   {...register("coverImage", { required: true })}
-                />
+                  />
+                  </div>
               <Input
                 lable="Full Name"
                 type="text"
