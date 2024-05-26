@@ -9,23 +9,23 @@ import MiniDrawer from "./components/Drawer";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    authService
-      .getCurrentUser()
-      .then((userData) => {
-        if (userData) {
-          dispatch(authLogin(userData.data));
-        } else {
-          dispatch(logout());
-          navigate("/login");
-        }
-      })
-      .catch((error) => error)
-      .finally(() => setLoading(false));
-  }, []);
+  // useEffect(() => {
+  //   authService
+  //     .getCurrentUser()
+  //     .then((userData) => {
+  //       if (userData) {
+  //         dispatch(authLogin(userData.data));
+  //       } else {
+  //         dispatch(logout());
+  //         navigate("/login");
+  //       }
+  //     })
+  //     .catch((error) => error)
+  //     .finally(() => setLoading(false));
+  // }, []);
 
 
   return !loading ? (
