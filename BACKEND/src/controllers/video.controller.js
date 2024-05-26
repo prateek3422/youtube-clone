@@ -107,9 +107,9 @@ const publishAVideo = asyncHandler(async (req, res) => {
   }
 
   // console.log(req.file)
-  const videoLocalFilePath = req.files?.videoFile[0]?.path;
+  const videoLocalFilePath = req.files?.videoFile[0];
 
-  const thumbnailFilePath = req.files?.thumbnail[0]?.path;
+  const thumbnailFilePath = req.files?.thumbnail[0];
   // upload video
 
 
