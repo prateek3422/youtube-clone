@@ -29,13 +29,13 @@ const userSchema = new Schema(
       type:{
         url:String,
         public_Id:String
-      }, //Coudnary upload
+      },
     },
     coverImage: {
       type:{
         url:String,
         public_Id:String
-      }, //Coudnary upload
+      }, 
     },
 
     watchhistory: [
