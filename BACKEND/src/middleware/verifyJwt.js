@@ -11,8 +11,6 @@ export const veryfyJwt = asyncHandler(async (req, _, next) => {
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
 
-    // console.log(req.header)
-    // console.log(token)
 
     if (!token) {
       throw new ApiError(401, "unauthorized request");

@@ -8,13 +8,12 @@ import { Video } from "../models/video.model.js";
 const createPlaylist = asyncHandler(async (req, res) => {
   const { name, description } = req.body;
   //TODO: create playlist
-  // console.log(title)
+
 
   if (!name && !description) {
     throw new ApiError(400, "name or description are required");
   }
 
-  console.log(name, description)
 
   const playlist = await Playlist.create({
     name,
@@ -22,7 +21,7 @@ const createPlaylist = asyncHandler(async (req, res) => {
     owner: req.user?._id,
   });
 
-  // console.log(playlist)
+
   if (!playlist) {
     throw new ApiError(500, "something went wrong while creating playlist");
   }
@@ -35,7 +34,7 @@ const createPlaylist = asyncHandler(async (req, res) => {
 const getUserPlaylists = asyncHandler(async (req, res) => {
   const { userId } = req.params;
   //TODO: get user playlists
-  // console.log(userId);
+
 
   if (!isValidObjectId(userId)) {
     throw new ApiError(404, "user is missing");
@@ -45,7 +44,6 @@ const getUserPlaylists = asyncHandler(async (req, res) => {
       $match: { owner: new mongoose.Types.ObjectId(userId) },
     },
   ]);
-  // console.log(playlist);
   
   return res
     .status(200)
@@ -56,7 +54,7 @@ const getPlaylistById = asyncHandler(async (req, res) => {
   const { playlistId } = req.params;
   //TODO: get playlist by id
 
-  //   console.log(playlistId)
+  
 
   if (!isValidObjectId(playlistId)) {
     throw new ApiError(404, "playlist is missing");
@@ -64,7 +62,6 @@ const getPlaylistById = asyncHandler(async (req, res) => {
 
   const playlist = await Playlist.findById(playlistId);
 
-  console.log(playlist);
   return res
     .status(200)
     .json(new ApiResponse(200, playlist, "playlist created successfully"));
@@ -73,8 +70,6 @@ const getPlaylistById = asyncHandler(async (req, res) => {
 const addVideoToPlaylist = asyncHandler(async (req, res) => {
   const { playlistId, videoId } = req.params;
 
-  //   console.log(videoId)
-  //   console.log(playlistId)
 
   if (!playlistId && !videoId) {
     throw new ApiError(404, "playlist is missing");
@@ -86,7 +81,6 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
     throw new ApiError(404, "video not found ");
   }
 
-//   console.log(videos);
 
 const playlist = await Playlist.findById(playlistId)
 
@@ -106,7 +100,7 @@ if(playlist.videos.includes(videoId)){
     }
   );
 
-//   console.log(addVideoPlaylist);
+
 
   return res
     .status(200)

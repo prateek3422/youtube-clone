@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../../../../services/axios";
 
 const getVideoCommentQuery = (videoId,) => {
-  // console.log(videoId)
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useQuery({
     queryKey: ["comment", [videoId]],

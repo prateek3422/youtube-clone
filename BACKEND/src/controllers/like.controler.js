@@ -7,7 +7,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 const toggleVideoLike = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
   //TODO: toggle like on video
-  //   console.log(videoId)
+ 
 
   if (!isValidObjectId(videoId)) {
     throw new ApiError(404, "video not found");
@@ -28,7 +28,7 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
     likedBy: req.user?._id,
   });
 
-  // console.log(like)
+
   return res.status(200).json(new ApiResponse(200, like, "like successfully"));
 });
 
@@ -154,7 +154,7 @@ const getLikedVideos = asyncHandler(async (req, res) => {
     },
   ]);
 
-  // console.log(likedVideos);
+
 
   if (!likedVideos) {
     throw new ApiError(400, "liked videos not found");

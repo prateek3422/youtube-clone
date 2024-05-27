@@ -120,7 +120,6 @@ const Customise = () => {
         </div>
 
         {video?.map((item) => {
-          // console.log(item)
           return <UserVideoDetails item={item} key={item?._id} />;
         })}
       </div>

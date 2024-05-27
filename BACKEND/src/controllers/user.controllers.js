@@ -30,9 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // if user not exist then check password and email vlidated or not
   // after checking validation save the user in database
   const { userName, fullname, email, password } = req.body;
-  console.log(req.body)
 
-  console.log(userName, fullname, email, password)
   if (!userName || !email || !fullname || !password) {
     throw new ApiError(409, "All filds are required");
   }
@@ -107,7 +105,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const { userName, email, password } = req.body;
 
-  // console.log(req.body)
+
   if (!userName && !email) {
     throw new ApiError(400, "userName or email are required");
   }
@@ -158,7 +156,6 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
-  // console.log(req.user._id);
   await User.findByIdAndUpdate(
     req.user._id,
     {
@@ -440,7 +437,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     },
   ]);
 
-  // console.log(user.watchhistory)
+
   return res
     .status(200)
     .json(

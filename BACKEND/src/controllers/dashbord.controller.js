@@ -12,7 +12,7 @@ import { ApiResponse } from "../utils/ApiResponses.js";
 const getChannelStats = asyncHandler(async (req, res) => {
   // TODO: Get the channel stats like total video views, total subscribers,  total likes etc.
   const userId = req.user._id;
-  // console.log(userId)
+
 
   const totalSubcriber = await Subscription.aggregate([
     {
@@ -26,7 +26,6 @@ const getChannelStats = asyncHandler(async (req, res) => {
     },
   ]);
 
-  // console.log(totalSubcriber);
 
   const video = await Video.aggregate([
     {

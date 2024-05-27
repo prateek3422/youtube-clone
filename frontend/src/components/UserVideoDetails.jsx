@@ -9,7 +9,6 @@ import { queryClient } from "../utils/query-client.js";
 import { UpdateVideo } from "./index.js";
 
 const UserVideoDetails = ({ item }) => {
-  // console.log(item)
   const [publish, SetPublish] = useState(item?.isPublished);
 
   const handlePublish = async () => {
@@ -24,7 +23,6 @@ const UserVideoDetails = ({ item }) => {
   const handleDelete = () => {
     try {
       const res = videoService.deleteVideo(item?._id);
-      console.log(res);
       return res
     } catch (error) {
       console.log(error);

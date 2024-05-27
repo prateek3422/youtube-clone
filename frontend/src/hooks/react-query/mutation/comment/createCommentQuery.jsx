@@ -6,7 +6,6 @@ import { queryClient } from "../../../../utils/query-client";
 
 const createCommentQuery = (videoId ) => {
 
-  // console.log(videoId)
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useMutation({
     mutationFn: (data) => { 

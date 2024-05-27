@@ -66,15 +66,13 @@ const PlaylistCard = ({ userId }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // console.log(userId)
+
   const [playlist, setPlaylist] = useState([]);
-  // console.log(playlist)
 
   useEffect(() => {
     (async () => {
       try {
         const playlist = await videoService.userplaylist(userId);
-        // console.log(playlist.data),
         setPlaylist(playlist.data);
       } catch (error) {
         console.log(error);
@@ -105,7 +103,6 @@ const PlaylistCard = ({ userId }) => {
   return (
     <>
       {playlist?.map((item) => {
-        // console.log(item)
         return item?.length == 0 ? (
           "playlist not available"
         ) : (

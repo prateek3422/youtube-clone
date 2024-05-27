@@ -14,7 +14,7 @@ cloudinary.config({
 
 
 const cloudinaryUpload = async (localFilPath) => {
-  console.log(localFilPath)
+ 
   try {
 
     if (!localFilPath) return null;
@@ -23,7 +23,7 @@ const cloudinaryUpload = async (localFilPath) => {
         folder:"videoMAte",
         resource_type: "auto",
       });
-      console.log(' file is  uploaded on cloudinary', response)
+      // console.log(' file is  uploaded on cloudinary', response)
       fs.unlinkSync(localFilPath);
       return response;
     
@@ -39,11 +39,11 @@ const clouldinaryDelete = async (public_id) =>{
         if(!public_id?.trim()) return
 
     
-        console.log(public_id)
+   
 
         const response = await cloudinary.api.delete_resources(public_id)
 
-        console.log(response)
+        // console.log(response)
 
         return response
     } catch (error) {

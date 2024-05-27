@@ -4,7 +4,6 @@ import getAllVudeo from "../hooks/react-query/query/videos/getAllVudeo.jsx";
 
 const Home = () => {
   // const [query, setQuery] = useState("jjk");
-  // console.log(video);
 
   const {data:video, isLoading,} = getAllVudeo()
 

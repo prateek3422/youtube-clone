@@ -52,7 +52,7 @@ const getVideoComments = asyncHandler(async (req, res) => {
     limit,
   });
 
-  // console.log(comment);
+
 
   return res
     .status(200)
@@ -64,7 +64,6 @@ const addComment = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
   const { content } = req.body;
 
-  // console.log(content);
 
   if (!content) {
     throw new ApiError(404, "content is missing");
@@ -84,7 +83,7 @@ const addComment = asyncHandler(async (req, res) => {
     throw new ApiError(400, "something went wrong while creating a comment");
   }
 
-  // console.log(comment);
+
 
   return res
     .status(200)
@@ -115,7 +114,6 @@ const updateComment = asyncHandler(async (req, res) => {
     }
   );
 
-  // console.log(commentUpdate)
 
   return res
     .status(200)

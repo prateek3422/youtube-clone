@@ -10,6 +10,7 @@ import PlaylistCard from "./PlaylistCard";
 import Comunity from "./comunity";
 
 const ChannelComponent = ({channel, myData,userData,authStatus = false,}) => {
+
   const [value, setValue] = useState("video");
 
   const handleChange = (event, newValue) => {

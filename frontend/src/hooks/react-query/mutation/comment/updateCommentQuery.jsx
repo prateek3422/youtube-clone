@@ -17,7 +17,6 @@ const updateCommentQuery = (comment) => {
     },
 
     onSuccess: (data) => {
-      // console.log(data)
       toast.success(data?.message, {
         position: "top-right",
         autoClose: 5000,

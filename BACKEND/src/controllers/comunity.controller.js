@@ -70,7 +70,6 @@ const getUserComunity = asyncHandler(async (req, res) => {
     },
   ]);
 
-//   console.log(getComunity);
 
   return res.status(200).json(new ApiResponse(200, getComunity, "fetched comunity successfully"));
 });

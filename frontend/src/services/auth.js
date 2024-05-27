@@ -26,7 +26,6 @@ export class AuthService {
     try {
       const res = await api.post(`/api/v1/users/login`, data);
 
-      // console.log(res)
       toast.success(res?.data?.message, {
         position: "top-right",
         autoClose: 5000,

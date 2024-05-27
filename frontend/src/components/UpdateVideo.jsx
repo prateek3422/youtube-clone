@@ -20,7 +20,6 @@ const UpdateVideo = (video) => {
         description: data.des,
       };
 
-      console.log(newData)
 
       const res = await videoService.updateVideo(newData, video.id);
       if(res){

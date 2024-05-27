@@ -53,7 +53,6 @@ const Subscribers = () => {
     queryFn: fetchedChannels,
   });
 
-  console.log(data);
   const { mutate: Subscribe } = useMutation({
     mutationFn: handleSubscribe,
     onSuccess: () => {

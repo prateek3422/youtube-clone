@@ -11,7 +11,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
   //TODO: get all videos based on query, sort, pagination
 
-  // console.log(userId)
   const pipeline = [];
   if (query) {
     pipeline.push({
@@ -27,7 +26,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
   if (userId) {
     pipeline.push({
       $match: {
-        owner: new mongoose.Types.ObjectId(req.user._id),
+        owner: new mongoose.Types.ObjectId(userId),
       },
     });
   }
@@ -79,7 +78,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
   }
 
   const aggregate = Video.aggregate(pipeline);
-  // console.log(aggregate)
 
   const video = await Video.aggregatePaginate(aggregate, {
     page,
@@ -106,7 +104,6 @@ const publishAVideo = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All filds are required");
   }
 
-  // console.log(req.file)
   const videoLocalFilePath = req.files?.videoFile[0]?.path;
 
   const thumbnailFilePath = req.files?.thumbnail[0]?.path;
@@ -231,7 +228,6 @@ const getVideoById = asyncHandler(async (req, res) => {
     },
   ]);
 
-  // console.log(video)
   const user = await User.findById(req.user?._id);
 
   if (!user) {
@@ -246,7 +242,6 @@ const getVideoById = asyncHandler(async (req, res) => {
   if (!view) {
     throw new ApiError(400, "somethin went wrong while updating views");
   }
-  // console.log(video)
   return res
     .status(200)
     .json(new ApiResponse(200, video[0], "video by id feched successfully"));
@@ -286,7 +281,6 @@ const thumbnailFilePath = req.file?.path;
   if (!thumbnail) {
     throw new ApiError(400, "somethin went worng while uploading thumbnail");
   }
-  console.log(thumbnail)
 
   const video = await Video.findByIdAndUpdate(
     videoId,

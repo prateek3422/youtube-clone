@@ -133,7 +133,6 @@ const CommentSection = ({ slug }) => {
         <hr className="my-4 border-white" />
 
         {comment?.docs?.map((item) => {
-          // console.log(item)
           return (
             <div key={item?._id}>
               <div className="flex gap-x-4">

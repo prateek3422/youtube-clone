@@ -18,7 +18,7 @@ const toggleSubscription = asyncHandler(async (req, res) => {
     subscriber: new mongoose.Types.ObjectId(req.user?._id),
   });
 
-  // console.log(subscriberExist)
+
 
   if (!subscriberExist) {
     const subscribed = await Subscription.create({
@@ -72,7 +72,7 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
     },
   ]);
 
-  // console.log(getSubscriber)
+
 
   return res
     .status(200)
@@ -117,7 +117,7 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
     },
   ]);
 
-  // console.log(getChannel)
+
 
   return res
     .status(200)

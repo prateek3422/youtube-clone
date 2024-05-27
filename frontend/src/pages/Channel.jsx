@@ -12,9 +12,10 @@ const Channel = () => {
 
 
   const {data:myData} = getMyVideoQuery(channel?._id)
+
   return (
     <>
-   <ChannelComponent channel={channel}  myData={myData}/> 
+   <ChannelComponent channel={channel}  myData={myData?.docs ?? []}/> 
     </>
   )
 }

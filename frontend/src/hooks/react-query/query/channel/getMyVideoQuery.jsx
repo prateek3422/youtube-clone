@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 
 const getMyVideoQuery = (userId) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  console.log(userId)
   return useQuery({
     queryKey: ["channel", userId],
     queryFn: () =>

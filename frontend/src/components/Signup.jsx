@@ -27,7 +27,6 @@ const Signup = () => {
     };  
     try {
       const createSession = await authService.createAccount(newData);
-      console.log(createSession)
       if(createSession){
         const userData  = await authService.getCurrentUser()
         if(userData)dispatch(authLogin(userData.data))
