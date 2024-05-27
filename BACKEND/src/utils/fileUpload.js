@@ -15,13 +15,15 @@ const cloudinaryUpload = async (localFilPath) => {
     if (!localFilPath) return null;
       
       const response = await cloudinary.uploader.upload(localFilPath, {
+        folder:"videoMAte",
         resource_type: "auto",
       });
-      // console.log(' file is  uploaded on cloudinary', response)
+      console.log(' file is  uploaded on cloudinary', response)
       fs.unlinkSync(localFilPath);
       return response;
     
   } catch (error) {
+    console.log(error)
     fs.unlinkSync(localFilPath) 
     return null;
   }
