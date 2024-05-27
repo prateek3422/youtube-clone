@@ -12,23 +12,13 @@ const cloudinaryUpload = async (localFilPath) => {
   try {
 
     if (!localFilPath) return null;
-
-    cloudinary.uploader.upload_stream({
-      folder: "youtube-clone",
-      resource_type: "auto",
-    }, (err , res)=>{
-      if(err) throw err
-      return res
-
-    }).end(localFilPath)
-    
       
-    //   const response = await cloudinary.uploader.upload(localFilPath, {
-    //     resource_type: "auto",
-    //   });
-    //   // console.log(' file is  uploaded on cloudinary', response)
-    //   fs.unlinkSync(localFilPath);
-    //   return response;
+      const response = await cloudinary.uploader.upload(localFilPath, {
+        resource_type: "auto",
+      });
+      // console.log(' file is  uploaded on cloudinary', response)
+      fs.unlinkSync(localFilPath);
+      return response;
     
   } catch (error) {
     fs.unlinkSync(localFilPath) 
