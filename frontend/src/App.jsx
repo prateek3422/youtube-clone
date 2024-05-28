@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Header} from "./components";
+import { Header, Loader} from "./components";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import authService from "./services/auth";
@@ -41,7 +41,7 @@ function App() {
         </div>
       </div>
     </>
-  ) : null;
+  ) : <> <Loader/></>;
 }
 
 export default App;

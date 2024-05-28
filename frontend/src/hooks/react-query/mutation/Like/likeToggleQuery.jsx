@@ -26,7 +26,7 @@ const likeToggleQuery = (videoId) => {
         theme: "colored",
       });
 
-        queryClient.invalidateQueries({ queryKey: ["video"] });
+        queryClient.invalidateQueries({ queryKey: [videoId] });
     }
   })
 }

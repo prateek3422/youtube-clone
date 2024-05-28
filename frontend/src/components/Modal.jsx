@@ -3,6 +3,7 @@ import Input from "./Inputs";
 import Button from "./Button";
 import videoService from "../services/VideoService";
 import { useForm } from "react-hook-form";
+import videoMutetion from "../hooks/react-query/mutation/video/videoMutetion";
 
 const modal = () => {
   const [hide, setHide] = useState();
@@ -19,7 +20,9 @@ const modal = () => {
         description: data.des,
       };
 
-      await videoService.publishVideo(newData);
+      await videoMutetion(newData);
+
+      // await videoService.publishVideo(newData);
     } catch (error) {
       console.log(error);
     }

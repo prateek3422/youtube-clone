@@ -16,7 +16,7 @@ export class VideoService {
 
       return response;
     } catch (error) {
-      console.log("get all video error", error);
+      console.log("get all video error", error)
       // toast.error(res?.data?.message, {
       //   position: "top-right",
       //   autoClose: 5000,

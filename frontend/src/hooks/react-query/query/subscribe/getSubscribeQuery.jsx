@@ -4,7 +4,7 @@ import { api } from "../../../../services/axios";
 const getSubscribeQuery = (channelId) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useQuery({
-    queryKey: ["subscribe"],
+    queryKey: [channelId],
     queryFn: () =>
       api
         .get(`/api/v1/subscriptions/c/${channelId}`)

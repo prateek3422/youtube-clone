@@ -3,7 +3,7 @@ import { api } from "../../../../services/axios";
 import { queryClient } from "../../../../utils/query-client";
 import { toast } from "react-toastify";
 
-const toggleSubscribeQuery = (channelId) => {
+const toggleSubscribeQuery = (channelId, slug) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useMutation({
     mutationFn: () =>{
@@ -25,7 +25,8 @@ const toggleSubscribeQuery = (channelId) => {
         theme: "colored",
       });
 
-      queryClient.invalidateQueries({ queryKey: ["video"] });
+      queryClient.invalidateQueries({ queryKey: [slug] });
+      
     }
   });
 };

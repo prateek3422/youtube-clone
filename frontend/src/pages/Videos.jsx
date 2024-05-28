@@ -1,18 +1,19 @@
-
-import { Link,  useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BiLike } from "react-icons/bi";
-import { Button, CommentSection,   } from "../components";
+import { Button, CommentSection } from "../components";
 import videoQuery from "../hooks/react-query/query/videos/videoQuery.jsx";
 import toggleSubscribeQuery from "../hooks/react-query/mutation/subscribe/toggleSubscribeQuery.jsx";
 import likeToggleQuery from "../hooks/react-query/mutation/Like/likeToggleQuery.jsx";
 
-
-
 const Videos = () => {
   const { slug } = useParams();
-  const {data:video }= videoQuery(slug)
-  const {mutate:subscribe} = toggleSubscribeQuery(video?.owner?._id)
-  const {mutate:Like} = likeToggleQuery(video?._id)
+  const { data: video } = videoQuery(slug);
+  
+  const { mutate: subscribe } = toggleSubscribeQuery(
+    video?.owner?._id,
+    video?._id
+  );
+  const { mutate: Like } = likeToggleQuery(video?._id);
 
   return (
     <>
@@ -24,7 +25,7 @@ const Videos = () => {
                 src={video?.videoFile?.url}
                 controls
                 autoPlay
-                className="h-full w-full rounded-lg"
+                className=" rounded-lg"
               ></video>
             </div>
             <div className=" mt-4 rounded-xl p-4  lg:mx-32">
@@ -53,7 +54,7 @@ const Videos = () => {
                     />
                   </div>
                   <div className="block">
-                    <Link to={``}>
+                    <Link to={`/channel/${video?.owner?._id}`}>
                       <p className="text-green-200">
                         {" "}
                         {video?.owner?.userName}
@@ -82,8 +83,7 @@ const Videos = () => {
             </div>
             {/* ===============comment section========== */}
 
-            <CommentSection slug={slug}/>
-            
+            <CommentSection slug={slug} />
           </div>
 
           {/* <div className="related-videos ">related videos</div> */}

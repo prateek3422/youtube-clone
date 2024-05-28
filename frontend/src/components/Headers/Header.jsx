@@ -37,9 +37,11 @@ const Header = ({ setSlide, slide }) => {
         <nav className="flex justify-between items-center mx-4 ">
 
         
+        <Link to={"/"}>
             <div className="log0 w-32 ">
               <Logo />
             </div>
+        </Link>
 
           <ul className="Nav-btn  flex justify-between gap-4 items-center">
             {navItem.map((item) =>
