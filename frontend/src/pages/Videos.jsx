@@ -4,7 +4,7 @@ import { Button, CommentSection } from "../components";
 import videoQuery from "../hooks/react-query/query/videos/videoQuery.jsx";
 import toggleSubscribeQuery from "../hooks/react-query/mutation/subscribe/toggleSubscribeQuery.jsx";
 import likeToggleQuery from "../hooks/react-query/mutation/Like/likeToggleQuery.jsx";
-
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 const Videos = () => {
   const { slug } = useParams();
   const { data: video } = videoQuery(slug);
@@ -70,6 +70,7 @@ const Videos = () => {
                   <Button
                     onClick={() => subscribe()}
                     className=" px-4 py-1 rounded-2xl text-white"
+                 
                   >
                     {video?.owner?.isSubscribed ? "unsubscribe" : "subscribe"}
                   </Button>

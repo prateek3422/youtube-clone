@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import "./App.css";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
@@ -13,7 +15,6 @@ import { store } from "./store/store.js";
 import Videos from "./pages/Videos.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-
 import Subscribers from "./pages/Subscribers.jsx";
 import MyContent from "./pages/MyContent.jsx";
 import Customise from "./pages/Customise.jsx";
@@ -21,7 +22,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {queryClient} from "./utils/query-client.js"
 import Channel from "./pages/Channel.jsx";
 import EditUser from "./pages/EditUser.jsx";
-
 import AuthLayOut from "./components/AuthLayOut.jsx";
 import LikedVideo from "./pages/LikedVideo.jsx";
 import VideoHistory from "./pages/VideoHistory.jsx";

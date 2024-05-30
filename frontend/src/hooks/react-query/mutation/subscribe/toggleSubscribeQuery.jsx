@@ -26,7 +26,6 @@ const toggleSubscribeQuery = (channelId, slug) => {
       });
 
       queryClient.invalidateQueries({ queryKey: [slug] });
-      
     }
   });
 };

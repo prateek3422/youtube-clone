@@ -55,8 +55,6 @@ const StyledMenu = styled((props) => (
 }));
 
 const PlaylistCard = ({ userId }) => {
-
-
   const navigate  = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

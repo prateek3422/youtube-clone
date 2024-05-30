@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import videoService from "../services/VideoService";
 import Slider from "./Slider";
-
 import { MdDelete } from "react-icons/md";
-
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../utils/query-client.js";
 import { UpdateVideo } from "./index.js";
 

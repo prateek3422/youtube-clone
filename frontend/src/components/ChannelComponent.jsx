@@ -68,10 +68,10 @@ const ChannelComponent = ({channel, myData,userData,authStatus = false,}) => {
               <Tab value="video" label="video" sx={{ color: "white" }} />
               <Tab value="playlist" label="playlist" sx={{ color: "white" }} />
               <Tab value="comunity" label="comunity" sx={{ color: "white" }} />
-              {/* {
+              {
                 authStatus &&
                 <Tab value="edit" label="edit" sx={{ color: "white" }}/>
-              } */}
+              }
             </Tabs>
           </Box>
         </div>
@@ -95,8 +95,8 @@ const ChannelComponent = ({channel, myData,userData,authStatus = false,}) => {
         <div className={value === "playlist" ? "block" : "hidden"}>
           <div className="main  w-full mt-4 ">
             <div className="grid grid-cols-3 gap-4">
-              {<h1>comming soon ...</h1>}
-              {/* <PlaylistCard userId={userData?.data?._id} /> */}
+              {/* {<h1>comming soon ...</h1>} */}
+              <PlaylistCard userId={userData?.data?._id} />
             </div>
           </div>
         </div>

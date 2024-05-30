@@ -412,6 +412,7 @@ export class VideoService {
   // playlist
 
   async createPlaylist(data) {
+    console.log(data)
     try {
       const playlist = await api({
         url: `/api/v1/playlists/`,

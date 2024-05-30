@@ -4,10 +4,8 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Input from "./Inputs";
 import { useForm } from "react-hook-form";
-
 import Textarea from "@mui/joy/Textarea";
 import Typography from "@mui/joy/Typography";
-
 import Button from "./Button";
 import videoService from "../services/VideoService";
 
@@ -25,9 +23,7 @@ const AddVideoOnPlaylsits = () => {
     }
   };
 
-
-
- return (
+  return (
     <>
       <Box sx={{ width: "100%" }}>
         <Tabs
@@ -80,9 +76,7 @@ const AddVideoOnPlaylsits = () => {
         </div>
       </div>
 
-      <div className={value === "video" ? "block" : "hidden"}>
-        
-      </div>
+      <div className={value === "video" ? "block" : "hidden"}></div>
     </>
   );
 };
